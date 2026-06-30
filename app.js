@@ -680,6 +680,8 @@
       display:grid;
       gap:10px;
       margin-top:12px;
+      touch-action:none;
+      overscroll-behavior:contain;
     }
     .snake-board{
       display:grid;
@@ -724,12 +726,24 @@
       width:max-content;
     }
     .snake-controls button{
-      width:42px;
-      height:36px;
+      width:48px;
+      height:42px;
       border:1px solid var(--line);
-      background:rgba(53,255,162,.05);
+      background:rgba(53,255,162,.08);
       color:var(--green2);
       cursor:pointer;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action:manipulation;
+      border-radius:4px;
+    }
+    .snake-controls button:active{
+      background:var(--green);
+      color:#021009;
+      transform:scale(.96);
+    }
+    #snakeGamePanel{
+      scroll-margin-top:90px;
     }
     .snake-controls [data-dir="up"]{grid-area:up}
     .snake-controls [data-dir="left"]{grid-area:left}
@@ -1524,6 +1538,27 @@
     return freeCells[Math.floor(Math.random() * freeCells.length)];
   }
 
+  function keepSnakeGameVisible() {
+    const panel = document.getElementById('snakeGamePanel');
+    if (!panel) return;
+
+    // Keep the game at the bottom of the terminal without moving the whole page.
+    output.scrollTop = output.scrollHeight;
+
+    // On small screens, keep the terminal itself visible.
+    if (window.innerWidth <= 760) {
+      const terminalRect = document.getElementById('terminalBox').getBoundingClientRect();
+      const headerOffset = 72;
+
+      if (terminalRect.top < headerOffset || terminalRect.bottom > window.innerHeight) {
+        document.getElementById('terminalBox').scrollIntoView({
+          behavior:'smooth',
+          block:'start'
+        });
+      }
+    }
+  }
+
   function renderSnakeGame() {
     if (!activeGame || activeGame.type !== 'snake') return;
 
@@ -1571,10 +1606,51 @@
     `;
 
     panel.querySelectorAll('[data-dir]').forEach(button => {
-      button.addEventListener('click', () => setSnakeDirection(button.dataset.dir));
+      const move = event => {
+        event.preventDefault();
+        event.stopPropagation();
+        setSnakeDirection(button.dataset.dir);
+        input.blur();
+        keepSnakeGameVisible();
+      };
+
+      button.addEventListener('pointerdown', move);
+      button.addEventListener('click', event => {
+        // Prevent the synthetic click after pointerdown from moving twice.
+        event.preventDefault();
+      });
     });
 
-    output.scrollTop = output.scrollHeight;
+    const board = panel.querySelector('.snake-board');
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    board.addEventListener('touchstart', event => {
+      const touch = event.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      event.preventDefault();
+    }, { passive:false });
+
+    board.addEventListener('touchend', event => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      const minimumSwipe = 18;
+
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < minimumSwipe) return;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        setSnakeDirection(deltaX > 0 ? 'right' : 'left');
+      } else {
+        setSnakeDirection(deltaY > 0 ? 'down' : 'up');
+      }
+
+      event.preventDefault();
+      keepSnakeGameVisible();
+    }, { passive:false });
+
+    keepSnakeGameVisible();
   }
 
   function setSnakeDirection(direction) {
@@ -1599,19 +1675,26 @@
     snakeLoop = null;
 
     const finalScore = activeGame.score;
+    const packetsCaught = activeGame.foodsCaught;
     saveHighScore('snakeHighScore', finalScore);
+
+    const oldPanel = document.getElementById('snakeGamePanel');
+    if (oldPanel) oldPanel.remove();
+
+    activeGame = null;
 
     addBlock('snake game over', [
       `Final score: ${finalScore}`,
-      `Packets caught: ${activeGame.foodsCaught}`,
-      `High score: ${Math.max(finalScore, Number(localStorage.getItem('snakeHighScore') || 0))}`
+      `Packets caught: ${packetsCaught}`,
+      `High score: ${Math.max(finalScore, Number(localStorage.getItem('snakeHighScore') || 0))}`,
+      'Type play snake to restart.'
     ]);
 
     if (finalScore >= 8) {
       unlockAchievement('TERMINAL SERPENT', `Scored ${finalScore} in Terminal Snake.`);
     }
 
-    activeGame = null;
+    output.scrollTop = output.scrollHeight;
   }
 
   function snakeTick() {
@@ -1681,8 +1764,17 @@
   }
 
   function startSnakeGame() {
-    if (activeGame) {
-      addLine('A game is already active. Type <span class="k">quit game</span> first.', 'error');
+    // Clean up any stale game state from a previous run.
+    if (snakeLoop) {
+      clearInterval(snakeLoop);
+      snakeLoop = null;
+    }
+
+    const stalePanel = document.getElementById('snakeGamePanel');
+    if (stalePanel) stalePanel.remove();
+
+    if (activeGame && activeGame.type !== 'snake') {
+      addLine('Another game is active. Type <span class="k">quit game</span> first.', 'error');
       return;
     }
 
@@ -1709,7 +1801,12 @@
     ]);
 
     renderSnakeGame();
-    snakeLoop = setInterval(snakeTick, 145);
+    input.blur();
+    keepSnakeGameVisible();
+
+    // Slightly slower on phones for easier touch control.
+    const snakeSpeed = window.innerWidth <= 760 ? 190 : 145;
+    snakeLoop = setInterval(snakeTick, snakeSpeed);
   }
 
   function quitActiveGame() {
@@ -1728,6 +1825,7 @@
 
     addLine(`Game stopped: ${activeGame.type}`);
     activeGame = null;
+    output.scrollTop = output.scrollHeight;
   }
 
   function showHighScores() {
@@ -1843,11 +1941,23 @@
     const direction = keyMap[event.key];
     if (direction) {
       event.preventDefault();
+      event.stopPropagation();
       setSnakeDirection(direction);
+      input.blur();
+      keepSnakeGameVisible();
     }
-  });
+  }, true);
 
   input.addEventListener('keydown', event => {
+    if (activeGame && activeGame.type === 'snake') {
+      const snakeKeys = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d','W','A','S','D'];
+      if (snakeKeys.includes(event.key)) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+    }
+
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       if (historyIndex > 0) historyIndex -= 1;
