@@ -1506,14 +1506,22 @@
   let snakeLoop = null;
 
   function randomSnakeFood(snake) {
-    let position;
-    do {
-      position = {
-        x:Math.floor(Math.random() * SNAKE_COLS),
-        y:Math.floor(Math.random() * SNAKE_ROWS)
-      };
-    } while (snake.some(segment => segment.x === position.x && segment.y === position.y));
-    return position;
+    // Build a list of every free cell and choose one.
+    // This guarantees a new food packet after every catch and avoids
+    // accidental endless loops when the snake becomes long.
+    const occupied = new Set(snake.map(segment => `${segment.x},${segment.y}`));
+    const freeCells = [];
+
+    for (let y = 0; y < SNAKE_ROWS; y++) {
+      for (let x = 0; x < SNAKE_COLS; x++) {
+        if (!occupied.has(`${x},${y}`)) {
+          freeCells.push({ x, y });
+        }
+      }
+    }
+
+    if (!freeCells.length) return null;
+    return freeCells[Math.floor(Math.random() * freeCells.length)];
   }
 
   function renderSnakeGame() {
@@ -1549,6 +1557,7 @@
         <div class="snake-board">${cells.join('')}</div>
         <div class="snake-status">
           <span>SCORE: ${game.score}</span>
+          <span>PACKETS CAUGHT: ${game.foodsCaught}</span>
           <span>HIGH SCORE: ${Number(localStorage.getItem('snakeHighScore') || 0)}</span>
           <span>CONTROLS: ARROW KEYS / WASD</span>
         </div>
@@ -1594,6 +1603,7 @@
 
     addBlock('snake game over', [
       `Final score: ${finalScore}`,
+      `Packets caught: ${activeGame.foodsCaught}`,
       `High score: ${Math.max(finalScore, Number(localStorage.getItem('snakeHighScore') || 0))}`
     ]);
 
@@ -1610,14 +1620,29 @@
     const game = activeGame;
     game.direction = game.nextDirection;
 
-    const head = {...game.snake[0]};
+    const head = { ...game.snake[0] };
     if (game.direction === 'up') head.y -= 1;
     if (game.direction === 'down') head.y += 1;
     if (game.direction === 'left') head.x -= 1;
     if (game.direction === 'right') head.x += 1;
 
-    const hitWall = head.x < 0 || head.x >= SNAKE_COLS || head.y < 0 || head.y >= SNAKE_ROWS;
-    const hitSelf = game.snake.some(segment => segment.x === head.x && segment.y === head.y);
+    const hitWall =
+      head.x < 0 ||
+      head.x >= SNAKE_COLS ||
+      head.y < 0 ||
+      head.y >= SNAKE_ROWS;
+
+    const willEat =
+      game.food &&
+      head.x === game.food.x &&
+      head.y === game.food.y;
+
+    // When the snake is not eating, the tail moves away during this tick.
+    // Excluding that last tail cell prevents false self-collisions.
+    const bodyToCheck = willEat ? game.snake : game.snake.slice(0, -1);
+    const hitSelf = bodyToCheck.some(
+      segment => segment.x === head.x && segment.y === head.y
+    );
 
     if (hitWall || hitSelf) {
       endSnakeGame();
@@ -1626,9 +1651,28 @@
 
     game.snake.unshift(head);
 
-    if (head.x === game.food.x && head.y === game.food.y) {
+    if (willEat) {
       game.score += 1;
+      game.foodsCaught += 1;
+
+      // Immediately generate another packet. This continues without a limit
+      // until the snake hits a wall or its own body.
       game.food = randomSnakeFood(game.snake);
+
+      // The player has filled the complete board.
+      if (!game.food) {
+        clearInterval(snakeLoop);
+        snakeLoop = null;
+        saveHighScore('snakeHighScore', game.score);
+        addBlock('snake board completed', [
+          `Final score: ${game.score}`,
+          `Packets caught: ${game.foodsCaught}`,
+          'Every available cell was filled.'
+        ]);
+        unlockAchievement('TERMINAL SERPENT MASTER', 'Completed the full Snake board.');
+        activeGame = null;
+        return;
+      }
     } else {
       game.snake.pop();
     }
@@ -1651,9 +1695,12 @@
       ],
       direction:'right',
       nextDirection:'right',
-      food:{x:12,y:5},
-      score:0
+      food:null,
+      score:0,
+      foodsCaught:0
     };
+
+    activeGame.food = randomSnakeFood(activeGame.snake);
 
     addBlock('terminal snake', [
       'Use Arrow Keys or W/A/S/D.',
