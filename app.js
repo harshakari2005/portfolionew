@@ -68,27 +68,67 @@
       {
         title: 'MOTAG — Intelligent DDoS Detection and Mitigation System',
         tags: ['DDoS', 'MTD', 'ChaCha20'],
-        description: 'Built a real-time system to monitor network traffic, detect abnormal spikes and automatically block malicious sources while maintaining service availability.'
+        description: 'Built a real-time system to monitor network traffic, detect abnormal spikes and automatically block malicious sources while maintaining service availability.',
+        objective: 'Build a resilient DDoS defense system capable of maintaining service availability during large-scale attacks.',
+        contribution: 'Designed the monitoring flow, attack-detection logic, dynamic proxy shuffling concept and encrypted communication layer.',
+        architecture: ['Traffic Monitor', 'Anomaly Detector', 'Dynamic Proxy Shuffler', 'Filtering Module', 'Protected Server'],
+        results: 'Improved resilience by combining traffic monitoring, source blocking, proxy rotation and secure ChaCha20-based communication.',
+        challenges: 'Balancing detection speed, false positives, encryption overhead and service availability.',
+        future: 'Add adaptive ML-based thresholds, live SIEM integration and large-scale cloud deployment.',
+        github: '',
+        demo: ''
       },
       {
         title: 'AI-Based Phishing Website Detection',
         tags: ['Python', 'Flask', 'Machine Learning'],
-        description: 'Real-time malicious URL classification using TF-IDF vectorization and machine-learning models.'
+        description: 'Real-time malicious URL classification using TF-IDF vectorization and machine-learning models.',
+        objective: 'Detect phishing websites quickly by classifying malicious and legitimate URLs.',
+        contribution: 'Implemented URL preprocessing, TF-IDF feature extraction, ML classification and a Flask-based interface.',
+        architecture: ['URL Input', 'Preprocessing', 'TF-IDF Vectorizer', 'ML Classifier', 'Safe / Phishing Result'],
+        results: 'Produced a browser-accessible phishing detection workflow suitable for automated web-security monitoring.',
+        challenges: 'Handling obfuscated URLs, dataset imbalance and model generalization.',
+        future: 'Add browser-extension integration, domain reputation feeds and explainable risk scoring.',
+        github: '',
+        demo: ''
       },
       {
         title: 'Memory Forensics: Investigating Volatile Memory for Cyber Threats',
         tags: ['Forensics', 'Memory', 'Threat Analysis'],
-        description: 'Analyzed volatile memory to identify malware, malicious activity and unauthorized access.'
+        description: 'Analyzed volatile memory to identify malware, malicious activity and unauthorized access.',
+        objective: 'Investigate volatile-memory evidence to uncover cyber threats that may not appear on disk.',
+        contribution: 'Captured memory dumps, reviewed running processes, network artifacts and suspicious indicators.',
+        architecture: ['Memory Capture', 'Artifact Extraction', 'Process Analysis', 'Network Review', 'Threat Findings'],
+        results: 'Identified suspicious process and memory artifacts useful for incident investigation.',
+        challenges: 'Large memory images, noisy artifacts and distinguishing legitimate activity from malicious behavior.',
+        future: 'Automate IOC extraction and integrate YARA-based memory scanning.',
+        github: '',
+        demo: ''
       },
       {
         title: 'Automated Vulnerability Scanning Tool',
         tags: ['Scanner', 'Web Security', 'Automation'],
-        description: 'Automatically analyzes websites for vulnerabilities, errors and security risks and provides detailed reports.'
+        description: 'Automatically analyzes websites for vulnerabilities, errors and security risks and provides detailed reports.',
+        objective: 'Reduce manual effort by automatically identifying common website security issues.',
+        contribution: 'Designed the scanning workflow, findings format and report-oriented presentation.',
+        architecture: ['Target URL', 'Request Engine', 'Security Checks', 'Finding Classification', 'Report Generator'],
+        results: 'Created a repeatable scanning workflow that helps developers review security, performance and reliability issues.',
+        challenges: 'Avoiding false positives, safely handling timeouts and presenting findings clearly.',
+        future: 'Add authenticated scans, exportable reports and vulnerability-severity scoring.',
+        github: '',
+        demo: ''
       },
       {
         title: 'Waste Segregation using Arduino',
         tags: ['Arduino', 'IoT', 'Sensors'],
-        description: 'Smart dustbin using IR, inductive and moisture sensors to classify metallic, wet and dry waste.'
+        description: 'Smart dustbin using IR, inductive and moisture sensors to classify metallic, wet and dry waste.',
+        objective: 'Automate waste classification for cleaner and more efficient disposal.',
+        contribution: 'Integrated sensor inputs, Arduino control logic and classification flow for metallic, wet and dry waste.',
+        architecture: ['Waste Input', 'IR Sensor', 'Inductive Sensor', 'Moisture Sensor', 'Classification & Segregation'],
+        results: 'Demonstrated automatic sensor-based waste segregation with real-time monitoring potential.',
+        challenges: 'Sensor calibration, mixed waste conditions and mechanical reliability.',
+        future: 'Add IoT dashboards, cloud analytics and computer-vision-assisted classification.',
+        github: '',
+        demo: ''
       }
     ],
     skills: {
@@ -287,6 +327,115 @@
       transform:translateX(calc((var(--glow-strength) - 1) * -35%));
       pointer-events:none;
     }
+
+
+    .boot-loader{
+      position:fixed;
+      inset:0;
+      z-index:12000;
+      display:grid;
+      place-items:center;
+      background:#020507;
+      color:var(--green);
+      font-family:var(--mono);
+      transition:opacity .45s ease,visibility .45s ease;
+    }
+    .boot-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .boot-box{
+      width:min(680px,calc(100% - 32px));
+      border:1px solid var(--line);
+      background:rgba(3,12,15,.98);
+      padding:24px;
+      box-shadow:0 0 45px rgba(53,255,162,.12);
+    }
+    .boot-title{font-size:clamp(18px,4vw,30px);margin-bottom:18px;text-shadow:0 0 16px rgba(53,255,162,.45)}
+    .boot-log{min-height:150px;color:#a9f8ca;font:12px/1.8 var(--mono)}
+    .boot-progress{height:8px;border:1px solid var(--line);background:#06100d;overflow:hidden}
+    .boot-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#0a6d44,var(--green));box-shadow:0 0 14px var(--green);transition:width .2s linear}
+    .boot-note{margin-top:10px;color:var(--muted);font-size:10px}
+
+    .threat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .threat-card{
+      padding:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(145deg,rgba(10,25,31,.9),rgba(5,12,16,.87));
+      position:relative;
+      overflow:hidden;
+    }
+    .threat-card::after{
+      content:'';
+      position:absolute;
+      inset:auto -30% -60% 20%;
+      height:140px;
+      background:radial-gradient(circle,rgba(53,255,162,.14),transparent 68%);
+    }
+    .threat-card small{display:block;color:var(--muted);font:10px var(--mono);margin-bottom:10px}
+    .threat-card strong{display:block;color:var(--green);font:700 clamp(28px,4vw,46px) var(--mono)}
+    .threat-card span{display:block;margin-top:8px;color:#b8cdbf;font-size:12px}
+    .simulated-label{margin-top:14px;color:var(--muted);font:10px var(--mono)}
+
+    .resume-counter{
+      margin-top:12px;
+      color:var(--green2);
+      font:10px var(--mono);
+    }
+
+    .project-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .project-actions button,.project-actions a{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.04);
+      color:var(--green2);
+      padding:8px 10px;
+      font:700 10px var(--mono);
+      cursor:pointer;
+    }
+    .project-actions button:hover,.project-actions a:hover{background:var(--green);color:#021009}
+
+    .project-modal{
+      position:fixed;
+      inset:0;
+      z-index:11000;
+      display:none;
+      place-items:center;
+      padding:20px;
+      background:rgba(0,0,0,.88);
+      backdrop-filter:blur(8px);
+    }
+    .project-modal.active{display:grid}
+    .project-modal-panel{
+      width:min(900px,100%);
+      max-height:90vh;
+      overflow:auto;
+      border:1px solid rgba(53,255,162,.45);
+      background:#061015;
+      box-shadow:0 0 60px rgba(53,255,162,.14);
+    }
+    .project-modal-head{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      font:700 12px var(--mono);
+      color:var(--green);
+    }
+    .project-modal-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green);
+      padding:7px 10px;
+      cursor:pointer;
+    }
+    .project-modal-body{padding:22px}
+    .project-modal-body h4{font-size:clamp(24px,4vw,40px);margin:0 0 20px}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .modal-block{padding:16px;border:1px solid var(--line);background:rgba(53,255,162,.025)}
+    .modal-block small{display:block;color:var(--cyan);font:10px var(--mono);margin-bottom:8px}
+    .modal-block p{margin:0;color:#bdd0c4;line-height:1.65}
+    .architecture-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .architecture-flow span{border:1px solid var(--line);padding:8px 10px;color:var(--green2);font:10px var(--mono)}
+    .architecture-flow b{color:var(--cyan)}
 
     .breach-overlay{
       position:fixed;
@@ -504,6 +653,7 @@
       .hero{grid-template-columns:1fr}
       .identity{max-width:520px;width:100%;justify-self:center}
       .grid2{grid-template-columns:1fr}
+      .threat-grid{grid-template-columns:repeat(2,1fr)}
       .status{display:none}
     }
     @media(max-width:760px){
@@ -516,6 +666,7 @@
       .stats{grid-template-columns:repeat(2,1fr)}
       .stats div:nth-child(2){border-right:0}
       .contact{grid-template-columns:1fr}
+      .threat-grid,.modal-grid{grid-template-columns:1fr}
       .heading{align-items:flex-start;flex-direction:column}
       .output{height:390px;font-size:11px;padding:15px}
       footer{flex-direction:column}
@@ -541,6 +692,11 @@
         <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
         <h4>${project.title}</h4>
         <p>${project.description}</p>
+        <div class="project-actions">
+          <button class="project-details-btn" data-project-index="${DATA.projects.indexOf(project)}">VIEW CASE STUDY</button>
+          ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener">GITHUB</a>` : ''}
+          ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener">LIVE DEMO</a>` : ''}
+        </div>
       </article>
     `).join('');
   }
@@ -594,6 +750,25 @@
   function appTemplate() {
     return html`
       <style>${styles}</style>
+      <div class="boot-loader" id="bootLoader">
+        <div class="boot-box">
+          <div class="boot-title">INITIALIZING SECURE PORTFOLIO...</div>
+          <div class="boot-log" id="bootLog"></div>
+          <div class="boot-progress"><span id="bootBar"></span></div>
+          <div class="boot-note">Loading security modules, project database and terminal interface.</div>
+        </div>
+      </div>
+
+      <div class="project-modal" id="projectModal" aria-hidden="true">
+        <div class="project-modal-panel">
+          <div class="project-modal-head">
+            <span>PROJECT CASE STUDY</span>
+            <button id="projectModalClose">CLOSE [ESC]</button>
+          </div>
+          <div class="project-modal-body" id="projectModalBody"></div>
+        </div>
+      </div>
+
       <canvas id="matrix"></canvas>
 
       <div class="scanlines"></div>
@@ -653,6 +828,7 @@
             <div class="actions">
               <button class="btn primary" data-target="terminal">&gt; OPEN TERMINAL</button>
               <button class="btn" id="resumeBtn">VIEW RESUME</button>
+              <div class="resume-counter">RESUME OPENED ON THIS DEVICE: <span id="resumeCount">0</span></div>
               <button class="btn" id="simulationBtn">RUN SECURITY SIMULATION</button>
             </div>
             <div class="stats">
@@ -731,9 +907,24 @@
           <div class="skills">${skillTags()}</div>
         </section>
 
+
+        <section class="section" id="threat-dashboard">
+          <div class="heading">
+            <div><div class="label">05 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
+            <div class="mono">[ demonstration_mode = true ]</div>
+          </div>
+          <div class="threat-grid">
+            <div class="threat-card"><small>THREATS ANALYZED</small><strong data-counter="12480">0</strong><span>Simulated portfolio metric</span></div>
+            <div class="threat-card"><small>MALICIOUS URLS FOUND</small><strong data-counter="247">0</strong><span>Phishing detection demo</span></div>
+            <div class="threat-card"><small>DDoS EVENTS BLOCKED</small><strong data-counter="38921">0</strong><span>MOTAG demonstration</span></div>
+            <div class="threat-card"><small>SECURITY SCORE</small><strong data-counter="94" data-suffix="%">0%</strong><span>Portfolio readiness score</span></div>
+          </div>
+          <div class="simulated-label">These values are clearly marked demonstration metrics and are not live production statistics.</div>
+        </section>
+
         <section class="section" id="terminal">
           <div class="heading">
-            <div><div class="label">05 // INTERACTIVE TERMINAL</div><h3>Query the complete profile</h3></div>
+            <div><div class="label">06 // INTERACTIVE TERMINAL</div><h3>Query the complete profile</h3></div>
             <div class="mono">Type help to begin</div>
           </div>
 
@@ -756,7 +947,7 @@
 
         <section class="section">
           <div class="heading">
-            <div><div class="label">06 // CONTACT</div><h3>Let’s build secure systems</h3></div>
+            <div><div class="label">07 // CONTACT</div><h3>Let’s build secure systems</h3></div>
           </div>
           <div class="contact">
             <a href="mailto:${DATA.profile.email}"><small>EMAIL</small><strong>${DATA.profile.email}</strong></a>
@@ -775,7 +966,83 @@
     `;
   }
 
+
   document.getElementById('app').innerHTML = appTemplate();
+
+  // Fast cinematic loading screen.
+  const bootLoader = document.getElementById('bootLoader');
+  const bootLog = document.getElementById('bootLog');
+  const bootBar = document.getElementById('bootBar');
+  const bootMessages = [
+    'Loading identity profile...',
+    'Decrypting project database...',
+    'Initializing threat dashboard...',
+    'Mounting interactive terminal...',
+    'Verifying portfolio integrity...',
+    'ACCESS GRANTED'
+  ];
+
+  bootMessages.forEach((message, index) => {
+    setTimeout(() => {
+      const line = document.createElement('div');
+      line.textContent = `> ${message}`;
+      bootLog.appendChild(line);
+      bootBar.style.width = `${Math.round(((index + 1) / bootMessages.length) * 100)}%`;
+    }, index * 130);
+  });
+
+  setTimeout(() => {
+    bootLoader.classList.add('hidden');
+  }, 900);
+
+
+
+  const projectModal = document.getElementById('projectModal');
+  const projectModalBody = document.getElementById('projectModalBody');
+  const projectModalClose = document.getElementById('projectModalClose');
+
+  function openProjectModal(index) {
+    const project = DATA.projects[index];
+    if (!project) return;
+
+    const architecture = (project.architecture || [])
+      .map((step, stepIndex, steps) =>
+        `<span>${step}</span>${stepIndex < steps.length - 1 ? '<b>→</b>' : ''}`
+      )
+      .join('');
+
+    projectModalBody.innerHTML = `
+      <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+      <h4>${project.title}</h4>
+      <div class="modal-grid">
+        <div class="modal-block"><small>PROJECT OBJECTIVE</small><p>${project.objective || project.description}</p></div>
+        <div class="modal-block"><small>MY CONTRIBUTION</small><p>${project.contribution || 'Project design and implementation.'}</p></div>
+        <div class="modal-block" style="grid-column:1/-1"><small>ARCHITECTURE</small><div class="architecture-flow">${architecture}</div></div>
+        <div class="modal-block"><small>RESULTS</small><p>${project.results || project.description}</p></div>
+        <div class="modal-block"><small>CHALLENGES</small><p>${project.challenges || 'Technical research, implementation and validation.'}</p></div>
+        <div class="modal-block" style="grid-column:1/-1"><small>FUTURE IMPROVEMENTS</small><p>${project.future || 'Continue improving scalability, automation and usability.'}</p></div>
+      </div>
+    `;
+
+    projectModal.classList.add('active');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjectModal() {
+    projectModal.classList.remove('active');
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.project-details-btn').forEach(button => {
+    button.addEventListener('click', () => openProjectModal(Number(button.dataset.projectIndex)));
+  });
+
+  projectModalClose.addEventListener('click', closeProjectModal);
+  projectModal.addEventListener('click', event => {
+    if (event.target === projectModal) closeProjectModal();
+  });
 
   const output = document.getElementById('output');
   const input = document.getElementById('terminalInput');
@@ -812,8 +1079,13 @@
       '<span class="k">contact</span>        show contact details',
       '<span class="k">resume</span>         open resume PDF',
       '<span class="k">all</span>            print complete profile',
-      '<span class="k">simulation</span>     replay browser-only breach effect',
-      '<span class="k">clear</span>          clear terminal'
+      '<span class="k">ls</span>            list portfolio files',
+      '<span class="k">cat [file]</span>    read a virtual portfolio file',
+      '<span class="k">history</span>       show terminal history',
+      '<span class="k">date</span>          show current date and time',
+      '<span class="k">search [term]</span> search projects, skills and credentials',
+      '<span class="k">simulation</span>    replay browser-only breach effect',
+      '<span class="k">clear</span>         clear terminal'
     ]),
 
     whoami: () => addBlock('identity', [
@@ -879,7 +1151,7 @@
 
     resume: () => {
       addLine('Opening resume PDF...');
-      window.open('assets/Harsha_Resume.pdf', '_blank', 'noopener');
+      openResumeAndCount();
     },
 
     clear: () => {
@@ -894,11 +1166,108 @@
     }
   };
 
+
+  const commandHistory = [];
+  let historyIndex = 0;
+
+  const virtualFiles = {
+    'about.txt': () => DATA.about,
+    'education.txt': () => DATA.education.flatMap(item => [
+      `${item.period} — ${item.institution}`,
+      `${item.detail} | ${item.score}`
+    ]),
+    'skills.txt': () => Object.entries(DATA.skills).map(([key, values]) => `${key}: ${values.join(', ')}`),
+    'projects.txt': () => DATA.projects.map((project, index) => `[${index + 1}] ${project.title} — ${project.description}`),
+    'certificates.txt': () => DATA.certifications,
+    'contact.txt': () => [
+      `Email: ${DATA.profile.email}`,
+      `Phone: ${DATA.profile.phone}`,
+      `LinkedIn: ${DATA.profile.linkedin}`,
+      `Location: ${DATA.profile.location}`
+    ],
+    'profile.txt': () => [
+      `Name: ${DATA.profile.name}`,
+      `Role: ${DATA.profile.role}`,
+      `Status: ${DATA.profile.status}`
+    ]
+  };
+
+  function searchPortfolio(term) {
+    const query = term.trim().toLowerCase();
+    if (!query) {
+      addLine('Usage: search [term]', 'error');
+      return;
+    }
+
+    const results = [];
+
+    DATA.projects.forEach(project => {
+      const haystack = `${project.title} ${project.description} ${project.tags.join(' ')}`.toLowerCase();
+      if (haystack.includes(query)) results.push(`PROJECT: ${project.title}`);
+    });
+
+    Object.entries(DATA.skills).forEach(([group, skills]) => {
+      skills.forEach(skill => {
+        if (`${group} ${skill}`.toLowerCase().includes(query)) results.push(`SKILL: ${skill} (${group})`);
+      });
+    });
+
+    DATA.certifications.forEach(cert => {
+      if (cert.toLowerCase().includes(query)) results.push(`CERTIFICATE: ${cert}`);
+    });
+
+    DATA.publications.forEach(pub => {
+      if (`${pub.title} ${pub.description}`.toLowerCase().includes(query)) results.push(`PUBLICATION: ${pub.title}`);
+    });
+
+    if (results.length) addBlock(`search results for "${term}"`, results);
+    else addLine(`No portfolio results found for "${term}".`);
+  }
+
   function runCommand(raw) {
     const command = String(raw || '').trim().toLowerCase();
     if (!command) return;
 
     addLine(command, 'command');
+
+    commandHistory.push(command);
+    historyIndex = commandHistory.length;
+
+    if (command === 'ls') {
+      addBlock('virtual files', [
+        'about.txt',
+        'education.txt',
+        'skills.txt',
+        'projects.txt',
+        'certificates.txt',
+        'contact.txt',
+        'profile.txt'
+      ]);
+      return;
+    }
+
+    if (command === 'history') {
+      addBlock('command history', commandHistory.map((item, index) => `${index + 1}  ${item}`));
+      return;
+    }
+
+    if (command === 'date') {
+      addLine(new Date().toString());
+      return;
+    }
+
+    if (command.startsWith('cat ')) {
+      const fileName = command.slice(4).trim();
+      const reader = virtualFiles[fileName];
+      if (reader) addBlock(fileName, reader());
+      else addLine(`cat: ${fileName}: file not found`, 'error');
+      return;
+    }
+
+    if (command.startsWith('search ')) {
+      searchPortfolio(command.slice(7));
+      return;
+    }
 
     const handler = commandMap[command];
     if (handler) {
@@ -913,6 +1282,35 @@
     runCommand(input.value);
     input.value = '';
     input.focus();
+  });
+
+  input.addEventListener('keydown', event => {
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (historyIndex > 0) historyIndex -= 1;
+      input.value = commandHistory[historyIndex] || '';
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (historyIndex < commandHistory.length) historyIndex += 1;
+      input.value = commandHistory[historyIndex] || '';
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      const commands = [
+        ...Object.keys(commandMap),
+        'ls','history','date',
+        'cat about.txt','cat education.txt','cat skills.txt','cat projects.txt',
+        'cat certificates.txt','cat contact.txt','cat profile.txt','search '
+      ];
+      const matches = commands.filter(command => command.startsWith(input.value.toLowerCase()));
+      if (matches.length === 1) input.value = matches[0];
+      else if (matches.length > 1) addBlock('autocomplete', matches);
+    }
   });
 
   document.querySelectorAll('[data-command]').forEach(button => {
@@ -930,9 +1328,20 @@
     input.focus();
   });
 
+  const resumeCountElement = document.getElementById('resumeCount');
+  let resumeOpenCount = Number(localStorage.getItem('resumeOpenCount') || 0);
+  resumeCountElement.textContent = String(resumeOpenCount);
+
+  function openResumeAndCount() {
+    resumeOpenCount += 1;
+    localStorage.setItem('resumeOpenCount', String(resumeOpenCount));
+    resumeCountElement.textContent = String(resumeOpenCount);
+    window.open('assets/Harsha_Resume.pdf', '_blank', 'noopener');
+  }
+
   document.getElementById('resumeBtn').addEventListener('click', event => {
     event.preventDefault();
-    window.open('assets/Harsha_Resume.pdf', '_blank', 'noopener');
+    openResumeAndCount();
   });
 
   document.getElementById('simulationBtn').addEventListener('click', event => {
@@ -1139,13 +1548,16 @@
     if (event.key === 'Escape' && (breachRunning || breachReveal.classList.contains('active'))) {
       stopBreach(false);
     }
+    if (event.key === 'Escape' && projectModal.classList.contains('active')) {
+      closeProjectModal();
+    }
   });
 
   // Start immediately as soon as the script finishes loading.
   // No click, key press, timeout, or visible delay is required.
-  if (!breachTriggered) {
-    startBreachSimulation();
-  }
+  setTimeout(() => {
+    if (!breachTriggered) startBreachSimulation();
+  }, 950);
 
   // Terminal command to replay the visual effect deliberately.
   commandMap.simulation = () => {
@@ -1153,6 +1565,43 @@
     breachTriggered = false;
     startBreachSimulation();
   };
+
+
+  // Animate demonstration dashboard metrics when they become visible.
+  const metricElements = [...document.querySelectorAll('[data-counter]')];
+  let metricsAnimated = false;
+
+  function animateMetrics() {
+    if (metricsAnimated) return;
+    metricsAnimated = true;
+
+    metricElements.forEach(element => {
+      const target = Number(element.dataset.counter || 0);
+      const suffix = element.dataset.suffix || '';
+      const duration = 1300;
+      const start = performance.now();
+
+      function step(now) {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(target * eased);
+        element.textContent = value.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    });
+  }
+
+  const dashboard = document.getElementById('threat-dashboard');
+  const dashboardObserver = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      animateMetrics();
+      dashboardObserver.disconnect();
+    }
+  }, { threshold: 0.25 });
+
+  dashboardObserver.observe(dashboard);
 
   // Matrix background
 
