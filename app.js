@@ -237,15 +237,25 @@
     .section{width:min(1180px,calc(100% - 36px));margin:auto;padding:105px 0}
     .hero{
       min-height:100vh;
-      padding-top:135px;
+      padding-top:125px;
       display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:54px;
+      grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);
+      gap:42px;
       align-items:center;
+    }
+    .hero>div:first-child{
+      min-width:0;
     }
     .eyebrow,.label,.mono{font-family:var(--mono);color:var(--green)}
     .eyebrow{font-size:13px;margin-bottom:22px}
-    h1{font-size:clamp(52px,8vw,118px);line-height:.86;margin:0;letter-spacing:-.06em}
+    h1{
+      font-size:clamp(52px,6.8vw,96px);
+      line-height:.9;
+      margin:0;
+      letter-spacing:-.055em;
+      max-width:100%;
+      overflow-wrap:anywhere;
+    }
     h1 small{
       display:block;
       font:700 .42em var(--mono);
@@ -256,10 +266,10 @@
     }
     .hero h2{font:600 clamp(16px,2vw,24px) var(--mono);color:var(--green2);line-height:1.55;margin:26px 0 18px}
     .lead{
-      font-size:clamp(18px,1.55vw,22px);
-      line-height:1.82;
+      font-size:clamp(17px,1.25vw,20px);
+      line-height:1.72;
       color:#c3d8cc;
-      max-width:780px;
+      max-width:760px;
       margin-top:20px;
     }
     .actions{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0}
@@ -271,22 +281,27 @@
     .stats strong{display:block;color:var(--green);font:700 22px var(--mono)}
     .stats span{font-size:11px;color:var(--muted)}
     .identity{
-      padding:20px;
+      padding:16px;
       border:1px solid var(--line);
       background:var(--panel);
       box-shadow:0 25px 70px rgba(0,0,0,.45);
       width:100%;
-      max-width:560px;
+      max-width:430px;
       justify-self:end;
     }
     .photo{
       position:relative;
       overflow:hidden;
-      aspect-ratio:.84;
-      min-height:520px;
+      width:100%;
+      height:clamp(390px,55vh,520px);
       background:#0b1418;
     }
-    .photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center 12%;
+    }
     .scan{position:absolute;left:0;right:0;height:2px;background:var(--green);box-shadow:0 0 16px var(--green);animation:scan 4s linear infinite}
     @keyframes scan{from{top:0}to{top:100%}}
     .meta{display:grid;gap:8px;margin-top:15px}
@@ -963,8 +978,8 @@
     footer{width:min(1180px,calc(100% - 36px));margin:auto;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;color:var(--muted);font:10px var(--mono)}
     @media(max-width:980px){
       .hero{grid-template-columns:1fr}
-      .identity{max-width:620px;width:100%;justify-self:center}
-      .photo{min-height:0;aspect-ratio:.9}
+      .identity{max-width:500px;width:100%;justify-self:center}
+      .photo{height:clamp(420px,62vh,560px)}
       .grid2{grid-template-columns:1fr}
       .threat-grid{grid-template-columns:repeat(2,1fr)}
       .status{display:none}
@@ -988,8 +1003,8 @@
       h1{font-size:47px}
       h1 small{font-size:.55em;margin-bottom:8px}
       .lead{font-size:17px;line-height:1.7}
-      .identity{padding:14px}
-      .photo{aspect-ratio:.88}
+      .identity{padding:12px;max-width:100%}
+      .photo{height:auto;aspect-ratio:.78}
       .actions{flex-direction:column}
       .btn{text-align:center}
       .meta div{align-items:flex-start;flex-direction:column}
