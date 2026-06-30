@@ -234,7 +234,7 @@
     .status{display:flex;align-items:center;gap:8px;font:700 10px var(--mono);color:var(--green2);border:1px solid var(--line);padding:8px 11px}
     .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
     .menu{display:none;margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--green);padding:7px 10px}
-    .section{width:min(1180px,calc(100% - 36px));margin:auto;padding:105px 0}
+    .section{width:min(1180px,calc(100% - 36px));margin:auto;padding:68px 0}
     .hero{
       min-height:100vh;
       padding-top:125px;
@@ -1094,9 +1094,44 @@
     }
     .hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hints button{border:1px solid var(--line);background:var(--panel);color:var(--green2);padding:8px 10px;font:10px var(--mono);cursor:pointer}
-    .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .contact a,.contact div{padding:18px;border:1px solid var(--line);background:var(--panel)}
-    .contact small{display:block;color:var(--muted);font:10px var(--mono);margin-bottom:8px}
+
+    .section + .section{border-top:1px solid rgba(53,255,162,.055)}
+    .heading{margin-bottom:28px!important}
+    .section .grid2{margin-top:0}
+    #credentials .cyber-timeline{margin-top:38px}
+    #contact{padding-bottom:58px}
+
+    .contact{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      opacity:1!important;
+      visibility:visible!important;
+    }
+    .contact a,.contact div{
+      display:block;
+      min-width:0;
+      padding:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(145deg,rgba(8,24,28,.82),rgba(4,12,16,.68));
+      color:var(--text);
+      text-decoration:none;
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none;
+    }
+    .contact a:hover{
+      border-color:var(--green);
+      box-shadow:0 0 28px rgba(53,255,162,.1);
+    }
+    .contact small{display:block;color:var(--green);font:10px var(--mono);margin-bottom:8px}
+    .contact strong{
+      display:block;
+      color:#d7efe1;
+      font-size:14px;
+      line-height:1.45;
+      overflow-wrap:anywhere;
+    }
     footer{width:min(1180px,calc(100% - 36px));margin:auto;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;color:var(--muted);font:10px var(--mono)}
     @media(max-width:980px){
       .hero{grid-template-columns:1fr}
@@ -1111,7 +1146,7 @@
       .menu{display:block}
       .nav{display:none;position:absolute;top:62px;left:0;right:0;padding:18px;flex-direction:column;background:rgba(4,9,13,.98);border-bottom:1px solid var(--line)}
       .nav.open{display:flex}
-      .section{padding:78px 0}
+      .section{padding:52px 0}
       .hero{padding-top:105px}
       .stats{grid-template-columns:repeat(2,1fr)}
       .stats div:nth-child(2){border-right:0}
@@ -1281,10 +1316,11 @@
         <button class="menu" id="menuBtn">☰</button>
         <nav class="nav" id="nav">
           <button data-target="home">HOME</button>
-          <button data-target="about">ABOUT</button>
           <button data-target="projects">PROJECTS</button>
+          <button data-target="about">ABOUT</button>
           <button data-target="credentials">CREDENTIALS</button>
           <button data-target="terminal">TERMINAL</button>
+          <button data-target="contact">CONTACT</button>
         </nav>
         <div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
       </header>
@@ -1349,7 +1385,7 @@
 
         <section class="section" id="projects">
           <div class="heading">
-            <div><div class="label">02 // PROJECTS</div><h3>Selected cyber operations</h3></div>
+            <div><div class="label">SECTION 02 // PROJECTS</div><h3>Selected cyber operations</h3></div>
             <div class="mono">[ mission_data.loaded = true ]</div>
           </div>
           <div class="grid2">${projectCards()}</div>
@@ -1439,15 +1475,27 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="contact">
           <div class="heading">
             <div><div class="label">07 // CONTACT</div><h3>Let’s build secure systems</h3></div>
           </div>
           <div class="contact">
-            <a href="mailto:${DATA.profile.email}"><small>EMAIL</small><strong>${DATA.profile.email}</strong></a>
-            <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}"><small>PHONE</small><strong>${DATA.profile.phone}</strong></a>
-            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>harsha-vardhan-146181217</strong></a>
-            <div><small>LOCATION</small><strong>${DATA.profile.location}</strong></div>
+            <a href="mailto:${DATA.profile.email}">
+              <small>EMAIL</small>
+              <strong>${DATA.profile.email}</strong>
+            </a>
+            <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}">
+              <small>PHONE</small>
+              <strong>${DATA.profile.phone}</strong>
+            </a>
+            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener noreferrer">
+              <small>LINKEDIN</small>
+              <strong>kari-harshavardhan-chowdary-146181217</strong>
+            </a>
+            <div>
+              <small>LOCATION</small>
+              <strong>${DATA.profile.location}</strong>
+            </div>
           </div>
         </section>
       </main>
@@ -3242,7 +3290,6 @@
     '.info-row',
     '.threat-card',
     '.skills span',
-    '.contact > *',
     '.project-card',
     '.credential-column',
     '.about-card',
@@ -3365,7 +3412,23 @@
   const terminalElement=document.querySelector('.terminal'),terminalStartup=document.getElementById('terminalStartup');
   if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Scanning visitor permissions...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
 
+
+  // Contact visibility fallback
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    contactSection.style.opacity = '1';
+    contactSection.style.visibility = 'visible';
+    contactSection.querySelectorAll('.contact > *').forEach(item => {
+      item.classList.add('is-visible');
+      item.style.opacity = '1';
+      item.style.visibility = 'visible';
+      item.style.transform = 'none';
+      item.style.filter = 'none';
+    });
+  }
+
   // Matrix background
+
 
 
 
