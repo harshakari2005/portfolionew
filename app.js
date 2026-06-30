@@ -982,6 +982,55 @@
     @media(max-width:900px){.live-counter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.live-counter-grid{grid-template-columns:1fr 1fr}.hero-network{opacity:.34}}
 
+    /* Compact section spacing fixes */
+    #home.hero{
+      min-height:auto;
+      padding-top:118px;
+      padding-bottom:26px;
+      row-gap:24px;
+    }
+    #home .live-counter-grid{
+      grid-column:1 / -1;
+      width:100%;
+      margin-top:8px;
+    }
+    #projects{
+      padding-top:34px;
+      padding-bottom:58px;
+    }
+    #projects .heading{
+      margin-bottom:24px!important;
+    }
+    #credentials{
+      padding-top:54px;
+      padding-bottom:54px;
+    }
+    #credentials + .section{
+      padding-top:46px;
+      padding-bottom:38px;
+    }
+    #threat-dashboard{
+      padding-top:34px;
+      padding-bottom:54px;
+    }
+    #threat-dashboard .heading{
+      margin-bottom:22px!important;
+    }
+    #threat-dashboard .threat-grid{
+      margin-top:0;
+    }
+    @media(max-width:900px){
+      #home.hero{
+        padding-top:104px;
+        padding-bottom:22px;
+      }
+      #projects,
+      #threat-dashboard{
+        padding-top:30px;
+      }
+    }
+
+
     /* Scroll reveal animations */
     .reveal-item{
       opacity:0;
@@ -1424,7 +1473,7 @@
           </div>
 </section>
 
-        <section class="section">
+        <section class="section" id="skills">
           <div class="heading">
             <div><div class="label">04 // SKILLS</div><h3>Technical capabilities</h3></div>
           </div>
@@ -3412,6 +3461,17 @@
   const terminalElement=document.querySelector('.terminal'),terminalStartup=document.getElementById('terminalStartup');
   if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Scanning visitor permissions...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
 
+
+
+  // Keep key sections immediately visible and compact.
+  ['projects','skills','threat-dashboard'].forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.dataset.revealMode = 'default';
+    section.querySelectorAll('.reveal-item').forEach(item => {
+      item.classList.add('is-visible');
+    });
+  });
 
   // Contact visibility fallback
   const contactSection = document.getElementById('contact');
