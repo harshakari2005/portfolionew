@@ -930,6 +930,77 @@
       opacity:1;
     }
 
+
+    /* Scroll reveal animations */
+    .reveal-item{
+      opacity:0;
+      transform:translateY(34px) scale(.985);
+      filter:blur(5px);
+      transition:
+        opacity .75s cubic-bezier(.2,.7,.2,1),
+        transform .75s cubic-bezier(.2,.7,.2,1),
+        filter .75s cubic-bezier(.2,.7,.2,1);
+      transition-delay:var(--reveal-delay,0ms);
+      will-change:opacity,transform,filter;
+    }
+    .reveal-item.reveal-left{
+      transform:translateX(-42px) scale(.985);
+    }
+    .reveal-item.reveal-right{
+      transform:translateX(42px) scale(.985);
+    }
+    .reveal-item.reveal-zoom{
+      transform:scale(.92);
+    }
+    .reveal-item.is-visible{
+      opacity:1;
+      transform:translate3d(0,0,0) scale(1);
+      filter:blur(0);
+    }
+
+    .section-heading.reveal-item,
+    .heading.reveal-item{
+      transform:translateY(24px);
+    }
+
+    .topbar .nav button{
+      position:relative;
+      overflow:hidden;
+    }
+    .topbar .nav button::after{
+      content:'';
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-4px;
+      height:2px;
+      background:var(--green);
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .28s ease;
+      box-shadow:0 0 10px var(--green);
+    }
+    .topbar .nav button:hover::after,
+    .topbar .nav button.active::after{
+      transform:scaleX(1);
+    }
+    .topbar .nav button.active{
+      color:var(--green);
+      text-shadow:0 0 12px rgba(53,255,162,.45);
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .reveal-item,
+      .reveal-item.reveal-left,
+      .reveal-item.reveal-right,
+      .reveal-item.reveal-zoom{
+        opacity:1!important;
+        transform:none!important;
+        filter:none!important;
+        transition:none!important;
+      }
+    }
+
     .terminal{border:1px solid rgba(53,255,162,.48);background:rgba(2,8,10,.96);box-shadow:0 0 45px rgba(53,255,162,.08)}
     .termbar{height:45px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);font:11px var(--mono);color:var(--muted)}
     .termbar-actions{display:flex;align-items:center;gap:8px}
@@ -3035,7 +3106,95 @@
   renderAttackFeed();
   setInterval(renderAttackFeed,2200);
 
+
+  // Scroll reveal animations for sections, cards, tabs and interactive blocks.
+  const revealSelectors = [
+    '.section > .heading',
+    '.section > .section-heading',
+    '.section > .label',
+    '.card',
+    '.info-row',
+    '.threat-card',
+    '.skills span',
+    '.contact > *',
+    '.project-card',
+    '.credential-column',
+    '.about-card',
+    '.terminal',
+    '.command-hints button',
+    '.hints button',
+    '.identity',
+    '.quick-stats > div',
+    '.stats > div'
+  ];
+
+  const revealElements = [
+    ...new Set(
+      revealSelectors.flatMap(selector =>
+        [...document.querySelectorAll(selector)]
+      )
+    )
+  ];
+
+  revealElements.forEach((element, index) => {
+    element.classList.add('reveal-item');
+
+    const cycle = index % 4;
+    if (cycle === 1) element.classList.add('reveal-left');
+    if (cycle === 2) element.classList.add('reveal-right');
+    if (cycle === 3) element.classList.add('reveal-zoom');
+
+    const delay = Math.min((index % 6) * 80, 400);
+    element.style.setProperty('--reveal-delay', `${delay}ms`);
+  });
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold:0.12,
+    rootMargin:'0px 0px -8% 0px'
+  });
+
+  revealElements.forEach(element => revealObserver.observe(element));
+
+  // Keep hero content visible immediately.
+  document.querySelectorAll('#home .reveal-item').forEach(element => {
+    requestAnimationFrame(() => element.classList.add('is-visible'));
+  });
+
+  // Highlight the active navigation tab while scrolling.
+  const navButtons = [...document.querySelectorAll('.nav [data-target]')];
+  const navSections = navButtons
+    .map(button => document.getElementById(button.dataset.target))
+    .filter(Boolean);
+
+  const navObserver = new IntersectionObserver(entries => {
+    const visibleEntry = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visibleEntry) return;
+
+    navButtons.forEach(button => {
+      button.classList.toggle(
+        'active',
+        button.dataset.target === visibleEntry.target.id
+      );
+    });
+  }, {
+    threshold:[0.25,0.5,0.75],
+    rootMargin:'-20% 0px -55% 0px'
+  });
+
+  navSections.forEach(section => navObserver.observe(section));
+
   // Matrix background
+
 
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
