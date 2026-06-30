@@ -764,6 +764,102 @@
     .snake-controls [data-dir="left"]{grid-area:left}
     .snake-controls [data-dir="down"]{grid-area:down}
     .snake-controls [data-dir="right"]{grid-area:right}
+
+    .clearance-widget{
+      position:fixed;
+      left:14px;
+      bottom:14px;
+      z-index:90;
+      width:min(280px,calc(100% - 28px));
+      border:1px solid var(--line);
+      background:rgba(3,12,15,.94);
+      padding:12px;
+      font:10px var(--mono);
+      box-shadow:0 0 25px rgba(53,255,162,.08);
+    }
+    .clearance-widget strong{color:var(--green)}
+    .clearance-bar{height:7px;border:1px solid var(--line);background:#06100d;margin:8px 0;overflow:hidden}
+    .clearance-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#0b6d45,var(--green));transition:width .35s ease}
+    .achievements-panel,.floating-window{
+      position:fixed;
+      z-index:10500;
+      display:none;
+      width:min(520px,calc(100% - 24px));
+      max-height:78vh;
+      overflow:auto;
+      border:1px solid rgba(53,255,162,.45);
+      background:#061015;
+      box-shadow:0 0 45px rgba(53,255,162,.12);
+    }
+    .achievements-panel.active,.floating-window.active{display:block}
+    .window-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      color:var(--green);
+      font:700 11px var(--mono);
+      cursor:move;
+      user-select:none;
+    }
+    .window-head button{border:1px solid var(--line);background:transparent;color:var(--green);padding:6px 8px;cursor:pointer}
+    .window-body{padding:16px}
+    .achievement-row{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(53,255,162,.14)}
+    .achievement-row .state{color:var(--green)}
+    .achievement-row.locked{opacity:.45}
+    .suggestions{
+      display:none;
+      border-top:1px solid var(--line);
+      background:rgba(5,14,18,.98);
+      padding:8px 14px;
+      font:10px var(--mono);
+      color:var(--muted);
+    }
+    .suggestions.active{display:flex;flex-wrap:wrap;gap:8px}
+    .suggestions span{border:1px solid var(--line);padding:5px 7px;color:var(--green2);cursor:pointer}
+    .attack-feed{display:grid;gap:8px;margin-top:18px}
+    .attack-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px;border:1px solid var(--line);background:rgba(53,255,162,.025);font:10px var(--mono)}
+    .attack-row b{color:var(--cyan)}
+    .attack-row em{color:var(--green);font-style:normal}
+    .skill-detail{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+      padding:16px;
+      display:none;
+    }
+    .skill-detail.active{display:block}
+    .recruiter-mode .breach-overlay,
+    .recruiter-mode .boot-loader,
+    .recruiter-mode .hints,
+    .recruiter-mode .clearance-widget{display:none!important}
+    .recruiter-banner{
+      display:none;
+      position:fixed;
+      top:70px;
+      left:0;right:0;
+      z-index:40;
+      padding:9px 16px;
+      text-align:center;
+      background:#092117;
+      border-bottom:1px solid var(--line);
+      color:var(--green);
+      font:700 10px var(--mono);
+    }
+    .recruiter-mode .recruiter-banner{display:block}
+    .theme-switcher{display:flex;flex-wrap:wrap;gap:8px}
+    .theme-switcher button{border:1px solid var(--line);background:transparent;color:var(--green2);padding:8px 10px;font:10px var(--mono);cursor:pointer}
+    body.theme-red{--green:#ff4c5d;--green2:#ff9ba5;--cyan:#ffb34d;--line:rgba(255,76,93,.28)}
+    body.theme-blue{--green:#45d7ff;--green2:#9cecff;--cyan:#9f8cff;--line:rgba(69,215,255,.28)}
+    body.theme-amber{--green:#ffbd4a;--green2:#ffe0a0;--cyan:#ff7e47;--line:rgba(255,189,74,.28)}
+    @media(max-width:760px){
+      .clearance-widget{position:static;width:min(1180px,calc(100% - 36px));margin:0 auto 18px}
+      .achievements-panel,.floating-window{left:12px!important;top:74px!important}
+      .attack-row{grid-template-columns:1fr}
+    }
+
     .achievement-toast{
       position:fixed;
       right:18px;
@@ -941,7 +1037,21 @@
         </div>
       </div>
 
+      <div class="recruiter-banner">RECRUITER MODE ACTIVE — EXPERIENCE, SKILLS, PROJECTS, PATENTS, PUBLICATIONS AND CONTACT PRIORITIZED</div>
       <div class="achievement-toast" id="achievementToast"></div>
+      <div class="clearance-widget" id="clearanceWidget">
+        <strong>VISITOR SECURITY CLEARANCE</strong>
+        <div class="clearance-bar"><span id="clearanceBar"></span></div>
+        <div><span id="clearancePercent">0%</span> // <span id="clearanceRank">GUEST</span></div>
+      </div>
+      <div class="achievements-panel" id="achievementsPanel">
+        <div class="window-head"><span>ACHIEVEMENTS</span><button data-close-window="achievementsPanel">CLOSE</button></div>
+        <div class="window-body" id="achievementsBody"></div>
+      </div>
+      <div class="floating-window" id="utilityWindow">
+        <div class="window-head"><span id="utilityTitle">UTILITY</span><button data-close-window="utilityWindow">CLOSE</button></div>
+        <div class="window-body" id="utilityBody"></div>
+      </div>
 
       <div class="project-modal" id="projectModal" aria-hidden="true">
         <div class="project-modal-panel">
@@ -1088,7 +1198,7 @@
           <div class="heading">
             <div><div class="label">04 // SKILLS</div><h3>Technical capabilities</h3></div>
           </div>
-          <div class="skills">${skillTags()}</div>
+          <div class="skills">${skillTags()}</div><div class="skill-detail" id="skillDetail"></div>
         </section>
 
 
@@ -1104,6 +1214,7 @@
             <div class="threat-card"><small>SECURITY SCORE</small><strong data-counter="94" data-suffix="%">0%</strong><span>Portfolio readiness score</span></div>
           </div>
           <div class="simulated-label">These values are clearly marked demonstration metrics and are not live production statistics.</div>
+          <div class="attack-feed" id="attackFeed"></div>
         </section>
 
         <section class="section" id="terminal">
@@ -1125,10 +1236,11 @@
               <span class="prompt">harsha@portfolio:~$</span>
               <input id="terminalInput" autocomplete="off" spellcheck="false" placeholder="type a command...">
             </form>
+            <div class="suggestions" id="commandSuggestions"></div>
           </div>
 
           <div class="hints">
-            ${['help','whoami','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','play firewall','play snake','highscore','simulation','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+            ${['help','whoami','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','play firewall','play snake','mission','achievements','recruiter','theme','highscore','simulation','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
           </div>
         </section>
 
@@ -1213,6 +1325,11 @@
 
     projectModal.classList.add('active');
     projectModal.setAttribute('aria-hidden', 'false');
+    const opened = new Set(JSON.parse(localStorage.getItem('openedProjects') || '[]'));
+    opened.add(index);
+    localStorage.setItem('openedProjects', JSON.stringify([...opened]));
+    if (opened.size >= 3) unlockAchievement('PROJECT EXPLORER','Opened at least three project case studies.');
+    addClearance(4);
     document.body.style.overflow = 'hidden';
   }
 
@@ -1230,6 +1347,93 @@
   projectModal.addEventListener('click', event => {
     if (event.target === projectModal) closeProjectModal();
   });
+
+
+  const clearanceBar = document.getElementById('clearanceBar');
+  const clearancePercent = document.getElementById('clearancePercent');
+  const clearanceRank = document.getElementById('clearanceRank');
+  const achievementsPanel = document.getElementById('achievementsPanel');
+  const achievementsBody = document.getElementById('achievementsBody');
+  const utilityWindow = document.getElementById('utilityWindow');
+  const utilityTitle = document.getElementById('utilityTitle');
+  const utilityBody = document.getElementById('utilityBody');
+  const suggestionsBox = document.getElementById('commandSuggestions');
+  const skillDetail = document.getElementById('skillDetail');
+
+  let clearanceScore = Number(localStorage.getItem('clearanceScore') || 0);
+  const achievementCatalog = {
+    'TERMINAL OPERATOR':'Run five terminal commands.',
+    'FIREWALL DEFENDER':'Complete Firewall Defense with a strong score.',
+    'TERMINAL SERPENT':'Score at least 8 in Snake.',
+    'PROJECT EXPLORER':'Open three project case studies.',
+    'INCIDENT INVESTIGATOR':'Complete the cyber investigation mission.',
+    'ROOT ACCESS':'Reach 100% visitor clearance.'
+  };
+
+  function getClearanceRank(score) {
+    if (score >= 100) return 'ROOT ACCESS';
+    if (score >= 81) return 'RED TEAM OPERATOR';
+    if (score >= 61) return 'INCIDENT RESPONDER';
+    if (score >= 41) return 'SOC ANALYST';
+    if (score >= 21) return 'SECURITY TRAINEE';
+    return 'GUEST';
+  }
+
+  function addClearance(points) {
+    clearanceScore = Math.min(100, clearanceScore + points);
+    localStorage.setItem('clearanceScore', String(clearanceScore));
+    clearanceBar.style.width = `${clearanceScore}%`;
+    clearancePercent.textContent = `${clearanceScore}%`;
+    clearanceRank.textContent = getClearanceRank(clearanceScore);
+    if (clearanceScore >= 100) unlockAchievement('ROOT ACCESS','Completed the full portfolio exploration path.');
+  }
+
+  function renderAchievements() {
+    achievementsBody.innerHTML = Object.entries(achievementCatalog).map(([title, detail]) => {
+      const unlocked = Boolean(localStorage.getItem(`achievement:${title}`));
+      return `<div class="achievement-row ${unlocked ? '' : 'locked'}"><span class="state">${unlocked ? '[✓]' : '[ ]'}</span><div><strong>${title}</strong><br><span>${detail}</span></div></div>`;
+    }).join('');
+  }
+
+  function showWindow(title, htmlContent) {
+    utilityTitle.textContent = title;
+    utilityBody.innerHTML = htmlContent;
+    utilityWindow.classList.add('active');
+    utilityWindow.style.left = '50%';
+    utilityWindow.style.top = '50%';
+    utilityWindow.style.transform = 'translate(-50%,-50%)';
+  }
+
+  function makeDraggable(windowElement) {
+    const head = windowElement.querySelector('.window-head');
+    let dragging = false, offsetX = 0, offsetY = 0;
+    head.addEventListener('pointerdown', event => {
+      if (event.target.closest('button')) return;
+      dragging = true;
+      const rect = windowElement.getBoundingClientRect();
+      offsetX = event.clientX - rect.left;
+      offsetY = event.clientY - rect.top;
+      windowElement.style.transform = 'none';
+      head.setPointerCapture(event.pointerId);
+    });
+    head.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      windowElement.style.left = `${event.clientX - offsetX}px`;
+      windowElement.style.top = `${event.clientY - offsetY}px`;
+    });
+    head.addEventListener('pointerup', () => dragging = false);
+  }
+
+  makeDraggable(achievementsPanel);
+  makeDraggable(utilityWindow);
+
+  document.querySelectorAll('[data-close-window]').forEach(button => {
+    button.addEventListener('click', () => {
+      document.getElementById(button.dataset.closeWindow).classList.remove('active');
+    });
+  });
+
+  addClearance(0);
 
   const output = document.getElementById('output');
   const input = document.getElementById('terminalInput');
@@ -1275,6 +1479,12 @@
       '<span class="k">play snake</span>    start terminal Snake',
       '<span class="k">highscore</span>     show saved game scores',
       '<span class="k">quit game</span>     stop the active game',
+      '<span class="k">pwd / cd / tree</span> navigate virtual filesystem',
+      '<span class="k">mission</span>       start cyber investigation',
+      '<span class="k">achievements</span>  open achievement panel',
+      '<span class="k">recruiter</span>     enable recruiter mode',
+      '<span class="k">theme</span>         change visual theme',
+      '<span class="k">open [project]</span> open project case study',
       '<span class="k">Ctrl+C</span>        interrupt active task on desktop',
       '<span class="k">STOP button</span>   interrupt active task on phone',
       '<span class="k">simulation</span>    replay browser-only breach effect',
@@ -1425,6 +1635,7 @@
     const key = `achievement:${title}`;
     if (localStorage.getItem(key)) return;
     localStorage.setItem(key, '1');
+    if (typeof renderAchievements === 'function') renderAchievements();
 
     achievementToast.innerHTML = `<strong>ACHIEVEMENT UNLOCKED</strong><br>${title}<br><span style="color:var(--muted)">${detail}</span>`;
     achievementToast.classList.add('show');
@@ -1952,6 +2163,111 @@
     output.scrollTop = output.scrollHeight;
   }
 
+
+  let currentPath = '/home/harsha';
+  let missionState = null;
+  let typingTimer = null;
+  let typingMode = localStorage.getItem('typingMode') || 'instant';
+  let soundEnabled = localStorage.getItem('soundEnabled') === '1';
+  let commandCount = Number(localStorage.getItem('commandCount') || 0);
+
+  const fsTree = {
+    '/home/harsha':['about.txt','profile.txt','skills.txt','contact.txt','projects','certificates','evidence'],
+    '/home/harsha/projects':['motag.txt','phishing.txt','forensics.txt','scanner.txt','waste-iot.txt'],
+    '/home/harsha/certificates':['certificates.txt'],
+    '/home/harsha/evidence':['access.log','suspicious_process.txt','hash.txt']
+  };
+
+  const fileReaders = {
+    '/home/harsha/about.txt':() => DATA.about,
+    '/home/harsha/profile.txt':() => [`Name: ${DATA.profile.name}`,`Role: ${DATA.profile.role}`,`Status: ${DATA.profile.status}`],
+    '/home/harsha/skills.txt':() => Object.entries(DATA.skills).map(([k,v]) => `${k}: ${v.join(', ')}`),
+    '/home/harsha/contact.txt':() => [`Email: ${DATA.profile.email}`,`Phone: ${DATA.profile.phone}`,`LinkedIn: ${DATA.profile.linkedin}`],
+    '/home/harsha/projects/motag.txt':() => [DATA.projects[0].title,DATA.projects[0].description],
+    '/home/harsha/projects/phishing.txt':() => [DATA.projects[1].title,DATA.projects[1].description],
+    '/home/harsha/projects/forensics.txt':() => [DATA.projects[2].title,DATA.projects[2].description],
+    '/home/harsha/projects/scanner.txt':() => [DATA.projects[3].title,DATA.projects[3].description],
+    '/home/harsha/projects/waste-iot.txt':() => [DATA.projects[4].title,DATA.projects[4].description],
+    '/home/harsha/certificates/certificates.txt':() => DATA.certifications,
+    '/home/harsha/evidence/access.log':() => ['09:14:22 POST /login 401','09:14:28 POST /login 401','09:15:03 GET /invoice.zip 200','09:15:11 outbound connection 185.42.19.77:4444'],
+    '/home/harsha/evidence/suspicious_process.txt':() => ['PID 4182 svchost.exe','PID 5218 chrome.exe','PID 7741 invoice.pdf.exe','PID 8821 explorer.exe'],
+    '/home/harsha/evidence/hash.txt':() => ['invoice.pdf.exe SHA256: 8f14e45fceea167a5a36dedd4bea2543']
+  };
+
+  function normalizePath(target) {
+    if (!target || target === '~') return '/home/harsha';
+    if (target === '..') return currentPath.split('/').slice(0,-1).join('/') || '/';
+    if (target.startsWith('/')) return target.replace(/\/+$/,'');
+    return `${currentPath}/${target}`.replace(/\/+/g,'/').replace(/\/+$/,'');
+  }
+
+  function typeLines(title, lines) {
+    if (typingTimer) clearInterval(typingTimer);
+    if (typingMode === 'instant') {
+      addBlock(title, lines);
+      return;
+    }
+    addLine(`<span class="v">--- ${title.toUpperCase()} ---</span>`);
+    let index = 0;
+    const delay = typingMode === 'fast' ? 45 : 120;
+    typingTimer = setInterval(() => {
+      if (index >= lines.length) {
+        clearInterval(typingTimer);
+        typingTimer = null;
+        return;
+      }
+      addLine(lines[index++] || '&nbsp;');
+    }, delay);
+  }
+
+  function setTheme(name) {
+    document.body.classList.remove('theme-red','theme-blue','theme-amber');
+    if (['red','blue','amber'].includes(name)) document.body.classList.add(`theme-${name}`);
+    localStorage.setItem('portfolioTheme',name);
+    addLine(`Theme changed to ${name}.`);
+  }
+
+  function toggleRecruiterMode(enable) {
+    document.body.classList.toggle('recruiter-mode',enable);
+    localStorage.setItem('recruiterMode',enable ? '1':'0');
+    addLine(enable ? 'Recruiter mode enabled.' : 'Recruiter mode disabled.');
+  }
+
+  function startMission() {
+    missionState = {step:0};
+    typeLines('incident mission',[
+      'A suspicious executable was downloaded after repeated failed logins.',
+      'Use: ls evidence',
+      'Then inspect files with cat and submit the malicious process using:',
+      'submit <filename>'
+    ]);
+  }
+
+  function checkMissionCommand(command) {
+    if (!missionState) return false;
+    if (command.startsWith('submit ')) {
+      const suspect = command.slice(7).trim();
+      if (suspect === 'invoice.pdf.exe') {
+        typeLines('mission complete',[
+          'Attack type: Credential Theft / Malware Delivery',
+          'Malicious process: invoice.pdf.exe',
+          'Command-and-control destination: 185.42.19.77:4444',
+          'Score: 100%',
+          'Rank: Incident Investigator'
+        ]);
+        unlockAchievement('INCIDENT INVESTIGATOR','Completed the cyber investigation mission.');
+        addClearance(15);
+        missionState = null;
+      } else addLine('Incorrect suspect. Continue reviewing evidence.','error');
+      return true;
+    }
+    return false;
+  }
+
+  const savedTheme = localStorage.getItem('portfolioTheme');
+  if (savedTheme) setTheme(savedTheme);
+  if (localStorage.getItem('recruiterMode') === '1') document.body.classList.add('recruiter-mode');
+
   function runCommand(raw) {
     const command = String(raw || '').trim().toLowerCase();
     if (!command) return;
@@ -1960,6 +2276,153 @@
 
     commandHistory.push(command);
     historyIndex = commandHistory.length;
+
+    commandCount += 1;
+    localStorage.setItem('commandCount', String(commandCount));
+    if (commandCount >= 5) unlockAchievement('TERMINAL OPERATOR','Executed at least five commands.');
+    addClearance(1);
+
+    if (checkMissionCommand(command)) return;
+
+    if (command === 'pwd') {
+      addLine(currentPath);
+      return;
+    }
+
+    if (command === 'tree') {
+      addBlock('filesystem',[
+        '/home/harsha',
+        '├── about.txt',
+        '├── profile.txt',
+        '├── skills.txt',
+        '├── contact.txt',
+        '├── projects/',
+        '│   ├── motag.txt',
+        '│   ├── phishing.txt',
+        '│   ├── forensics.txt',
+        '│   ├── scanner.txt',
+        '│   └── waste-iot.txt',
+        '├── certificates/',
+        '└── evidence/'
+      ]);
+      return;
+    }
+
+    if (command.startsWith('cd')) {
+      const target = command.slice(2).trim() || '~';
+      const next = normalizePath(target);
+      if (fsTree[next]) currentPath = next;
+      else addLine(`cd: ${target}: no such directory`,'error');
+      return;
+    }
+
+    if (command === 'ls' || command.startsWith('ls ')) {
+      const target = command.slice(2).trim();
+      const path = target ? normalizePath(target) : currentPath;
+      const items = fsTree[path];
+      if (items) addBlock(path,items);
+      else addLine(`ls: ${target}: no such directory`,'error');
+      return;
+    }
+
+    if (command.startsWith('cat ')) {
+      const target = command.slice(4).trim();
+      const path = normalizePath(target);
+      const reader = fileReaders[path] || virtualFiles[target];
+      if (reader) typeLines(target,reader());
+      else addLine(`cat: ${target}: file not found`,'error');
+      return;
+    }
+
+    if (command === 'mission' || command === 'start mission') {
+      startMission();
+      return;
+    }
+
+    if (command === 'achievements') {
+      renderAchievements();
+      achievementsPanel.classList.add('active');
+      achievementsPanel.style.left='50%';
+      achievementsPanel.style.top='50%';
+      achievementsPanel.style.transform='translate(-50%,-50%)';
+      return;
+    }
+
+    if (command === 'recruiter' || command === 'recruiter on') {
+      toggleRecruiterMode(true);
+      typeLines('recruiter summary',[
+        `Current role: ${DATA.profile.role}`,
+        `Top skills: Python, Network Security, DDoS Mitigation, Wireshark, Nmap, Burp Suite`,
+        `Projects: ${DATA.projects.length}`,
+        `Publications: ${DATA.publications.length}`,
+        `Patents: ${DATA.patents.length}`,
+        `Contact: ${DATA.profile.email}`
+      ]);
+      return;
+    }
+
+    if (command === 'recruiter off') {
+      toggleRecruiterMode(false);
+      return;
+    }
+
+    if (command.startsWith('theme ')) {
+      setTheme(command.slice(6).trim());
+      return;
+    }
+
+    if (command === 'theme') {
+      showWindow('THEME SWITCHER','<div class="theme-switcher"><button data-theme="green">GREEN</button><button data-theme="red">RED</button><button data-theme="blue">BLUE</button><button data-theme="amber">AMBER</button></div>');
+      utilityBody.querySelectorAll('[data-theme]').forEach(btn => btn.addEventListener('click',()=>setTheme(btn.dataset.theme)));
+      return;
+    }
+
+    if (command.startsWith('open ')) {
+      const key = command.slice(5).trim();
+      const map = {motag:0,phishing:1,forensics:2,scanner:3,'waste-iot':4,waste:4};
+      if (key in map) openProjectModal(map[key]);
+      else addLine('Unknown project. Try: motag, phishing, forensics, scanner, waste-iot','error');
+      return;
+    }
+
+    if (command.startsWith('typing speed ')) {
+      const mode = command.slice(13).trim();
+      if (['instant','fast','normal'].includes(mode)) {
+        typingMode = mode;
+        localStorage.setItem('typingMode',mode);
+        addLine(`Typing mode set to ${mode}.`);
+      } else addLine('Use: typing speed instant|fast|normal','error');
+      return;
+    }
+
+    if (command === 'sound on') {
+      soundEnabled = true;
+      localStorage.setItem('soundEnabled','1');
+      addLine('Sound enabled. Browser interaction may be required.');
+      return;
+    }
+
+    if (command === 'sound off') {
+      soundEnabled = false;
+      localStorage.setItem('soundEnabled','0');
+      addLine('Sound disabled.');
+      return;
+    }
+
+    if (command === 'sudo su') {
+      addLine('Permission denied. Harshavardhan already has root access.');
+      return;
+    }
+
+    if (command === 'whoami --visitor') {
+      addBlock('visitor profile',[`Role: Curious Explorer`,`Clearance: ${clearanceScore}%`,`Rank: ${getClearanceRank(clearanceScore)}`,`Threat status: Harmless`]);
+      return;
+    }
+
+    if (command === 'rm -rf /') {
+      addLine('Operation blocked. This portfolio has better security than that.');
+      return;
+    }
 
     if (activeGame && activeGame.type === 'firewall' && ['1','2','3'].includes(command)) {
       handleFirewallChoice(command);
@@ -2006,14 +2469,6 @@
 
     if (command === 'date') {
       addLine(new Date().toString());
-      return;
-    }
-
-    if (command.startsWith('cat ')) {
-      const fileName = command.slice(4).trim();
-      const reader = virtualFiles[fileName];
-      if (reader) addBlock(fileName, reader());
-      else addLine(`cat: ${fileName}: file not found`, 'error');
       return;
     }
 
@@ -2080,6 +2535,35 @@
       input.blur();
     }
   }, true);
+
+
+  const suggestionCommands = [
+    'help','whoami','whoami --visitor','about','education','skills','projects','publications','patents','experience',
+    'certificates','leadership','strengths','hobbies','contact','resume','all','clear','pwd','ls','tree','cd projects',
+    'cat profile.txt','cat skills.txt','cat projects/motag.txt','mission','achievements','recruiter','recruiter off',
+    'theme green','theme red','theme blue','theme amber','typing speed instant','typing speed fast','typing speed normal',
+    'open motag','open phishing','open forensics','open scanner','play firewall','play snake','highscore','simulation',
+    'sudo su','rm -rf /'
+  ];
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    if (!query) {
+      suggestionsBox.classList.remove('active');
+      suggestionsBox.innerHTML='';
+      return;
+    }
+    const matches = suggestionCommands.filter(cmd => cmd.startsWith(query)).slice(0,6);
+    suggestionsBox.innerHTML = matches.map(cmd => `<span>${cmd}</span>`).join('');
+    suggestionsBox.classList.toggle('active',matches.length>0);
+    suggestionsBox.querySelectorAll('span').forEach(item => {
+      item.addEventListener('click',() => {
+        input.value=item.textContent;
+        suggestionsBox.classList.remove('active');
+        input.focus();
+      });
+    });
+  });
 
   input.addEventListener('keydown', event => {
     if (activeGame && activeGame.type === 'snake') {
@@ -2168,6 +2652,7 @@
 
   function openResumeAndCount() {
     resumeOpenCount += 1;
+    addClearance(5);
     localStorage.setItem('resumeOpenCount', String(resumeOpenCount));
     resumeCountElement.textContent = String(resumeOpenCount);
     window.open('assets/Harsha_Resume.pdf', '_blank', 'noopener');
@@ -2232,6 +2717,19 @@
   // Cursor-proximity glow for every skill button.
   // Buttons begin glowing before the pointer reaches them, and the glow becomes
   // stronger as the pointer moves closer.
+
+  document.querySelectorAll('.skills span').forEach(button => {
+    button.addEventListener('click', () => {
+      const skill = button.textContent.trim();
+      const related = DATA.projects.filter(project =>
+        `${project.title} ${project.description} ${project.tags.join(' ')}`.toLowerCase().includes(skill.toLowerCase())
+      );
+      skillDetail.classList.add('active');
+      skillDetail.innerHTML = `<div class="label">${skill.toUpperCase()}</div><strong>Used in:</strong><br>${related.length ? related.map(p => `• ${p.title}`).join('<br>') : '• Security research, tooling and practical implementation.'}`;
+      addClearance(2);
+    });
+  });
+
   const skillButtons = [...document.querySelectorAll('.skills span')];
   const GLOW_RADIUS = 180;
 
@@ -2460,6 +2958,28 @@
   }, { threshold: 0.25 });
 
   dashboardObserver.observe(dashboard);
+
+
+  const attackFeed = document.getElementById('attackFeed');
+  const simulatedAttacks = [
+    ['Unknown Node','DDoS','BLOCKED'],
+    ['External Host','Port Scan','DETECTED'],
+    ['Suspicious URL','Phishing','QUARANTINED'],
+    ['Botnet Relay','Credential Spray','BLOCKED'],
+    ['Malware Sample','C2 Beacon','ISOLATED']
+  ];
+  let attackIndex=0;
+  function renderAttackFeed() {
+    const [source,type,status] = simulatedAttacks[attackIndex % simulatedAttacks.length];
+    const row=document.createElement('div');
+    row.className='attack-row';
+    row.innerHTML=`<b>${source}</b><span>${type}</span><em>${status}</em>`;
+    attackFeed.prepend(row);
+    while (attackFeed.children.length>5) attackFeed.lastChild.remove();
+    attackIndex++;
+  }
+  renderAttackFeed();
+  setInterval(renderAttackFeed,2200);
 
   // Matrix background
 
