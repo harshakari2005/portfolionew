@@ -1053,6 +1053,82 @@
     }
 
 
+
+    /* Authoritative hero-to-project spacing fix */
+    #home.section.hero{
+      min-height:0!important;
+      height:auto!important;
+      margin:0 auto!important;
+      padding-top:118px!important;
+      padding-bottom:20px!important;
+      display:grid!important;
+      grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr)!important;
+      grid-template-rows:auto!important;
+      grid-auto-rows:auto!important;
+      align-items:start!important;
+      align-content:start!important;
+      column-gap:42px!important;
+      row-gap:0!important;
+      overflow:hidden;
+    }
+
+    #home > .hero-network{
+      position:absolute!important;
+      inset:0!important;
+      width:100%!important;
+      height:100%!important;
+      min-height:0!important;
+      margin:0!important;
+      padding:0!important;
+      pointer-events:none!important;
+    }
+
+    #home > div:not(.hero-network):not(.identity),
+    #home > .identity{
+      margin-bottom:0!important;
+      align-self:start!important;
+    }
+
+    #home .stats{
+      margin-bottom:0!important;
+    }
+
+    #projects.section{
+      min-height:0!important;
+      height:auto!important;
+      margin:0 auto!important;
+      padding-top:24px!important;
+      padding-bottom:48px!important;
+      transform:none!important;
+      opacity:1!important;
+      visibility:visible!important;
+      filter:none!important;
+      clip-path:none!important;
+    }
+
+    #projects .heading,
+    #projects .grid2,
+    #projects .project-card{
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+      filter:none!important;
+      clip-path:none!important;
+    }
+
+    @media(max-width:900px){
+      #home.section.hero{
+        grid-template-columns:1fr!important;
+        padding-top:104px!important;
+        padding-bottom:16px!important;
+        row-gap:26px!important;
+      }
+
+      #projects.section{
+        padding-top:20px!important;
+      }
+    }
+
     /* Scroll reveal animations */
     .reveal-item{
       opacity:0;
@@ -1430,14 +1506,6 @@
               <div><span>LOCATION</span><strong>HYDERABAD, INDIA</strong></div>
               <div><span>STATUS</span><strong style="color:var(--green)">WORKING AT SSEV SOFTSOLS</strong></div>
             </div>
-          </div>
-        
-          <div class="live-counter-grid" id="liveCounters">
-            <div class="live-counter"><strong data-counter="5">0</strong><span>PROJECTS</span></div>
-            <div class="live-counter"><strong data-counter="2">0</strong><span>PUBLICATIONS</span></div>
-            <div class="live-counter"><strong data-counter="2">0</strong><span>PATENTS</span></div>
-            <div class="live-counter"><strong data-counter="10">0</strong><span>CERTIFICATIONS</span></div>
-            <div class="live-counter"><strong data-counter="1">0</strong><span>CURRENT ROLE</span></div>
           </div>
 </section>
 
@@ -3462,10 +3530,6 @@
     addEventListener('resize',resizeNetwork);resizeNetwork();drawNetwork()
   }
 
-  // Live counters
-  const liveCounterSection=document.getElementById('liveCounters');
-  if(liveCounterSection){let started=false;const o=new IntersectionObserver(es=>{if(!es[0].isIntersecting||started)return;started=true;liveCounterSection.querySelectorAll('[data-counter]').forEach(el=>{const target=+el.dataset.counter,start=performance.now();function tick(now){const p=Math.min(1,(now-start)/1100),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e)+(target>=5?'+':'');if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)});o.disconnect()},{threshold:.35});o.observe(liveCounterSection)}
-
   // Timeline
   const cyberTimeline=document.getElementById('cyberTimeline');
   if(cyberTimeline){const o=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;cyberTimeline.classList.add('timeline-visible');cyberTimeline.querySelectorAll('.timeline-item').forEach((el,i)=>setTimeout(()=>el.classList.add('timeline-visible'),i*170));o.disconnect()},{threshold:.2});o.observe(cyberTimeline)}
@@ -3486,6 +3550,29 @@
 
 
 
+
+
+  // Remove any accidental runtime height left between Home and Projects.
+  const homeSection = document.getElementById('home');
+  const projectsSection = document.getElementById('projects');
+
+  if (homeSection && projectsSection) {
+    homeSection.style.minHeight = '0';
+    homeSection.style.height = 'auto';
+    homeSection.style.paddingBottom = '20px';
+    projectsSection.style.marginTop = '0';
+    projectsSection.style.paddingTop = '24px';
+    projectsSection.dataset.revealMode = 'default';
+
+    projectsSection.querySelectorAll('.reveal-item').forEach(item => {
+      item.classList.add('is-visible');
+      item.style.opacity = '1';
+      item.style.visibility = 'visible';
+      item.style.transform = 'none';
+      item.style.filter = 'none';
+      item.style.clipPath = 'none';
+    });
+  }
 
   // Prevent animation placeholders from creating empty sections.
   ['projects','about','threat-dashboard'].forEach(sectionId => {
