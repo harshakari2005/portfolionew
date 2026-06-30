@@ -1242,6 +1242,240 @@
       .project-visual{height:165px}
     }
 
+
+    /* Cybersecurity labs */
+    .lab-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+    }
+    .lab-card{
+      position:relative;
+      min-height:230px;
+      padding:20px;
+      border:1px solid var(--line);
+      background:linear-gradient(145deg,rgba(8,24,28,.78),rgba(4,12,16,.62));
+      overflow:hidden;
+    }
+    .lab-card::before{
+      content:'';
+      position:absolute;
+      inset:auto -20% -55% -20%;
+      height:150px;
+      background:radial-gradient(circle,rgba(53,255,162,.12),transparent 70%);
+      pointer-events:none;
+    }
+    .lab-icon{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      color:var(--green);
+      font:700 12px var(--mono);
+      margin-bottom:16px;
+      box-shadow:0 0 18px rgba(53,255,162,.08);
+    }
+    .lab-card h4{margin:0 0 10px}
+    .lab-card p{color:var(--muted);line-height:1.65}
+    .lab-tools{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      margin-top:14px;
+    }
+    .lab-tools span{
+      border:1px solid var(--line);
+      padding:5px 7px;
+      color:var(--green2);
+      font:9px var(--mono);
+    }
+    .lab-card button{
+      margin-top:16px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green);
+      padding:8px 10px;
+      font:10px var(--mono);
+      cursor:pointer;
+    }
+
+    /* Security writeups */
+    .writeup-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+    .writeup-card{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+      padding:20px;
+      cursor:pointer;
+      transition:.3s ease;
+    }
+    .writeup-card:hover{
+      transform:translateY(-5px);
+      border-color:var(--green);
+      box-shadow:0 0 28px rgba(53,255,162,.08);
+    }
+    .writeup-card .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--muted);
+      font:9px var(--mono);
+      margin-bottom:12px;
+    }
+    .writeup-card h4{margin:0 0 10px}
+    .writeup-card p{color:var(--muted);line-height:1.65}
+    .writeup-reader{
+      position:fixed;
+      inset:0;
+      z-index:11800;
+      display:none;
+      place-items:center;
+      background:rgba(1,7,10,.82);
+      backdrop-filter:blur(9px);
+    }
+    .writeup-reader.active{display:grid}
+    .writeup-reader-shell{
+      width:min(760px,calc(100% - 28px));
+      max-height:82vh;
+      overflow:auto;
+      border:1px solid var(--line);
+      background:#061015;
+      box-shadow:0 0 60px rgba(53,255,162,.14);
+    }
+    .writeup-reader-head{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:center;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      color:var(--green);
+      font:700 11px var(--mono);
+    }
+    .writeup-reader-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:6px 8px;
+      cursor:pointer;
+    }
+    .writeup-reader-body{
+      padding:22px;
+      color:#c8d7cf;
+      line-height:1.8;
+    }
+    .writeup-reader-body h3{
+      color:var(--text);
+      margin-top:0;
+    }
+    .writeup-reader-body h4{
+      color:var(--green);
+      margin-top:24px;
+    }
+
+    /* Professional mode */
+    .mode-switch{
+      display:flex;
+      gap:8px;
+      margin-left:auto;
+    }
+    .mode-switch button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:7px 9px;
+      font:9px var(--mono);
+      cursor:pointer;
+    }
+    .mode-switch button.active{
+      background:var(--green);
+      color:#03100a;
+    }
+
+    body.professional-mode{
+      --green:#4b6bff;
+      --green2:#7f96ff;
+      --cyan:#4b6bff;
+      --line:rgba(75,107,255,.2);
+      --panel:rgba(255,255,255,.92);
+      --text:#18202a;
+      --muted:#5c6570;
+      background:#eef2f7;
+      color:#18202a;
+    }
+    body.professional-mode::before,
+    body.professional-mode canvas,
+    body.professional-mode .hero-network,
+    body.professional-mode .code-rain-layer,
+    body.professional-mode .cyber-equalizer,
+    body.professional-mode .breach-overlay,
+    body.professional-mode .boot-loader{
+      display:none!important;
+    }
+    body.professional-mode .topbar{
+      background:rgba(255,255,255,.95);
+      border-bottom:1px solid rgba(0,0,0,.08);
+      box-shadow:0 8px 22px rgba(27,39,51,.05);
+    }
+    body.professional-mode .card,
+    body.professional-mode .identity,
+    body.professional-mode .terminal,
+    body.professional-mode .threat-card,
+    body.professional-mode .project-card,
+    body.professional-mode .about-card,
+    body.professional-mode .credential-column,
+    body.professional-mode .info-row,
+    body.professional-mode .contact>*,
+    body.professional-mode .lab-card,
+    body.professional-mode .writeup-card{
+      background:#fff!important;
+      color:#18202a;
+      backdrop-filter:none;
+      border-color:rgba(0,0,0,.09)!important;
+      box-shadow:0 14px 34px rgba(27,39,51,.07);
+    }
+    body.professional-mode .section{
+      border-color:rgba(0,0,0,.06);
+    }
+    body.professional-mode .project-visual{
+      background:linear-gradient(145deg,#f8faff,#eef3ff);
+    }
+    body.professional-mode .terminal{
+      background:#111827!important;
+      color:#d8e6df;
+    }
+    body.professional-mode .terminal *{
+      border-color:rgba(255,255,255,.08);
+    }
+    body.professional-mode .nav button,
+    body.professional-mode .topbar,
+    body.professional-mode h1,
+    body.professional-mode h2,
+    body.professional-mode h3,
+    body.professional-mode h4{
+      color:#18202a;
+      text-shadow:none;
+    }
+    body.professional-mode .label,
+    body.professional-mode .eyebrow,
+    body.professional-mode .timeline-year,
+    body.professional-mode .lab-icon,
+    body.professional-mode .writeup-reader-head{
+      color:#4b6bff;
+    }
+
+    @media(max-width:900px){
+      .lab-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:700px){
+      .lab-grid,.writeup-grid{grid-template-columns:1fr}
+      .mode-switch{width:100%;margin:8px 0 0}
+    }
+
     /* Portfolio search */
     .portfolio-search{
       position:fixed;
@@ -1908,12 +2142,18 @@
       <header class="topbar">
         <button class="brand nav-target" data-target="home"><b>&gt;_</b> HARSHAVARDHAN</button>
         <button class="menu" id="menuBtn">☰</button>
+        <div class="mode-switch" id="modeSwitch">
+          <button id="cyberModeButton" class="active">CYBER MODE</button>
+          <button id="professionalModeButton">PROFESSIONAL MODE</button>
+        </div>
         <nav class="nav" id="nav">
           <button data-target="home">HOME</button>
           <button data-target="projects">PROJECTS</button>
           <button data-target="about">ABOUT</button>
           <button data-target="credentials">CREDENTIALS</button>
           <button data-target="terminal">TERMINAL</button>
+          <button data-target="labs">LABS</button>
+          <button data-target="writeups">WRITE-UPS</button>
           <button data-target="contact">CONTACT</button>
           <button id="portfolioSearchButton">SEARCH</button>
         </nav>
@@ -2070,9 +2310,40 @@
           </div>
         </section>
 
-        <section class="section" id="contact">
+        
+        <section class="section" id="labs">
           <div class="heading">
-            <div><div class="label">08 // CONTACT</div><h3>Let’s build secure systems</h3></div>
+            <div>
+              <div class="label">08 // CYBERSECURITY LABS</div>
+              <h3>Practical security work</h3>
+            </div>
+          </div>
+          <div class="lab-grid" id="labGrid"></div>
+        </section>
+
+        <section class="section" id="writeups">
+          <div class="heading">
+            <div>
+              <div class="label">09 // SECURITY WRITE-UPS</div>
+              <h3>Technical explanations and research notes</h3>
+            </div>
+          </div>
+          <div class="writeup-grid" id="writeupGrid"></div>
+        </section>
+
+        <div class="writeup-reader" id="writeupReader" aria-hidden="true">
+          <div class="writeup-reader-shell">
+            <div class="writeup-reader-head">
+              <span id="writeupReaderTitle">WRITE-UP</span>
+              <button id="writeupReaderClose">CLOSE</button>
+            </div>
+            <div class="writeup-reader-body" id="writeupReaderBody"></div>
+          </div>
+        </div>
+
+<section class="section" id="contact">
+          <div class="heading">
+            <div><div class="label">10 // CONTACT</div><h3>Let’s build secure systems</h3></div>
           </div>
           <div class="contact">
             <a href="mailto:${DATA.profile.email}">
@@ -4357,7 +4628,199 @@
     if(nearBottom)showSessionSummary();
   },{passive:true});
 
+
+  // Cybersecurity labs
+  const labData=[
+    {
+      icon:'PKT',
+      title:'Packet Analysis Lab',
+      description:'Investigated network traffic patterns, suspicious connections and protocol behavior using packet captures.',
+      tools:['Wireshark','TCP/IP','Log Analysis']
+    },
+    {
+      icon:'WEB',
+      title:'Web Vulnerability Testing',
+      description:'Practiced identifying common web risks including injection, insecure configuration and authentication weaknesses.',
+      tools:['Burp Suite','OWASP Top 10','Nmap']
+    },
+    {
+      icon:'MEM',
+      title:'Memory Forensics Lab',
+      description:'Reviewed volatile memory artifacts to identify suspicious processes, network indicators and possible malware behavior.',
+      tools:['Volatility','REMnux','Linux']
+    },
+    {
+      icon:'NET',
+      title:'Network Scanning Lab',
+      description:'Performed controlled host discovery, service enumeration and exposure analysis in lab environments.',
+      tools:['Nmap','Linux','Bash']
+    },
+    {
+      icon:'LOG',
+      title:'Log Investigation Lab',
+      description:'Analyzed security logs to identify failed logins, anomalies and possible incident timelines.',
+      tools:['SIEM','Linux','Python']
+    },
+    {
+      icon:'DDoS',
+      title:'DDoS Defense Lab',
+      description:'Explored detection, proxy rotation, traffic filtering and moving target defense concepts for resilient services.',
+      tools:['MOTAG','IDS/IPS','ChaCha20']
+    }
+  ];
+
+  const labGrid=document.getElementById('labGrid');
+  if(labGrid){
+    labGrid.innerHTML=labData.map((lab,index)=>`
+      <article class="lab-card">
+        <div class="lab-icon">${lab.icon}</div>
+        <h4>${lab.title}</h4>
+        <p>${lab.description}</p>
+        <div class="lab-tools">${lab.tools.map(tool=>`<span>${tool}</span>`).join('')}</div>
+        <button type="button" data-lab-index="${index}">VIEW LAB DETAILS</button>
+      </article>
+    `).join('');
+
+    labGrid.querySelectorAll('[data-lab-index]').forEach(button=>{
+      button.addEventListener('click',()=>{
+        const lab=labData[Number(button.dataset.labIndex)];
+        showWindow(lab.title,`
+          <p>${lab.description}</p>
+          <p><strong>Tools:</strong> ${lab.tools.join(', ')}</p>
+          <p><strong>Focus:</strong> Defensive cybersecurity practice in controlled and ethical environments.</p>
+        `);
+      });
+    });
+  }
+
+  // Security write-ups
+  const writeups=[
+    {
+      title:'How TF-IDF Helps Detect Phishing URLs',
+      category:'AI / ML',
+      readTime:'4 MIN READ',
+      summary:'A practical explanation of how text features can help machine-learning models identify suspicious URLs.',
+      body:`
+        <h3>How TF-IDF Helps Detect Phishing URLs</h3>
+        <p>TF-IDF converts text into numerical features by measuring how important a term is within a document compared with the wider dataset.</p>
+        <h4>Why it is useful</h4>
+        <p>Phishing URLs often contain unusual words, brand references, suspicious paths, misleading subdomains and uncommon token patterns. TF-IDF helps a classifier assign weight to these patterns.</p>
+        <h4>Typical workflow</h4>
+        <p>URLs are cleaned, tokenized and converted into feature vectors. A supervised model then learns which combinations are more common in malicious or legitimate samples.</p>
+        <h4>Limitations</h4>
+        <p>TF-IDF does not understand intent by itself. It works best when combined with URL structure, domain information, page behavior and carefully validated training data.</p>
+      `
+    },
+    {
+      title:'How Moving Target Defense Reduces DDoS Risk',
+      category:'NETWORK DEFENSE',
+      readTime:'5 MIN READ',
+      summary:'An overview of changing attack surfaces through proxy rotation and dynamic routing.',
+      body:`
+        <h3>How Moving Target Defense Reduces DDoS Risk</h3>
+        <p>Moving Target Defense reduces predictability by changing exposed infrastructure details instead of leaving one fixed target available to attackers.</p>
+        <h4>Dynamic proxy rotation</h4>
+        <p>Requests can be routed through rotating proxy endpoints, making it harder for an attacker to continuously target the protected backend.</p>
+        <h4>Detection and filtering</h4>
+        <p>Traffic behavior is monitored for abnormal volume, repetition and source characteristics. Suspicious traffic can be filtered or rerouted.</p>
+        <h4>Important consideration</h4>
+        <p>Moving target defense is not a complete solution by itself. It should be combined with rate limiting, resilient infrastructure, monitoring and incident response.</p>
+      `
+    },
+    {
+      title:'Introduction to Memory Forensics',
+      category:'FORENSICS',
+      readTime:'4 MIN READ',
+      summary:'Why volatile memory is important when investigating malware and active threats.',
+      body:`
+        <h3>Introduction to Memory Forensics</h3>
+        <p>Memory forensics examines RAM because it may contain active processes, network connections, loaded modules, encryption keys and artifacts that never reach disk.</p>
+        <h4>Why memory matters</h4>
+        <p>Fileless malware and injected code may be visible in memory even when traditional file scanning finds nothing.</p>
+        <h4>Investigation flow</h4>
+        <p>An investigator captures memory, validates the image, extracts processes and connections, and correlates suspicious artifacts with other evidence.</p>
+        <h4>Best practice</h4>
+        <p>Memory should be acquired carefully to preserve integrity and documented as part of a repeatable forensic process.</p>
+      `
+    },
+    {
+      title:'How Wireshark Supports Network Investigation',
+      category:'PACKET ANALYSIS',
+      readTime:'3 MIN READ',
+      summary:'A concise guide to using packet-level evidence during network troubleshooting and incident analysis.',
+      body:`
+        <h3>How Wireshark Supports Network Investigation</h3>
+        <p>Wireshark allows analysts to inspect packet details, protocol behavior and communication patterns.</p>
+        <h4>Useful investigation areas</h4>
+        <p>Analysts can identify repeated connection attempts, unexpected destinations, suspicious DNS activity and unusual protocol use.</p>
+        <h4>Filtering</h4>
+        <p>Display filters help narrow large captures to specific IP addresses, ports, protocols or error conditions.</p>
+        <h4>Responsible use</h4>
+        <p>Packet captures may contain sensitive information and should only be collected and analyzed with proper authorization.</p>
+      `
+    }
+  ];
+
+  const writeupGrid=document.getElementById('writeupGrid');
+  const writeupReader=document.getElementById('writeupReader');
+  const writeupReaderTitle=document.getElementById('writeupReaderTitle');
+  const writeupReaderBody=document.getElementById('writeupReaderBody');
+  const writeupReaderClose=document.getElementById('writeupReaderClose');
+
+  if(writeupGrid){
+    writeupGrid.innerHTML=writeups.map((item,index)=>`
+      <article class="writeup-card" data-writeup-index="${index}">
+        <div class="meta"><span>${item.category}</span><span>${item.readTime}</span></div>
+        <h4>${item.title}</h4>
+        <p>${item.summary}</p>
+      </article>
+    `).join('');
+
+    writeupGrid.querySelectorAll('[data-writeup-index]').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const item=writeups[Number(card.dataset.writeupIndex)];
+        writeupReaderTitle.textContent=item.title;
+        writeupReaderBody.innerHTML=item.body;
+        writeupReader.classList.add('active');
+        writeupReader.setAttribute('aria-hidden','false');
+      });
+    });
+  }
+
+  function closeWriteupReader(){
+    writeupReader?.classList.remove('active');
+    writeupReader?.setAttribute('aria-hidden','true');
+  }
+
+  writeupReaderClose?.addEventListener('click',closeWriteupReader);
+  writeupReader?.addEventListener('click',event=>{
+    if(event.target===writeupReader)closeWriteupReader();
+  });
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&writeupReader?.classList.contains('active'))closeWriteupReader();
+  });
+
+  // Cyber / Professional mode
+  const cyberModeButton=document.getElementById('cyberModeButton');
+  const professionalModeButton=document.getElementById('professionalModeButton');
+
+  function setPortfolioMode(mode){
+    const professional=mode==='professional';
+    document.body.classList.toggle('professional-mode',professional);
+    cyberModeButton?.classList.toggle('active',!professional);
+    professionalModeButton?.classList.toggle('active',professional);
+    localStorage.setItem('portfolioMode',mode);
+  }
+
+  cyberModeButton?.addEventListener('click',()=>setPortfolioMode('cyber'));
+  professionalModeButton?.addEventListener('click',()=>setPortfolioMode('professional'));
+
+  const savedPortfolioMode=localStorage.getItem('portfolioMode')||'cyber';
+  setPortfolioMode(savedPortfolioMode);
+
   // Matrix background
+
 
 
 
