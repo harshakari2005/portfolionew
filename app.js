@@ -772,7 +772,26 @@
 
     .terminal{border:1px solid rgba(53,255,162,.48);background:rgba(2,8,10,.96);box-shadow:0 0 45px rgba(53,255,162,.08)}
     .termbar{height:45px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);font:11px var(--mono);color:var(--muted)}
+    .termbar-actions{display:flex;align-items:center;gap:8px}
     .termbar button{border:0;background:transparent;color:var(--green);font:10px var(--mono);cursor:pointer}
+    .termbar .stop-command{
+      display:none;
+      border:1px solid rgba(255,100,116,.5);
+      background:rgba(255,100,116,.08);
+      color:#ff8b97;
+      padding:6px 9px;
+    }
+    .termbar .stop-command:active{
+      background:#ff6474;
+      color:#170205;
+    }
+    @media (max-width:760px) and (pointer:coarse){
+      .termbar .stop-command{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+    }
     .output{height:430px;overflow:auto;padding:20px;font:13px/1.7 var(--mono);color:#baffd7}
     .line{white-space:pre-wrap;word-break:break-word;margin-bottom:6px}
     .line.command{color:var(--text)}
@@ -1073,7 +1092,10 @@
           <div class="terminal" id="terminalBox">
             <div class="termbar">
               <span>harsha@cyber-portfolio: ~</span>
-              <button id="clearBtn">CLEAR</button>
+              <div class="termbar-actions">
+                <button class="stop-command" id="stopCommandBtn">STOP</button>
+                <button id="clearBtn">CLEAR</button>
+              </div>
             </div>
             <div class="output" id="output"></div>
             <form class="inputrow" id="terminalForm">
@@ -1230,6 +1252,8 @@
       '<span class="k">play snake</span>    start terminal Snake',
       '<span class="k">highscore</span>     show saved game scores',
       '<span class="k">quit game</span>     stop the active game',
+      '<span class="k">Ctrl+C</span>        interrupt active task on desktop',
+      '<span class="k">STOP button</span>   interrupt active task on phone',
       '<span class="k">simulation</span>    replay browser-only breach effect',
       '<span class="k">clear</span>         clear terminal'
     ]),
@@ -1795,7 +1819,7 @@
     addBlock('terminal snake', [
       'Use Arrow Keys or W/A/S/D.',
       'Eat the red packets. Board edges wrap around; avoid touching your own body.',
-      'Type quit game to stop.'
+      'Desktop: press Ctrl+C. Phone: tap the STOP button. You can also type quit game.'
     ]);
 
     renderSnakeGame();
@@ -1833,6 +1857,44 @@
       `Firewall Defense: ${Number(localStorage.getItem('firewallHighScore') || 0)}`,
       `Terminal Snake: ${Number(localStorage.getItem('snakeHighScore') || 0)}`
     ]);
+  }
+
+
+  function interruptActiveTask(source = 'keyboard') {
+    let interrupted = false;
+
+    if (activeGame) {
+      if (activeGame.type === 'snake' && snakeLoop) {
+        clearInterval(snakeLoop);
+        snakeLoop = null;
+      }
+
+      const snakePanel = document.getElementById('snakeGamePanel');
+      if (snakePanel) snakePanel.remove();
+
+      addLine('^C', 'command');
+      addLine(`Interrupted active ${activeGame.type} task.`);
+      activeGame = null;
+      interrupted = true;
+    }
+
+    if (typeof breachRunning !== 'undefined' && breachRunning) {
+      stopBreach(false);
+      addLine('^C', 'command');
+      addLine('Security simulation interrupted.');
+      interrupted = true;
+    }
+
+    if (!interrupted) {
+      addLine('^C', 'command');
+      addLine(source === 'phone'
+        ? 'No active task. Terminal is ready.'
+        : 'No active process to interrupt.');
+    }
+
+    input.value = '';
+    input.focus();
+    output.scrollTop = output.scrollHeight;
   }
 
   function runCommand(raw) {
@@ -1921,6 +1983,13 @@
   });
 
   document.addEventListener('keydown', event => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'c') {
+      event.preventDefault();
+      event.stopPropagation();
+      interruptActiveTask('keyboard');
+      return;
+    }
+
     if (!activeGame || activeGame.type !== 'snake') return;
 
     const keyMap = {
@@ -1999,6 +2068,19 @@
     event.preventDefault();
     output.innerHTML = '';
     input.focus();
+  });
+
+  document.getElementById('stopCommandBtn').addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isPhone =
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    if (isPhone) {
+      interruptActiveTask('phone');
+    }
   });
 
   const resumeCountElement = document.getElementById('resumeCount');
