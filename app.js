@@ -681,7 +681,22 @@
       gap:10px;
       margin-top:12px;
       touch-action:none;
-      overscroll-behavior:contain;
+      overscroll-behavior:none;
+      -webkit-overflow-scrolling:auto;
+    }
+    .snake-board,
+    #snakeGamePanel{
+      touch-action:none;
+      overscroll-behavior:none;
+    }
+    body.snake-playing{
+      overscroll-behavior:none;
+    }
+    @media (max-width:760px) and (pointer:coarse){
+      body.snake-playing{
+        overflow:hidden;
+        touch-action:none;
+      }
     }
     .snake-board{
       display:grid;
@@ -1649,6 +1664,13 @@
       touchStartX = touch.clientX;
       touchStartY = touch.clientY;
       event.preventDefault();
+      event.stopPropagation();
+    }, { passive:false });
+
+    board.addEventListener('touchmove', event => {
+      // Prevent the phone page from scrolling while the player swipes.
+      event.preventDefault();
+      event.stopPropagation();
     }, { passive:false });
 
     board.addEventListener('touchend', event => {
@@ -1666,6 +1688,7 @@
       }
 
       event.preventDefault();
+      event.stopPropagation();
     }, { passive:false });
 
     // Updating the score must not move the terminal or the webpage.
@@ -1702,6 +1725,7 @@
     if (oldPanel) oldPanel.remove();
 
     activeGame = null;
+    document.body.classList.remove('snake-playing');
 
     addBlock('snake game over', [
       `Final score: ${finalScore}`,
@@ -1776,6 +1800,7 @@
         ]);
         unlockAchievement('TERMINAL SERPENT MASTER', 'Completed the full Snake board.');
         activeGame = null;
+        document.body.classList.remove('snake-playing');
         return;
       }
     } else {
@@ -1799,6 +1824,8 @@
       addLine('Another game is active. Type <span class="k">quit game</span> first.', 'error');
       return;
     }
+
+    document.body.classList.add('snake-playing');
 
     activeGame = {
       type:'snake',
@@ -1847,8 +1874,14 @@
     const panel = document.getElementById('snakeGamePanel');
     if (panel) panel.remove();
 
-    addLine(`Game stopped: ${activeGame.type}`);
+    const stoppedGameType = activeGame.type;
+    addLine(`Game stopped: ${stoppedGameType}`);
     activeGame = null;
+
+    if (stoppedGameType === 'snake') {
+      document.body.classList.remove('snake-playing');
+    }
+
     output.scrollTop = output.scrollHeight;
   }
 
@@ -1872,9 +1905,15 @@
       const snakePanel = document.getElementById('snakeGamePanel');
       if (snakePanel) snakePanel.remove();
 
+      const interruptedType = activeGame.type;
       addLine('^C', 'command');
-      addLine(`Interrupted active ${activeGame.type} task.`);
+      addLine(`Interrupted active ${interruptedType} task.`);
       activeGame = null;
+
+      if (interruptedType === 'snake') {
+        document.body.classList.remove('snake-playing');
+      }
+
       interrupted = true;
     }
 
@@ -1981,6 +2020,16 @@
     input.value = '';
     input.focus();
   });
+
+  document.addEventListener('touchmove', event => {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    const snakePanel = document.getElementById('snakeGamePanel');
+    if (snakePanel && snakePanel.contains(event.target)) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, { passive:false, capture:true });
 
   document.addEventListener('keydown', event => {
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'c') {
