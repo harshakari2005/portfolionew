@@ -1476,6 +1476,124 @@
       .mode-switch{width:100%;margin:8px 0 0}
     }
 
+
+    /* Hidden CTF challenge */
+    .ctf-panel{
+      position:fixed;
+      inset:0;
+      z-index:11950;
+      display:none;
+      place-items:center;
+      background:rgba(1,7,10,.88);
+      backdrop-filter:blur(8px);
+    }
+    .ctf-panel.active{display:grid}
+    .ctf-shell{
+      width:min(720px,calc(100% - 28px));
+      max-height:84vh;
+      overflow:auto;
+      border:1px solid rgba(53,255,162,.42);
+      background:#051015;
+      box-shadow:0 0 60px rgba(53,255,162,.16);
+    }
+    .ctf-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      color:var(--green);
+      font:700 11px var(--mono);
+    }
+    .ctf-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:6px 8px;
+      cursor:pointer;
+    }
+    .ctf-body{padding:18px}
+    .ctf-status{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .ctf-status div{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+      padding:10px;
+      font:9px var(--mono);
+      color:var(--muted);
+    }
+    .ctf-status strong{
+      display:block;
+      margin-top:6px;
+      color:var(--green);
+      font-size:13px;
+    }
+    .ctf-console{
+      min-height:260px;
+      max-height:380px;
+      overflow:auto;
+      border:1px solid var(--line);
+      background:#02090d;
+      padding:14px;
+      color:#c9f6da;
+      font:11px/1.65 var(--mono);
+      white-space:pre-wrap;
+    }
+    .ctf-input-row{
+      display:flex;
+      gap:8px;
+      margin-top:10px;
+    }
+    .ctf-input-row span{
+      align-self:center;
+      color:var(--green);
+      font:11px var(--mono);
+    }
+    .ctf-input-row input{
+      flex:1;
+      border:1px solid var(--line);
+      background:#061015;
+      color:var(--text);
+      outline:none;
+      padding:10px;
+      font:12px var(--mono);
+    }
+    .ctf-input-row button{
+      border:1px solid var(--line);
+      background:var(--green);
+      color:#021009;
+      padding:0 14px;
+      font:700 10px var(--mono);
+      cursor:pointer;
+    }
+    .ctf-hint{
+      margin-top:12px;
+      color:var(--muted);
+      font:10px/1.6 var(--mono);
+    }
+    .ctf-flag{
+      margin-top:14px;
+      padding:14px;
+      border:1px solid var(--green);
+      background:rgba(53,255,162,.06);
+      color:var(--green);
+      font:700 12px var(--mono);
+      text-align:center;
+      word-break:break-all;
+      box-shadow:0 0 26px rgba(53,255,162,.12);
+    }
+    @media(max-width:620px){
+      .ctf-status{grid-template-columns:1fr}
+      .ctf-input-row{flex-wrap:wrap}
+      .ctf-input-row input{min-width:0}
+      .ctf-input-row button{height:40px}
+    }
+
     /* Portfolio search */
     .portfolio-search{
       position:fixed;
@@ -1810,8 +1928,79 @@
         touch-action:manipulation;
       }
     }
-    .hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .hints button{border:1px solid var(--line);background:var(--panel);color:var(--green2);padding:8px 10px;font:10px var(--mono);cursor:pointer}
+    .hints{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .command-directory-title{
+      grid-column:1 / -1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.035);
+      color:var(--green);
+      font:700 11px var(--mono);
+    }
+    .command-directory-title span:last-child{
+      color:var(--muted);
+      font-weight:400;
+      font-size:9px;
+    }
+    .command-group{
+      border:1px solid var(--line);
+      background:linear-gradient(145deg,rgba(8,24,28,.68),rgba(4,12,16,.54));
+      padding:14px;
+    }
+    .command-group h4{
+      margin:0 0 11px;
+      color:var(--green);
+      font:700 10px var(--mono);
+      letter-spacing:.09em;
+    }
+    .command-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+    .hints button{
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--green2);
+      padding:7px 9px;
+      font:9px var(--mono);
+      cursor:pointer;
+      transition:.22s ease;
+    }
+    .hints button:hover{
+      border-color:var(--green);
+      color:var(--green);
+      transform:translateY(-2px);
+      box-shadow:0 0 14px rgba(53,255,162,.09);
+    }
+    .command-group small{
+      display:block;
+      margin-top:10px;
+      color:var(--muted);
+      font:9px/1.55 var(--mono);
+    }
+    @media(max-width:980px){
+      .hints{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:620px){
+      .hints{grid-template-columns:1fr}
+      .command-directory-title{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+      .hints button{
+        padding:8px 10px;
+      }
+    }
 
     .section + .section{border-top:1px solid rgba(53,255,162,.055)}
     .heading{margin-bottom:28px!important}
@@ -2078,6 +2267,30 @@
         <button id="sessionSummaryClose">CLOSE</button>
       </div>
 
+            <div class="ctf-panel" id="ctfPanel" aria-hidden="true">
+        <div class="ctf-shell">
+          <div class="ctf-head">
+            <span>HIDDEN CTF // SECURITY EXPLORER</span>
+            <button id="ctfClose">CLOSE</button>
+          </div>
+          <div class="ctf-body">
+            <div class="ctf-status">
+              <div>STAGE<strong id="ctfStage">1 / 4</strong></div>
+              <div>SCORE<strong id="ctfScore">0</strong></div>
+              <div>STATUS<strong id="ctfStatus">ACTIVE</strong></div>
+            </div>
+            <div class="ctf-console" id="ctfConsole"></div>
+            <form class="ctf-input-row" id="ctfForm">
+              <span>visitor@ctf:~$</span>
+              <input id="ctfInput" autocomplete="off" spellcheck="false" placeholder="type a command...">
+              <button type="submit">RUN</button>
+            </form>
+            <div class="ctf-hint">Hint: start with <strong>ls hidden</strong>. This challenge is browser-only and does not access your device.</div>
+            <div class="ctf-flag" id="ctfFlag" hidden></div>
+          </div>
+        </div>
+      </div>
+
       <div class="achievement-toast" id="achievementToast"></div>
       <div class="clearance-widget" id="clearanceWidget">
         <strong>VISITOR SECURITY CLEARANCE</strong>
@@ -2305,8 +2518,67 @@
             <div class="suggestions" id="commandSuggestions"></div>
           </div>
 
-          <div class="hints">
-            ${['help','whoami','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','play firewall','play snake','mission','achievements','recruiter','theme','highscore','simulation','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+          <div class="hints" id="commandDirectory">
+            <div class="command-directory-title">
+              <span>AVAILABLE TERMINAL COMMANDS</span>
+              <span>Click any command to run it</span>
+            </div>
+
+            <div class="command-group">
+              <h4>PROFILE</h4>
+              <div class="command-buttons">
+                ${['help','whoami','whoami --visitor','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','resume','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>View portfolio information, resume, contact details and complete profile data.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>FILESYSTEM</h4>
+              <div class="command-buttons">
+                ${['pwd','ls','tree','cd projects','cd certificates','cd evidence','cd ..','cat profile.txt','cat skills.txt','cat contact.txt','cat projects/motag.txt','cat projects/phishing.txt','cat projects/forensics.txt','cat projects/scanner.txt','cat certificates/certificates.txt'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Explore the portfolio using the simulated Linux-style filesystem.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>PROJECTS</h4>
+              <div class="command-buttons">
+                ${['open motag','open phishing','open forensics','open scanner','open waste-iot','project','project motag','project phishing','project forensics','project scanner','project waste'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Open full case studies and project-specific terminal summaries.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>SECURITY MISSIONS</h4>
+              <div class="command-buttons">
+                ${['mission','ls evidence','cat access.log','cat suspicious_process.txt','cat hash.txt','submit invoice.pdf.exe','ctf','play ctf','simulation'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Start the incident mission, inspect evidence, launch the hidden CTF or replay the simulation.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>GAMES & PROGRESS</h4>
+              <div class="command-buttons">
+                ${['play firewall','play snake','highscore','achievements','history','date','search'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Play terminal games, view scores, achievements and command history.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>DISPLAY & SETTINGS</h4>
+              <div class="command-buttons">
+                ${['theme','theme green','theme red','theme blue','theme amber','recruiter','recruiter off','typing speed instant','typing speed fast','typing speed normal','sound on','sound off','clear'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Change themes, recruiter mode, terminal typing speed, sound and screen output.</small>
+            </div>
+
+            <div class="command-group">
+              <h4>EASTER EGGS</h4>
+              <div class="command-buttons">
+                ${['sudo su','rm -rf /'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+              </div>
+              <small>Harmless browser-only Easter eggs. They do not affect the visitor's computer.</small>
+            </div>
           </div>
         </section>
 
@@ -2475,7 +2747,8 @@
     'TERMINAL SERPENT':'Score at least 8 in Snake.',
     'PROJECT EXPLORER':'Open three project case studies.',
     'INCIDENT INVESTIGATOR':'Complete the cyber investigation mission.',
-    'ROOT ACCESS':'Reach 100% visitor clearance.'
+    'ROOT ACCESS':'Reach 100% visitor clearance.',
+    'CTF SOLVER':'Complete the hidden portfolio challenge.'
   };
 
   function getClearanceRank(score) {
@@ -2594,6 +2867,7 @@
       '<span class="k">theme</span>         change visual theme',
       '<span class="k">open [project]</span> open project case study',
       '<span class="k">project [name]</span> project details + case study',
+      '<span class="k">ctf</span>            open hidden CTF challenge',
       '<span class="k">Ctrl+C</span>        interrupt active task on desktop',
       '<span class="k">STOP button</span>   interrupt active task on phone',
       '<span class="k">simulation</span>    replay browser-only breach effect',
@@ -4819,7 +5093,221 @@
   const savedPortfolioMode=localStorage.getItem('portfolioMode')||'cyber';
   setPortfolioMode(savedPortfolioMode);
 
+
+  // Hidden CTF challenge
+  const ctfPanel=document.getElementById('ctfPanel');
+  const ctfClose=document.getElementById('ctfClose');
+  const ctfConsole=document.getElementById('ctfConsole');
+  const ctfForm=document.getElementById('ctfForm');
+  const ctfInput=document.getElementById('ctfInput');
+  const ctfStage=document.getElementById('ctfStage');
+  const ctfScore=document.getElementById('ctfScore');
+  const ctfStatus=document.getElementById('ctfStatus');
+  const ctfFlag=document.getElementById('ctfFlag');
+
+  const ctfState={
+    stage:Number(sessionStorage.getItem('ctfStage')||1),
+    score:Number(sessionStorage.getItem('ctfScore')||0),
+    completed:sessionStorage.getItem('ctfCompleted')==='1'
+  };
+
+  function saveCtfState(){
+    sessionStorage.setItem('ctfStage',String(ctfState.stage));
+    sessionStorage.setItem('ctfScore',String(ctfState.score));
+    sessionStorage.setItem('ctfCompleted',ctfState.completed?'1':'0');
+  }
+
+  function updateCtfUi(){
+    ctfStage.textContent=`${Math.min(ctfState.stage,4)} / 4`;
+    ctfScore.textContent=String(ctfState.score);
+    ctfStatus.textContent=ctfState.completed?'COMPLETED':'ACTIVE';
+
+    if(ctfState.completed){
+      ctfFlag.hidden=false;
+      ctfFlag.textContent='FLAG{PORTFOLIO_SECURITY_EXPLORER}';
+    }
+  }
+
+  function ctfPrint(message,type='normal'){
+    const line=document.createElement('div');
+    line.textContent=message;
+    if(type==='error')line.style.color='#ff7b88';
+    if(type==='success')line.style.color='var(--green)';
+    if(type==='hint')line.style.color='var(--cyan)';
+    ctfConsole.appendChild(line);
+    ctfConsole.scrollTop=ctfConsole.scrollHeight;
+  }
+
+  function openCtf(){
+    ctfPanel.classList.add('active');
+    ctfPanel.setAttribute('aria-hidden','false');
+
+    if(!ctfConsole.dataset.initialized){
+      ctfConsole.dataset.initialized='1';
+      ctfPrint('Initializing hidden challenge...');
+      ctfPrint('Objective: locate, decode and submit the hidden flag.');
+      ctfPrint('Start with: ls hidden','hint');
+    }
+
+    updateCtfUi();
+
+    const isPhone=
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    if(!isPhone)setTimeout(()=>ctfInput.focus(),30);
+  }
+
+  function closeCtf(){
+    ctfPanel.classList.remove('active');
+    ctfPanel.setAttribute('aria-hidden','true');
+    ctfInput.blur();
+  }
+
+  function advanceCtf(points){
+    ctfState.stage=Math.min(4,ctfState.stage+1);
+    ctfState.score+=points;
+    saveCtfState();
+    updateCtfUi();
+  }
+
+  function resetCtf(){
+    ctfState.stage=1;
+    ctfState.score=0;
+    ctfState.completed=false;
+    saveCtfState();
+    ctfConsole.innerHTML='';
+    delete ctfConsole.dataset.initialized;
+    ctfFlag.hidden=true;
+    openCtf();
+  }
+
+  function runCtfCommand(raw){
+    const command=String(raw||'').trim().toLowerCase();
+    if(!command)return;
+
+    ctfPrint(`visitor@ctf:~$ ${command}`);
+
+    if(command==='help'){
+      ctfPrint('Commands: ls hidden, cat clue.txt, decode flag.enc, submit <flag>, reset','hint');
+      return;
+    }
+
+    if(command==='reset'){
+      resetCtf();
+      return;
+    }
+
+    if(ctfState.completed){
+      ctfPrint('Challenge already completed. Use reset to play again.','hint');
+      return;
+    }
+
+    if(command==='ls hidden'){
+      ctfPrint('clue.txt');
+      ctfPrint('flag.enc');
+      if(ctfState.stage===1)advanceCtf(25);
+      return;
+    }
+
+    if(command==='cat clue.txt'){
+      if(ctfState.stage<2){
+        ctfPrint('Access denied. Discover the hidden directory first.','error');
+        return;
+      }
+      ctfPrint('CLUE: The encoded value uses Base64.');
+      ctfPrint('Next command: decode flag.enc','hint');
+      if(ctfState.stage===2)advanceCtf(25);
+      return;
+    }
+
+    if(command==='cat flag.enc'){
+      if(ctfState.stage<2){
+        ctfPrint('Access denied. Discover the hidden directory first.','error');
+        return;
+      }
+      ctfPrint('RkxBR3tQT1JURk9MSU9fU0VDVVJJVFlfRVhQTE9SRVJ9');
+      return;
+    }
+
+    if(command==='decode flag.enc'){
+      if(ctfState.stage<3){
+        ctfPrint('Read clue.txt before decoding.','error');
+        return;
+      }
+      ctfPrint('Decoded value: FLAG{PORTFOLIO_SECURITY_EXPLORER}','success');
+      ctfPrint('Final step: submit FLAG{PORTFOLIO_SECURITY_EXPLORER}','hint');
+      if(ctfState.stage===3)advanceCtf(25);
+      return;
+    }
+
+    if(command.startsWith('submit ')){
+      if(ctfState.stage<4){
+        ctfPrint('Complete the previous stages first.','error');
+        return;
+      }
+
+      const submitted=command.slice(7).trim();
+      if(submitted==='flag{portfolio_security_explorer}'){
+        ctfState.completed=true;
+        ctfState.score+=25;
+        saveCtfState();
+        updateCtfUi();
+        ctfPrint('FLAG ACCEPTED. ACCESS GRANTED.','success');
+        ctfPrint('Achievement unlocked: CTF SOLVER','success');
+
+        if(typeof unlockAchievement==='function'){
+          unlockAchievement('CTF SOLVER','Completed the hidden portfolio challenge.');
+        }
+
+        if(typeof addClearance==='function')addClearance(10);
+      }else{
+        ctfPrint('Incorrect flag. Check capitalization and braces.','error');
+      }
+      return;
+    }
+
+    if(command==='whoami'){
+      ctfPrint('visitor // clearance: limited // role: security explorer');
+      return;
+    }
+
+    ctfPrint(`Command not found: ${command}. Type help.`, 'error');
+  }
+
+  ctfForm?.addEventListener('submit',event=>{
+    event.preventDefault();
+    const command=ctfInput.value.trim();
+    ctfInput.value='';
+    runCtfCommand(command);
+  });
+
+  ctfClose?.addEventListener('click',closeCtf);
+  ctfPanel?.addEventListener('click',event=>{
+    if(event.target===ctfPanel)closeCtf();
+  });
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&ctfPanel?.classList.contains('active'))closeCtf();
+  });
+
+  updateCtfUi();
+
+  // Extend the main portfolio terminal with the ctf command.
+  const runCommandBeforeCtf=runCommand;
+  runCommand=function(raw){
+    const normalized=String(raw||'').trim().toLowerCase();
+
+    if(normalized==='ctf' || normalized==='play ctf' || normalized==='start ctf'){
+      openCtf();
+      return;
+    }
+
+    runCommandBeforeCtf(raw);
+  };
+
   // Matrix background
+
 
 
 
