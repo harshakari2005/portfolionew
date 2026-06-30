@@ -235,13 +235,33 @@
     .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
     .menu{display:none;margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--green);padding:7px 10px}
     .section{width:min(1180px,calc(100% - 36px));margin:auto;padding:105px 0}
-    .hero{min-height:100vh;padding-top:135px;display:grid;grid-template-columns:1.25fr .75fr;gap:70px;align-items:center}
+    .hero{
+      min-height:100vh;
+      padding-top:135px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:54px;
+      align-items:center;
+    }
     .eyebrow,.label,.mono{font-family:var(--mono);color:var(--green)}
     .eyebrow{font-size:13px;margin-bottom:22px}
     h1{font-size:clamp(52px,8vw,118px);line-height:.86;margin:0;letter-spacing:-.06em}
-    h1 small{display:block;font:500 .24em var(--mono);letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+    h1 small{
+      display:block;
+      font:700 .42em var(--mono);
+      letter-spacing:.10em;
+      color:var(--green);
+      margin-bottom:10px;
+      text-shadow:0 0 18px rgba(53,255,162,.38);
+    }
     .hero h2{font:600 clamp(16px,2vw,24px) var(--mono);color:var(--green2);line-height:1.55;margin:26px 0 18px}
-    .lead{font-size:17px;line-height:1.75;color:#b7cbbf;max-width:720px}
+    .lead{
+      font-size:clamp(18px,1.55vw,22px);
+      line-height:1.82;
+      color:#c3d8cc;
+      max-width:780px;
+      margin-top:20px;
+    }
     .actions{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0}
     .btn{border:1px solid var(--line);padding:13px 18px;background:transparent;color:var(--text);font:700 12px var(--mono);cursor:pointer}
     .btn.primary{background:var(--green);color:#021009;box-shadow:0 0 24px rgba(53,255,162,.2)}
@@ -250,15 +270,29 @@
     .stats div:last-child{border-right:0}
     .stats strong{display:block;color:var(--green);font:700 22px var(--mono)}
     .stats span{font-size:11px;color:var(--muted)}
-    .identity{padding:17px;border:1px solid var(--line);background:var(--panel);box-shadow:0 25px 70px rgba(0,0,0,.45)}
-    .photo{position:relative;overflow:hidden;aspect-ratio:.78;background:#0b1418}
+    .identity{
+      padding:20px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:0 25px 70px rgba(0,0,0,.45);
+      width:100%;
+      max-width:560px;
+      justify-self:end;
+    }
+    .photo{
+      position:relative;
+      overflow:hidden;
+      aspect-ratio:.84;
+      min-height:520px;
+      background:#0b1418;
+    }
     .photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
     .scan{position:absolute;left:0;right:0;height:2px;background:var(--green);box-shadow:0 0 16px var(--green);animation:scan 4s linear infinite}
     @keyframes scan{from{top:0}to{top:100%}}
     .meta{display:grid;gap:8px;margin-top:15px}
     .meta div{display:flex;justify-content:space-between;gap:14px;padding-bottom:7px;border-bottom:1px dashed rgba(53,255,162,.14)}
-    .meta span{font:10px var(--mono);color:var(--muted)}
-    .meta strong{font:600 11px var(--mono);text-align:right}
+    .meta span{font:11px var(--mono);color:var(--muted)}
+    .meta strong{font:700 13px var(--mono);text-align:right}
     .label{font-size:12px;margin-bottom:16px}
     .heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:38px}
     h3{font-size:clamp(34px,5vw,62px);line-height:1.06;margin:0;letter-spacing:-.04em}
@@ -929,7 +963,8 @@
     footer{width:min(1180px,calc(100% - 36px));margin:auto;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;color:var(--muted);font:10px var(--mono)}
     @media(max-width:980px){
       .hero{grid-template-columns:1fr}
-      .identity{max-width:520px;width:100%;justify-self:center}
+      .identity{max-width:620px;width:100%;justify-self:center}
+      .photo{min-height:0;aspect-ratio:.9}
       .grid2{grid-template-columns:1fr}
       .threat-grid{grid-template-columns:repeat(2,1fr)}
       .status{display:none}
@@ -951,6 +986,10 @@
     }
     @media(max-width:470px){
       h1{font-size:47px}
+      h1 small{font-size:.55em;margin-bottom:8px}
+      .lead{font-size:17px;line-height:1.7}
+      .identity{padding:14px}
+      .photo{aspect-ratio:.88}
       .actions{flex-direction:column}
       .btn{text-align:center}
       .meta div{align-items:flex-start;flex-direction:column}
