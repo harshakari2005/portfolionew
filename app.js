@@ -630,6 +630,132 @@
       .breach-footer{flex-direction:column}
     }
 
+
+    .game-panel{
+      margin:14px 0 4px;
+      border:1px solid rgba(53,255,162,.35);
+      background:#020907;
+      padding:14px;
+      color:#baffd7;
+      font-family:var(--mono);
+    }
+    .game-title{
+      color:var(--green);
+      font-weight:700;
+      margin-bottom:10px;
+      text-shadow:0 0 12px rgba(53,255,162,.35);
+    }
+    .game-options{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .game-options button{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.05);
+      color:var(--green2);
+      padding:8px 10px;
+      font:700 10px var(--mono);
+      cursor:pointer;
+    }
+    .game-options button:hover{
+      background:var(--green);
+      color:#021009;
+    }
+    .game-meter{
+      height:8px;
+      border:1px solid var(--line);
+      background:#07100d;
+      margin:8px 0 12px;
+      overflow:hidden;
+    }
+    .game-meter span{
+      display:block;
+      height:100%;
+      background:linear-gradient(90deg,#ff4f5f,#ffcc66,#35ffa2);
+      transition:width .25s ease;
+    }
+    .snake-wrap{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .snake-board{
+      display:grid;
+      grid-template-columns:repeat(18,1fr);
+      width:min(100%,468px);
+      aspect-ratio:18/12;
+      border:1px solid rgba(53,255,162,.35);
+      background:#010503;
+      overflow:hidden;
+    }
+    .snake-cell{
+      border:1px solid rgba(53,255,162,.025);
+    }
+    .snake-cell.snake{
+      background:var(--green);
+      box-shadow:0 0 8px rgba(53,255,162,.55);
+    }
+    .snake-cell.head{
+      background:var(--cyan);
+      box-shadow:0 0 10px rgba(69,215,255,.7);
+    }
+    .snake-cell.food{
+      background:#ff5969;
+      box-shadow:0 0 10px rgba(255,89,105,.75);
+      border-radius:50%;
+    }
+    .snake-status{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:10px;
+      color:var(--muted);
+      font-size:10px;
+    }
+    .snake-controls{
+      display:grid;
+      grid-template-columns:repeat(3,42px);
+      grid-template-areas:
+        ". up ."
+        "left down right";
+      gap:6px;
+      width:max-content;
+    }
+    .snake-controls button{
+      width:42px;
+      height:36px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.05);
+      color:var(--green2);
+      cursor:pointer;
+    }
+    .snake-controls [data-dir="up"]{grid-area:up}
+    .snake-controls [data-dir="left"]{grid-area:left}
+    .snake-controls [data-dir="down"]{grid-area:down}
+    .snake-controls [data-dir="right"]{grid-area:right}
+    .achievement-toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:13000;
+      max-width:320px;
+      padding:14px 16px;
+      border:1px solid rgba(53,255,162,.45);
+      background:rgba(2,12,8,.97);
+      color:var(--green2);
+      font:11px/1.5 var(--mono);
+      box-shadow:0 0 30px rgba(53,255,162,.16);
+      transform:translateY(120%);
+      opacity:0;
+      transition:.35s ease;
+    }
+    .achievement-toast.show{
+      transform:translateY(0);
+      opacity:1;
+    }
+
     .terminal{border:1px solid rgba(53,255,162,.48);background:rgba(2,8,10,.96);box-shadow:0 0 45px rgba(53,255,162,.08)}
     .termbar{height:45px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);font:11px var(--mono);color:var(--muted)}
     .termbar button{border:0;background:transparent;color:var(--green);font:10px var(--mono);cursor:pointer}
@@ -758,6 +884,8 @@
           <div class="boot-note">Loading security modules, project database and terminal interface.</div>
         </div>
       </div>
+
+      <div class="achievement-toast" id="achievementToast"></div>
 
       <div class="project-modal" id="projectModal" aria-hidden="true">
         <div class="project-modal-panel">
@@ -941,7 +1069,7 @@
           </div>
 
           <div class="hints">
-            ${['help','whoami','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','simulation','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+            ${['help','whoami','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','play firewall','play snake','highscore','simulation','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
           </div>
         </section>
 
@@ -1084,6 +1212,10 @@
       '<span class="k">history</span>       show terminal history',
       '<span class="k">date</span>          show current date and time',
       '<span class="k">search [term]</span> search projects, skills and credentials',
+      '<span class="k">play firewall</span> start Firewall Defense',
+      '<span class="k">play snake</span>    start terminal Snake',
+      '<span class="k">highscore</span>     show saved game scores',
+      '<span class="k">quit game</span>     stop the active game',
       '<span class="k">simulation</span>    replay browser-only breach effect',
       '<span class="k">clear</span>         clear terminal'
     ]),
@@ -1224,6 +1356,340 @@
     else addLine(`No portfolio results found for "${term}".`);
   }
 
+
+  const achievementToast = document.getElementById('achievementToast');
+  let achievementTimer = null;
+
+  function unlockAchievement(title, detail) {
+    const key = `achievement:${title}`;
+    if (localStorage.getItem(key)) return;
+    localStorage.setItem(key, '1');
+
+    achievementToast.innerHTML = `<strong>ACHIEVEMENT UNLOCKED</strong><br>${title}<br><span style="color:var(--muted)">${detail}</span>`;
+    achievementToast.classList.add('show');
+
+    clearTimeout(achievementTimer);
+    achievementTimer = setTimeout(() => {
+      achievementToast.classList.remove('show');
+    }, 3200);
+  }
+
+  let activeGame = null;
+
+  const firewallThreats = [
+    { source:'185.42.19.77', port:22, signature:'BRUTE_FORCE', answer:'2', label:'BLOCK' },
+    { source:'10.0.0.14', port:443, signature:'TRUSTED_INTERNAL_API', answer:'1', label:'ALLOW' },
+    { source:'45.83.91.10', port:3389, signature:'RDP_SPRAY', answer:'3', label:'QUARANTINE' },
+    { source:'172.16.0.5', port:53, signature:'DNS_HEALTH_CHECK', answer:'1', label:'ALLOW' },
+    { source:'203.0.113.91', port:80, signature:'SQL_INJECTION_PATTERN', answer:'2', label:'BLOCK' },
+    { source:'192.168.1.23', port:445, signature:'LATERAL_MOVEMENT', answer:'3', label:'QUARANTINE' },
+    { source:'198.51.100.7', port:443, signature:'VALID_CERTIFICATE_UPDATE', answer:'1', label:'ALLOW' },
+    { source:'91.204.14.8', port:23, signature:'TELNET_BOTNET_SCAN', answer:'2', label:'BLOCK' }
+  ];
+
+  function getFirewallRank(score, total) {
+    const percent = Math.round((score / total) * 100);
+    if (percent >= 91) return 'CYBER DEFENSE COMMANDER';
+    if (percent >= 76) return 'INCIDENT RESPONDER';
+    if (percent >= 56) return 'SOC ANALYST';
+    if (percent >= 31) return 'SECURITY INTERN';
+    return 'SCRIPT KIDDIE';
+  }
+
+  function saveHighScore(key, score) {
+    const previous = Number(localStorage.getItem(key) || 0);
+    if (score > previous) localStorage.setItem(key, String(score));
+  }
+
+  function renderFirewallRound() {
+    if (!activeGame || activeGame.type !== 'firewall') return;
+
+    const game = activeGame;
+    const threat = game.threats[game.index];
+
+    if (!threat || game.health <= 0) {
+      const total = game.threats.length * 100;
+      const rank = getFirewallRank(game.score, total);
+      saveHighScore('firewallHighScore', game.score);
+
+      addBlock('firewall defense complete', [
+        `Threats handled: ${game.index}/${game.threats.length}`,
+        `Final score: ${game.score}`,
+        `System health: ${Math.max(0, game.health)}%`,
+        `Rank: ${rank}`
+      ]);
+
+      if (game.score >= 600) {
+        unlockAchievement('FIREWALL DEFENDER', `Completed Firewall Defense with ${game.score} points.`);
+      }
+
+      activeGame = null;
+      return;
+    }
+
+    const panel = document.createElement('div');
+    panel.className = 'game-panel';
+    panel.innerHTML = `
+      <div class="game-title">FIREWALL DEFENSE // ROUND ${game.index + 1}</div>
+      <div><span class="k">SOURCE:</span> ${threat.source}</div>
+      <div><span class="k">PORT:</span> ${threat.port}</div>
+      <div><span class="k">SIGNATURE:</span> ${threat.signature}</div>
+      <div style="margin-top:8px">Choose the correct action:</div>
+      <div class="game-options">
+        <button data-fw-choice="1">[1] ALLOW</button>
+        <button data-fw-choice="2">[2] BLOCK</button>
+        <button data-fw-choice="3">[3] QUARANTINE</button>
+      </div>
+      <div class="game-meter"><span style="width:${Math.max(0, game.health)}%"></span></div>
+      <div class="snake-status">
+        <span>SCORE: ${game.score}</span>
+        <span>HEALTH: ${Math.max(0, game.health)}%</span>
+        <span>COMBO: x${game.combo}</span>
+      </div>
+    `;
+    output.appendChild(panel);
+    output.scrollTop = output.scrollHeight;
+
+    panel.querySelectorAll('[data-fw-choice]').forEach(button => {
+      button.addEventListener('click', () => {
+        handleFirewallChoice(button.dataset.fwChoice);
+      });
+    });
+  }
+
+  function handleFirewallChoice(choice) {
+    if (!activeGame || activeGame.type !== 'firewall') return;
+
+    const game = activeGame;
+    const threat = game.threats[game.index];
+
+    if (choice === threat.answer) {
+      game.combo += 1;
+      const points = 100 + Math.max(0, game.combo - 1) * 20;
+      game.score += points;
+      addLine(`<span class="v">CORRECT:</span> ${threat.label} selected. +${points} points.`);
+    } else {
+      game.combo = 0;
+      game.health -= 22;
+      addLine(`<span class="error">INCORRECT ACTION:</span> system health reduced by 22%.`, 'error');
+    }
+
+    game.index += 1;
+    renderFirewallRound();
+  }
+
+  function startFirewallGame() {
+    if (activeGame) {
+      addLine('A game is already active. Type <span class="k">quit game</span> first.', 'error');
+      return;
+    }
+
+    activeGame = {
+      type:'firewall',
+      threats:[...firewallThreats].sort(() => Math.random() - .5),
+      index:0,
+      score:0,
+      health:100,
+      combo:0
+    };
+
+    addBlock('firewall defense', [
+      'Protect the simulated network.',
+      'Type 1, 2 or 3, or click a decision button.',
+      '1 = ALLOW | 2 = BLOCK | 3 = QUARANTINE'
+    ]);
+    renderFirewallRound();
+  }
+
+  const SNAKE_COLS = 18;
+  const SNAKE_ROWS = 12;
+  let snakeLoop = null;
+
+  function randomSnakeFood(snake) {
+    let position;
+    do {
+      position = {
+        x:Math.floor(Math.random() * SNAKE_COLS),
+        y:Math.floor(Math.random() * SNAKE_ROWS)
+      };
+    } while (snake.some(segment => segment.x === position.x && segment.y === position.y));
+    return position;
+  }
+
+  function renderSnakeGame() {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    let panel = document.getElementById('snakeGamePanel');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.className = 'game-panel';
+      panel.id = 'snakeGamePanel';
+      output.appendChild(panel);
+    }
+
+    const game = activeGame;
+    const cells = [];
+
+    for (let y = 0; y < SNAKE_ROWS; y++) {
+      for (let x = 0; x < SNAKE_COLS; x++) {
+        let cls = 'snake-cell';
+
+        const snakeIndex = game.snake.findIndex(segment => segment.x === x && segment.y === y);
+        if (snakeIndex === 0) cls += ' head';
+        else if (snakeIndex > 0) cls += ' snake';
+
+        if (game.food.x === x && game.food.y === y) cls += ' food';
+        cells.push(`<div class="${cls}"></div>`);
+      }
+    }
+
+    panel.innerHTML = `
+      <div class="game-title">TERMINAL SNAKE</div>
+      <div class="snake-wrap">
+        <div class="snake-board">${cells.join('')}</div>
+        <div class="snake-status">
+          <span>SCORE: ${game.score}</span>
+          <span>HIGH SCORE: ${Number(localStorage.getItem('snakeHighScore') || 0)}</span>
+          <span>CONTROLS: ARROW KEYS / WASD</span>
+        </div>
+        <div class="snake-controls">
+          <button data-dir="up">↑</button>
+          <button data-dir="left">←</button>
+          <button data-dir="down">↓</button>
+          <button data-dir="right">→</button>
+        </div>
+      </div>
+    `;
+
+    panel.querySelectorAll('[data-dir]').forEach(button => {
+      button.addEventListener('click', () => setSnakeDirection(button.dataset.dir));
+    });
+
+    output.scrollTop = output.scrollHeight;
+  }
+
+  function setSnakeDirection(direction) {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    const opposites = {
+      up:'down',
+      down:'up',
+      left:'right',
+      right:'left'
+    };
+
+    if (opposites[direction] !== activeGame.direction) {
+      activeGame.nextDirection = direction;
+    }
+  }
+
+  function endSnakeGame() {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    clearInterval(snakeLoop);
+    snakeLoop = null;
+
+    const finalScore = activeGame.score;
+    saveHighScore('snakeHighScore', finalScore);
+
+    addBlock('snake game over', [
+      `Final score: ${finalScore}`,
+      `High score: ${Math.max(finalScore, Number(localStorage.getItem('snakeHighScore') || 0))}`
+    ]);
+
+    if (finalScore >= 8) {
+      unlockAchievement('TERMINAL SERPENT', `Scored ${finalScore} in Terminal Snake.`);
+    }
+
+    activeGame = null;
+  }
+
+  function snakeTick() {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    const game = activeGame;
+    game.direction = game.nextDirection;
+
+    const head = {...game.snake[0]};
+    if (game.direction === 'up') head.y -= 1;
+    if (game.direction === 'down') head.y += 1;
+    if (game.direction === 'left') head.x -= 1;
+    if (game.direction === 'right') head.x += 1;
+
+    const hitWall = head.x < 0 || head.x >= SNAKE_COLS || head.y < 0 || head.y >= SNAKE_ROWS;
+    const hitSelf = game.snake.some(segment => segment.x === head.x && segment.y === head.y);
+
+    if (hitWall || hitSelf) {
+      endSnakeGame();
+      return;
+    }
+
+    game.snake.unshift(head);
+
+    if (head.x === game.food.x && head.y === game.food.y) {
+      game.score += 1;
+      game.food = randomSnakeFood(game.snake);
+    } else {
+      game.snake.pop();
+    }
+
+    renderSnakeGame();
+  }
+
+  function startSnakeGame() {
+    if (activeGame) {
+      addLine('A game is already active. Type <span class="k">quit game</span> first.', 'error');
+      return;
+    }
+
+    activeGame = {
+      type:'snake',
+      snake:[
+        {x:7,y:5},
+        {x:6,y:5},
+        {x:5,y:5}
+      ],
+      direction:'right',
+      nextDirection:'right',
+      food:{x:12,y:5},
+      score:0
+    };
+
+    addBlock('terminal snake', [
+      'Use Arrow Keys or W/A/S/D.',
+      'Eat the red packets. Avoid walls and your own trail.',
+      'Type quit game to stop.'
+    ]);
+
+    renderSnakeGame();
+    snakeLoop = setInterval(snakeTick, 145);
+  }
+
+  function quitActiveGame() {
+    if (!activeGame) {
+      addLine('No game is currently active.');
+      return;
+    }
+
+    if (activeGame.type === 'snake') {
+      clearInterval(snakeLoop);
+      snakeLoop = null;
+    }
+
+    const panel = document.getElementById('snakeGamePanel');
+    if (panel) panel.remove();
+
+    addLine(`Game stopped: ${activeGame.type}`);
+    activeGame = null;
+  }
+
+  function showHighScores() {
+    addBlock('saved high scores', [
+      `Firewall Defense: ${Number(localStorage.getItem('firewallHighScore') || 0)}`,
+      `Terminal Snake: ${Number(localStorage.getItem('snakeHighScore') || 0)}`
+    ]);
+  }
+
   function runCommand(raw) {
     const command = String(raw || '').trim().toLowerCase();
     if (!command) return;
@@ -1232,6 +1698,31 @@
 
     commandHistory.push(command);
     historyIndex = commandHistory.length;
+
+    if (activeGame && activeGame.type === 'firewall' && ['1','2','3'].includes(command)) {
+      handleFirewallChoice(command);
+      return;
+    }
+
+    if (command === 'play firewall' || command === 'game firewall' || command === 'firewall') {
+      startFirewallGame();
+      return;
+    }
+
+    if (command === 'play snake' || command === 'play snack' || command === 'game snake' || command === 'snake') {
+      startSnakeGame();
+      return;
+    }
+
+    if (command === 'quit game' || command === 'quit') {
+      quitActiveGame();
+      return;
+    }
+
+    if (command === 'highscore' || command === 'highscores') {
+      showHighScores();
+      return;
+    }
 
     if (command === 'ls') {
       addBlock('virtual files', [
@@ -1284,6 +1775,31 @@
     input.focus();
   });
 
+  document.addEventListener('keydown', event => {
+    if (!activeGame || activeGame.type !== 'snake') return;
+
+    const keyMap = {
+      ArrowUp:'up',
+      w:'up',
+      W:'up',
+      ArrowDown:'down',
+      s:'down',
+      S:'down',
+      ArrowLeft:'left',
+      a:'left',
+      A:'left',
+      ArrowRight:'right',
+      d:'right',
+      D:'right'
+    };
+
+    const direction = keyMap[event.key];
+    if (direction) {
+      event.preventDefault();
+      setSnakeDirection(direction);
+    }
+  });
+
   input.addEventListener('keydown', event => {
     if (event.key === 'ArrowUp') {
       event.preventDefault();
@@ -1305,7 +1821,8 @@
         ...Object.keys(commandMap),
         'ls','history','date',
         'cat about.txt','cat education.txt','cat skills.txt','cat projects.txt',
-        'cat certificates.txt','cat contact.txt','cat profile.txt','search '
+        'cat certificates.txt','cat contact.txt','cat profile.txt','search ',
+        'play firewall','play snake','highscore','quit game'
       ];
       const matches = commands.filter(command => command.startsWith(input.value.toLowerCase()));
       if (matches.length === 1) input.value = matches[0];
