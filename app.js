@@ -12,7 +12,7 @@
       location: 'Gangaram, Hyderabad, Telangana, India',
       email: 'hvckari@gmail.com',
       phone: '+91 8019252777',
-      linkedin: 'https://www.linkedin.com/in/kari-harshavardhan-chowdary-146181217/',
+      linkedin: 'https://www.linkedin.com/in/harsha-vardhan-146181217/',
       status: 'Working at SSEV SOFTSOLS as Cyber Security Analyst'
     },
     about: [
@@ -923,6 +923,65 @@
     }
 
 
+
+    .hero{position:relative;isolation:isolate;overflow:hidden}
+    .hero-network{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.55}
+    .hero-network canvas{width:100%;height:100%;display:block}
+    .hero::before{content:'';position:absolute;width:430px;height:430px;right:7%;top:14%;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(53,255,162,.13),transparent 68%);filter:blur(18px);animation:heroGlow 5.5s ease-in-out infinite;pointer-events:none}
+    @keyframes heroGlow{0%,100%{transform:scale(.92);opacity:.55}50%{transform:scale(1.08);opacity:1}}
+
+    .card,.identity,.terminal,.threat-card,.project-card,.about-card,.credential-column,.info-row,.contact>*{
+      background:linear-gradient(145deg,rgba(8,24,28,.72),rgba(4,12,16,.56))!important;
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-color:rgba(138,255,200,.2)!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 18px 46px rgba(0,0,0,.22);
+      transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s ease,box-shadow .35s ease
+    }
+    .card:hover,.threat-card:hover,.project-card:hover,.about-card:hover,.credential-column:hover,.contact>*:hover{
+      transform:translateY(-7px);border-color:rgba(53,255,162,.46)!important;
+      box-shadow:0 24px 60px rgba(0,0,0,.34),0 0 30px rgba(53,255,162,.08)
+    }
+    .magnetic{will-change:transform;transition:transform .18s ease,box-shadow .25s ease}
+
+    .cyber-timeline{position:relative;display:grid;gap:24px;margin-top:32px;padding-left:34px}
+    .cyber-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--green),rgba(53,255,162,.08));transform:scaleY(0);transform-origin:top;transition:transform 1.2s ease;box-shadow:0 0 12px rgba(53,255,162,.25)}
+    .cyber-timeline.timeline-visible::before{transform:scaleY(1)}
+    .timeline-item{position:relative;opacity:0;transform:translateX(26px);transition:.65s cubic-bezier(.2,.8,.2,1)}
+    .timeline-item::before{content:'';position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    .timeline-item.timeline-visible{opacity:1;transform:none}
+    .timeline-year{color:var(--green);font:700 11px var(--mono);letter-spacing:.12em;margin-bottom:6px}
+    .timeline-title{font-weight:700;margin-bottom:5px}
+    .timeline-copy{color:var(--muted);line-height:1.65}
+
+    .live-counter-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:24px}
+    .live-counter{padding:18px 14px;text-align:center;border:1px solid var(--line);background:rgba(53,255,162,.035);backdrop-filter:blur(10px)}
+    .live-counter strong{display:block;color:var(--green);font:800 clamp(24px,3vw,40px) var(--mono);line-height:1;text-shadow:0 0 18px rgba(53,255,162,.25)}
+    .live-counter span{display:block;margin-top:8px;color:var(--muted);font:9px var(--mono);letter-spacing:.08em}
+
+    .section[data-reveal-mode="scan"] .reveal-item{clip-path:inset(0 100% 0 0);opacity:1;filter:none;transform:none;transition:clip-path .9s cubic-bezier(.2,.8,.2,1)}
+    .section[data-reveal-mode="scan"] .reveal-item.is-visible{clip-path:inset(0)}
+    .section[data-reveal-mode="cascade"] .reveal-item{transform:translateY(48px) rotateX(8deg);transform-origin:top}
+    .section[data-reveal-mode="cascade"] .reveal-item.is-visible{transform:none}
+
+    .code-rain-host{position:relative;overflow:hidden}
+    .code-rain-layer{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.09;overflow:hidden;font:10px/1.25 var(--mono);color:var(--green);white-space:pre;mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 82%,transparent)}
+    .code-rain-column{position:absolute;top:-140%;animation:codeRain linear infinite;text-shadow:0 0 8px rgba(53,255,162,.35)}
+    @keyframes codeRain{to{transform:translateY(260%)}}
+    .code-rain-host>*:not(.code-rain-layer){position:relative;z-index:1}
+
+    .cyber-equalizer{display:flex;align-items:flex-end;gap:4px;height:26px;margin-top:14px}
+    .cyber-equalizer i{width:4px;height:20%;background:linear-gradient(var(--green),var(--cyan));box-shadow:0 0 8px rgba(53,255,162,.3);animation:eqPulse 1.1s ease-in-out infinite}
+    .cyber-equalizer i:nth-child(2){animation-delay:.1s}.cyber-equalizer i:nth-child(3){animation-delay:.2s}.cyber-equalizer i:nth-child(4){animation-delay:.3s}.cyber-equalizer i:nth-child(5){animation-delay:.4s}.cyber-equalizer i:nth-child(6){animation-delay:.5s}.cyber-equalizer i:nth-child(7){animation-delay:.6s}.cyber-equalizer i:nth-child(8){animation-delay:.7s}
+    @keyframes eqPulse{0%,100%{height:18%;opacity:.45}50%{height:100%;opacity:1}}
+
+    .terminal-startup{padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(53,255,162,.025);font:10px/1.7 var(--mono);color:var(--green2)}
+    .terminal-startup .startup-line{opacity:0;transform:translateY(5px);animation:terminalBootLine .4s ease forwards}
+    @keyframes terminalBootLine{to{opacity:1;transform:none}}
+    .terminal.terminal-locked .inputrow{opacity:.35;pointer-events:none;filter:grayscale(1)}
+
+    @media(max-width:900px){.live-counter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){.live-counter-grid{grid-template-columns:1fr 1fr}.hero-network{opacity:.34}}
+
     /* Scroll reveal animations */
     .reveal-item{
       opacity:0;
@@ -1232,8 +1291,10 @@
 
       <main>
         <section class="section hero" id="home">
+          <div class="hero-network"><canvas id="heroNetworkCanvas"></canvas></div>
           <div>
             <div class="eyebrow">root@portfolio:~$ ./initialize_profile.sh</div>
+          <div class="cyber-equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <h1><small>K</small>HARSHAVARDHAN</h1>
             <h2>Cyber Security Analyst at SSEV SOFTSOLS // Researcher // Builder</h2>
             <p class="lead">${DATA.about.join(' ')}</p>
@@ -1263,7 +1324,15 @@
               <div><span>STATUS</span><strong style="color:var(--green)">WORKING AT SSEV SOFTSOLS</strong></div>
             </div>
           </div>
-        </section>
+        
+          <div class="live-counter-grid" id="liveCounters">
+            <div class="live-counter"><strong data-counter="5">0</strong><span>PROJECTS</span></div>
+            <div class="live-counter"><strong data-counter="2">0</strong><span>PUBLICATIONS</span></div>
+            <div class="live-counter"><strong data-counter="2">0</strong><span>PATENTS</span></div>
+            <div class="live-counter"><strong data-counter="10">0</strong><span>CERTIFICATIONS</span></div>
+            <div class="live-counter"><strong data-counter="1">0</strong><span>CURRENT ROLE</span></div>
+          </div>
+</section>
 
         <section class="section" id="about">
           <div class="heading">
@@ -1310,7 +1379,14 @@
               </div>
             </div>
           </div>
-        </section>
+        
+          <div class="cyber-timeline" id="cyberTimeline">
+            <article class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-title">Cybersecurity Foundation</div><div class="timeline-copy">Built practical experience in ethical hacking, network analysis, web security and defensive tools.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-title">Research and Project Development</div><div class="timeline-copy">Worked on phishing detection, memory forensics, vulnerability scanning and cybersecurity research.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-title">Publications and Patent Work</div><div class="timeline-copy">Advanced work in DDoS mitigation, moving target defense, ChaCha20 and AI-assisted threat detection.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2026</div><div class="timeline-title">Graduation and Industry Role</div><div class="timeline-copy">Completing B.Tech CSE Cyber Security while working as a Cyber Security Analyst at SSEV SOFTSOLS.</div></article>
+          </div>
+</section>
 
         <section class="section">
           <div class="heading">
@@ -1350,6 +1426,7 @@
               </div>
             </div>
             <div class="output" id="output"></div>
+            <div class="terminal-startup" id="terminalStartup" aria-live="polite"></div>
             <form class="inputrow" id="terminalForm">
               <span class="prompt">harsha@portfolio:~$</span>
               <input id="terminalInput" autocomplete="off" spellcheck="false" placeholder="type a command...">
@@ -1369,7 +1446,7 @@
           <div class="contact">
             <a href="mailto:${DATA.profile.email}"><small>EMAIL</small><strong>${DATA.profile.email}</strong></a>
             <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}"><small>PHONE</small><strong>${DATA.profile.phone}</strong></a>
-            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>kari-harshavardhan-chowdary-146181217</strong></a>
+            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>harsha-vardhan-146181217</strong></a>
             <div><small>LOCATION</small><strong>${DATA.profile.location}</strong></div>
           </div>
         </section>
@@ -3243,7 +3320,53 @@
   navSections.forEach(section => navObserver.observe(section));
 
 
+
+  // Animated hero network
+  const heroNetworkCanvas=document.getElementById('heroNetworkCanvas');
+  if(heroNetworkCanvas){
+    const c=heroNetworkCanvas.getContext('2d');let nodes=[],pointer={x:null,y:null};
+    function resizeNetwork(){
+      const r=heroNetworkCanvas.parentElement.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);
+      heroNetworkCanvas.width=Math.max(1,r.width*d);heroNetworkCanvas.height=Math.max(1,r.height*d);
+      heroNetworkCanvas.style.width=r.width+'px';heroNetworkCanvas.style.height=r.height+'px';c.setTransform(d,0,0,d,0,0);
+      nodes=Array.from({length:Math.max(28,Math.min(76,Math.floor(r.width/18)))},()=>({x:Math.random()*r.width,y:Math.random()*r.height,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,r:Math.random()*1.8+.7}));
+    }
+    function drawNetwork(){
+      const w=heroNetworkCanvas.clientWidth,h=heroNetworkCanvas.clientHeight;c.clearRect(0,0,w,h);
+      nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;c.beginPath();c.arc(n.x,n.y,n.r,0,Math.PI*2);c.fillStyle='rgba(53,255,162,.65)';c.fill()});
+      for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],dist=Math.hypot(a.x-b.x,a.y-b.y);if(dist<115){c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.strokeStyle=`rgba(53,255,162,${(1-dist/115)*.18})`;c.stroke()}}
+      if(pointer.x!==null)nodes.forEach(n=>{const dist=Math.hypot(n.x-pointer.x,n.y-pointer.y);if(dist<145){c.beginPath();c.moveTo(n.x,n.y);c.lineTo(pointer.x,pointer.y);c.strokeStyle=`rgba(69,215,255,${(1-dist/145)*.24})`;c.stroke()}});
+      requestAnimationFrame(drawNetwork)
+    }
+    heroNetworkCanvas.parentElement.addEventListener('pointermove',e=>{const r=heroNetworkCanvas.getBoundingClientRect();pointer={x:e.clientX-r.left,y:e.clientY-r.top}});
+    heroNetworkCanvas.parentElement.addEventListener('pointerleave',()=>pointer={x:null,y:null});
+    addEventListener('resize',resizeNetwork);resizeNetwork();drawNetwork()
+  }
+
+  // Live counters
+  const liveCounterSection=document.getElementById('liveCounters');
+  if(liveCounterSection){let started=false;const o=new IntersectionObserver(es=>{if(!es[0].isIntersecting||started)return;started=true;liveCounterSection.querySelectorAll('[data-counter]').forEach(el=>{const target=+el.dataset.counter,start=performance.now();function tick(now){const p=Math.min(1,(now-start)/1100),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e)+(target>=5?'+':'');if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)});o.disconnect()},{threshold:.35});o.observe(liveCounterSection)}
+
+  // Timeline
+  const cyberTimeline=document.getElementById('cyberTimeline');
+  if(cyberTimeline){const o=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;cyberTimeline.classList.add('timeline-visible');cyberTimeline.querySelectorAll('.timeline-item').forEach((el,i)=>setTimeout(()=>el.classList.add('timeline-visible'),i*170));o.disconnect()},{threshold:.2});o.observe(cyberTimeline)}
+
+  // Section variations
+  document.querySelectorAll('.section').forEach((s,i)=>s.dataset.revealMode=i%3===0?'cascade':i%3===1?'scan':'default');
+
+  // Magnetic controls
+  document.querySelectorAll('button,.btn,.button,.nav button,.skills span,.hints button,.command-hints button').forEach(el=>{el.classList.add('magnetic');el.addEventListener('pointermove',e=>{if(matchMedia('(pointer:coarse)').matches)return;const r=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.16}px,${(e.clientY-r.top-r.height/2)*.16}px)`});el.addEventListener('pointerleave',()=>el.style.transform='')});
+
+  // Code rain
+  const chars='01{}[]<>/\\\\$#@*&%ABCDEFabcdef';
+  [document.querySelector('.terminal'),document.querySelector('#projects'),document.querySelector('#credentials'),document.querySelector('#threat-dashboard')].filter(Boolean).forEach(target=>{target.classList.add('code-rain-host');const layer=document.createElement('div');layer.className='code-rain-layer';const count=Math.max(8,Math.floor((target.clientWidth||600)/44));for(let i=0;i<count;i++){const col=document.createElement('span');col.className='code-rain-column';col.style.left=(i/count*100)+'%';col.style.animationDuration=(5+Math.random()*6)+'s';col.style.animationDelay=(-Math.random()*8)+'s';col.textContent=Array.from({length:28},()=>chars[Math.floor(Math.random()*chars.length)]).join('\n');layer.appendChild(col)}target.prepend(layer)});
+
+  // Terminal startup
+  const terminalElement=document.querySelector('.terminal'),terminalStartup=document.getElementById('terminalStartup');
+  if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Scanning visitor permissions...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
+
   // Matrix background
+
 
 
 
