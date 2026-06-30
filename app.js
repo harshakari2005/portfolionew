@@ -1129,6 +1129,231 @@
       }
     }
 
+
+    /* Portfolio search */
+    .portfolio-search{
+      position:fixed;
+      inset:0;
+      z-index:12000;
+      display:none;
+      place-items:start center;
+      padding-top:90px;
+      background:rgba(2,8,11,.78);
+      backdrop-filter:blur(8px);
+    }
+    .portfolio-search.active{display:grid}
+    .search-shell{
+      width:min(720px,calc(100% - 28px));
+      border:1px solid var(--line);
+      background:#061015;
+      box-shadow:0 0 60px rgba(53,255,162,.16);
+    }
+    .search-head{
+      display:flex;
+      gap:10px;
+      padding:14px;
+      border-bottom:1px solid var(--line);
+    }
+    .search-head input{
+      flex:1;
+      border:1px solid var(--line);
+      background:#02090d;
+      color:var(--text);
+      padding:12px 14px;
+      font:13px var(--mono);
+      outline:none;
+    }
+    .search-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green);
+      padding:0 12px;
+      font:10px var(--mono);
+      cursor:pointer;
+    }
+    .search-results{
+      max-height:58vh;
+      overflow:auto;
+      padding:10px;
+    }
+    .search-result{
+      width:100%;
+      text-align:left;
+      border:1px solid transparent;
+      background:transparent;
+      color:var(--text);
+      padding:12px;
+      cursor:pointer;
+      font:11px/1.55 var(--mono);
+    }
+    .search-result:hover,.search-result.active{
+      border-color:var(--line);
+      background:rgba(53,255,162,.04);
+    }
+    .search-result strong{color:var(--green)}
+    .search-result small{display:block;color:var(--muted);margin-top:4px}
+    .search-highlight{
+      outline:2px solid var(--green)!important;
+      box-shadow:0 0 28px rgba(53,255,162,.24)!important;
+      transition:.3s ease;
+    }
+
+    /* Skills to project map */
+    .skill-project-map{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:240px 1fr;
+      gap:18px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+      padding:18px;
+    }
+    .skill-map-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-content:flex-start;
+    }
+    .skill-map-list button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:8px 10px;
+      font:10px var(--mono);
+      cursor:pointer;
+    }
+    .skill-map-list button.active{
+      background:var(--green);
+      color:#021009;
+    }
+    .skill-map-output{
+      min-height:140px;
+      border-left:1px solid var(--line);
+      padding-left:18px;
+    }
+    .skill-map-output h4{
+      margin:0 0 10px;
+      color:var(--green);
+      font:700 12px var(--mono);
+    }
+    .skill-map-output ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    /* Animated architecture diagrams */
+    .architecture-panel{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background:rgba(4,13,16,.82);
+      padding:16px;
+      overflow:hidden;
+    }
+    .architecture-flow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+      min-width:650px;
+    }
+    .arch-node{
+      position:relative;
+      z-index:2;
+      flex:1;
+      min-height:76px;
+      display:grid;
+      place-items:center;
+      padding:12px;
+      text-align:center;
+      border:1px solid var(--line);
+      background:#071218;
+      color:var(--green2);
+      font:10px/1.45 var(--mono);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .arch-node:hover,.arch-node.active{
+      border-color:var(--green);
+      box-shadow:0 0 22px rgba(53,255,162,.15);
+      transform:translateY(-4px);
+    }
+    .arch-link{
+      flex:0 0 42px;
+      height:1px;
+      background:linear-gradient(90deg,var(--green),transparent);
+      position:relative;
+      overflow:visible;
+    }
+    .arch-link::after{
+      content:'';
+      position:absolute;
+      top:-3px;
+      left:-6px;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--cyan);
+      box-shadow:0 0 10px var(--cyan);
+      animation:packetMove 1.7s linear infinite;
+    }
+    @keyframes packetMove{
+      from{transform:translateX(0)}
+      to{transform:translateX(48px)}
+    }
+    .arch-description{
+      margin-top:14px;
+      color:var(--muted);
+      font:11px/1.65 var(--mono);
+    }
+
+    /* Session summary */
+    .session-summary{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:10400;
+      display:none;
+      width:min(330px,calc(100% - 32px));
+      border:1px solid var(--line);
+      background:rgba(3,12,15,.97);
+      padding:14px;
+      box-shadow:0 0 36px rgba(53,255,162,.12);
+    }
+    .session-summary.active{display:block}
+    .session-summary h4{
+      margin:0 0 10px;
+      color:var(--green);
+      font:700 11px var(--mono);
+    }
+    .session-summary-grid{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px 12px;
+      color:var(--muted);
+      font:10px var(--mono);
+    }
+    .session-summary-grid strong{color:var(--text)}
+    .session-summary button{
+      width:100%;
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green);
+      padding:8px;
+      font:10px var(--mono);
+      cursor:pointer;
+    }
+
+    @media(max-width:760px){
+      .skill-project-map{grid-template-columns:1fr}
+      .skill-map-output{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:16px}
+      .architecture-panel{overflow:auto}
+      .portfolio-search{padding-top:24px}
+    }
+
     /* Scroll reveal animations */
     .reveal-item{
       opacity:0;
@@ -1397,6 +1622,27 @@
 
       <div class="recruiter-banner">RECRUITER MODE ACTIVE — EXPERIENCE, SKILLS, PROJECTS, PATENTS, PUBLICATIONS AND CONTACT PRIORITIZED</div>
 
+            <div class="portfolio-search" id="portfolioSearch" aria-hidden="true">
+        <div class="search-shell">
+          <div class="search-head">
+            <input id="portfolioSearchInput" type="search" placeholder="Search projects, skills, patents, publications...">
+            <button id="portfolioSearchClose">CLOSE</button>
+          </div>
+          <div class="search-results" id="portfolioSearchResults"></div>
+        </div>
+      </div>
+
+      <div class="session-summary" id="sessionSummary">
+        <h4>SESSION SUMMARY</h4>
+        <div class="session-summary-grid">
+          <span>Projects viewed</span><strong id="sessionProjects">0</strong>
+          <span>Commands executed</span><strong id="sessionCommands">0</strong>
+          <span>Achievements unlocked</span><strong id="sessionAchievements">0</strong>
+          <span>Clearance reached</span><strong id="sessionClearance">0%</strong>
+        </div>
+        <button id="sessionSummaryClose">CLOSE</button>
+      </div>
+
       <div class="achievement-toast" id="achievementToast"></div>
       <div class="clearance-widget" id="clearanceWidget">
         <strong>VISITOR SECURITY CLEARANCE</strong>
@@ -1468,6 +1714,7 @@
           <button data-target="credentials">CREDENTIALS</button>
           <button data-target="terminal">TERMINAL</button>
           <button data-target="contact">CONTACT</button>
+          <button id="portfolioSearchButton">SEARCH</button>
         </nav>
         <div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
       </header>
@@ -1569,6 +1816,13 @@
             <div><div class="label">05 // SKILLS</div><h3>Technical capabilities</h3></div>
           </div>
           <div class="skills">${skillTags()}</div><div class="skill-detail" id="skillDetail"></div>
+          <div class="skill-project-map" id="skillProjectMap">
+            <div class="skill-map-list" id="skillMapList"></div>
+            <div class="skill-map-output" id="skillMapOutput">
+              <h4>SELECT A SKILL</h4>
+              <div>Choose a skill to see the related projects and practical applications.</div>
+            </div>
+          </div>
         </section>
 
 
@@ -1866,6 +2120,7 @@
       '<span class="k">recruiter</span>     enable recruiter mode',
       '<span class="k">theme</span>         change visual theme',
       '<span class="k">open [project]</span> open project case study',
+      '<span class="k">project [name]</span> project details + case study',
       '<span class="k">Ctrl+C</span>        interrupt active task on desktop',
       '<span class="k">STOP button</span>   interrupt active task on phone',
       '<span class="k">simulation</span>    replay browser-only breach effect',
@@ -3612,7 +3867,286 @@
     });
   }
 
+
+  // Portfolio search
+  const portfolioSearch=document.getElementById('portfolioSearch');
+  const portfolioSearchButton=document.getElementById('portfolioSearchButton');
+  const portfolioSearchInput=document.getElementById('portfolioSearchInput');
+  const portfolioSearchResults=document.getElementById('portfolioSearchResults');
+  const portfolioSearchClose=document.getElementById('portfolioSearchClose');
+
+  const searchIndex=[
+    ...DATA.projects.map((p,index)=>({type:'Project',title:p.title,description:p.description,target:()=>openProjectModal(index)})),
+    ...Object.entries(DATA.skills).flatMap(([group,skills])=>skills.map(skill=>({
+      type:`Skill · ${group}`,
+      title:skill,
+      description:`Cybersecurity skill listed under ${group}.`,
+      target:()=>document.getElementById('skills')?.scrollIntoView({behavior:'smooth'})
+    }))),
+    ...DATA.publications.map(item=>({type:'Publication',title:item,description:'Research publication',target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
+    ...DATA.patents.map(item=>({type:'Patent',title:item,description:'Patent application',target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
+    {type:'Contact',title:'Email',description:DATA.profile.email,target:()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})},
+    {type:'Contact',title:'LinkedIn',description:DATA.profile.linkedin,target:()=>window.open(DATA.profile.linkedin,'_blank')}
+  ];
+
+  function openPortfolioSearch(){
+    portfolioSearch.classList.add('active');
+    portfolioSearch.setAttribute('aria-hidden','false');
+    portfolioSearchInput.value='';
+    renderSearchResults('');
+    setTimeout(()=>portfolioSearchInput.focus(),30);
+  }
+
+  function closePortfolioSearch(){
+    portfolioSearch.classList.remove('active');
+    portfolioSearch.setAttribute('aria-hidden','true');
+  }
+
+  function renderSearchResults(query){
+    const q=query.trim().toLowerCase();
+    const matches=searchIndex.filter(item=>
+      !q || `${item.type} ${item.title} ${item.description}`.toLowerCase().includes(q)
+    ).slice(0,20);
+
+    portfolioSearchResults.innerHTML=matches.length
+      ? matches.map((item,index)=>`
+          <button class="search-result ${index===0?'active':''}" data-search-index="${searchIndex.indexOf(item)}">
+            <strong>${item.title}</strong>
+            <small>${item.type} · ${item.description}</small>
+          </button>`).join('')
+      : '<div class="search-result"><small>No matching portfolio content found.</small></div>';
+
+    portfolioSearchResults.querySelectorAll('[data-search-index]').forEach(button=>{
+      button.addEventListener('click',()=>{
+        const item=searchIndex[Number(button.dataset.searchIndex)];
+        closePortfolioSearch();
+        item.target();
+      });
+    });
+  }
+
+  portfolioSearchButton?.addEventListener('click',openPortfolioSearch);
+  portfolioSearchClose?.addEventListener('click',closePortfolioSearch);
+  portfolioSearchInput?.addEventListener('input',()=>renderSearchResults(portfolioSearchInput.value));
+  portfolioSearch?.addEventListener('click',event=>{
+    if(event.target===portfolioSearch)closePortfolioSearch();
+  });
+
+  document.addEventListener('keydown',event=>{
+    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){
+      event.preventDefault();
+      openPortfolioSearch();
+    }
+    if(event.key==='Escape'&&portfolioSearch.classList.contains('active'))closePortfolioSearch();
+  });
+
+  // Skills to project relationship map
+  const skillProjectRelations={
+    'Python':['AI-Based Phishing Website Detection','Automated Vulnerability Scanning Tool','Security automation workflows'],
+    'Wireshark':['Memory Forensics','Network traffic analysis','DDoS investigation'],
+    'Nmap':['Automated Vulnerability Scanning Tool','Network reconnaissance','Exposure assessment'],
+    'Burp Suite':['Web application security testing','Phishing and URL analysis','OWASP testing'],
+    'SQL':['Security data storage','Application backends','Log analysis'],
+    'Linux':['Memory Forensics','Security tooling','Network defense workflows'],
+    'IDS/IPS':['MOTAG','DDoS detection and mitigation','Traffic filtering'],
+    'OWASP Top 10':['Web security testing','Vulnerability assessment','Secure development'],
+    'Network Security':['MOTAG','Packet analysis','DDoS defense'],
+    'DDoS Detection and Mitigation':['MOTAG','Moving target defense research','Dynamic proxy protection'],
+    'Packet Analysis':['Wireshark investigations','Memory Forensics','Network threat detection']
+  };
+
+  const skillMapList=document.getElementById('skillMapList');
+  const skillMapOutput=document.getElementById('skillMapOutput');
+
+  if(skillMapList&&skillMapOutput){
+    Object.keys(skillProjectRelations).forEach((skill,index)=>{
+      const button=document.createElement('button');
+      button.textContent=skill;
+      button.addEventListener('click',()=>{
+        skillMapList.querySelectorAll('button').forEach(btn=>btn.classList.remove('active'));
+        button.classList.add('active');
+        skillMapOutput.innerHTML=`
+          <h4>${skill.toUpperCase()}</h4>
+          <ul>${skillProjectRelations[skill].map(item=>`<li>${item}</li>`).join('')}</ul>`;
+      });
+      skillMapList.appendChild(button);
+      if(index===0)setTimeout(()=>button.click(),0);
+    });
+  }
+
+  // Animated architecture diagrams in project case studies
+  const projectArchitectures={
+    0:[
+      ['Incoming Traffic','Receives and observes network requests.'],
+      ['Detection Engine','Analyzes traffic behavior and detects possible DDoS patterns.'],
+      ['Dynamic Proxy Rotation','Changes proxy routes to reduce direct targeting of the protected server.'],
+      ['ChaCha20 Encryption','Protects sensitive communication between defense components.'],
+      ['Protected Server','Receives filtered and safer traffic.']
+    ],
+    1:[
+      ['URL Input','Receives the website address submitted by the user.'],
+      ['Feature Extraction','Converts URL and page characteristics into measurable indicators.'],
+      ['TF-IDF / ML Model','Classifies the website using trained machine-learning features.'],
+      ['Risk Decision','Marks the result as legitimate or suspicious.'],
+      ['Flask Interface','Displays the prediction to the user.']
+    ],
+    2:[
+      ['Memory Capture','Collects volatile memory from the target system.'],
+      ['Artifact Extraction','Finds processes, connections and suspicious objects.'],
+      ['Threat Correlation','Links memory artifacts with possible attack behavior.'],
+      ['Investigation Report','Summarizes evidence for forensic review.']
+    ],
+    3:[
+      ['Target Input','Receives the host or application to test.'],
+      ['Scanner Engine','Runs automated checks against known weaknesses.'],
+      ['Finding Classification','Groups issues by type and severity.'],
+      ['Security Report','Generates recommended remediation actions.']
+    ],
+    4:[
+      ['Sensor Input','Detects characteristics of incoming waste.'],
+      ['Arduino Controller','Processes sensor readings and classification logic.'],
+      ['Segregation Mechanism','Routes waste into the correct category.'],
+      ['Monitoring Layer','Records status and system activity.']
+    ]
+  };
+
+  const originalOpenProjectModal=openProjectModal;
+  openProjectModal=function(index){
+    originalOpenProjectModal(index);
+
+    setTimeout(()=>{
+      const modalContent=document.querySelector('#projectModal .modal-content, #projectModal .modal-body, #projectModal .window-body');
+      if(!modalContent)return;
+
+      modalContent.querySelector('.architecture-panel')?.remove();
+      const architecture=projectArchitectures[index]||[];
+      if(!architecture.length)return;
+
+      const panel=document.createElement('div');
+      panel.className='architecture-panel';
+
+      const flow=document.createElement('div');
+      flow.className='architecture-flow';
+
+      architecture.forEach((step,stepIndex)=>{
+        const node=document.createElement('button');
+        node.className='arch-node';
+        node.type='button';
+        node.textContent=step[0];
+        node.addEventListener('click',()=>{
+          flow.querySelectorAll('.arch-node').forEach(item=>item.classList.remove('active'));
+          node.classList.add('active');
+          panel.querySelector('.arch-description').textContent=step[1];
+        });
+        flow.appendChild(node);
+
+        if(stepIndex<architecture.length-1){
+          const link=document.createElement('div');
+          link.className='arch-link';
+          flow.appendChild(link);
+        }
+      });
+
+      const description=document.createElement('div');
+      description.className='arch-description';
+      description.textContent=architecture[0][1];
+
+      panel.appendChild(flow);
+      panel.appendChild(description);
+      modalContent.appendChild(panel);
+      flow.querySelector('.arch-node')?.classList.add('active');
+    },40);
+  };
+
+  // Project terminal commands
+  const projectCommandHelp=[
+    'project motag',
+    'project phishing',
+    'project forensics',
+    'project scanner',
+    'project waste'
+  ];
+
+  const previousRunCommand=runCommand;
+  runCommand=function(raw){
+    const normalized=String(raw||'').trim().toLowerCase();
+
+    if(normalized==='project'){
+      addBlock('project commands',projectCommandHelp);
+      return;
+    }
+
+    if(normalized.startsWith('project ')){
+      const key=normalized.slice(8).trim();
+      const projectMap={motag:0,phishing:1,forensics:2,scanner:3,waste:4,'waste-iot':4};
+      if(!(key in projectMap)){
+        addLine('Unknown project. Use: motag, phishing, forensics, scanner, waste','error');
+        return;
+      }
+
+      const project=DATA.projects[projectMap[key]];
+      addBlock(project.title,[
+        project.description,
+        `Technologies: ${project.tags.join(', ')}`,
+        'Opening the full case study...'
+      ]);
+      openProjectModal(projectMap[key]);
+      return;
+    }
+
+    previousRunCommand(raw);
+  };
+
+  // Session summary
+  const sessionSummary=document.getElementById('sessionSummary');
+  const sessionProjects=document.getElementById('sessionProjects');
+  const sessionCommands=document.getElementById('sessionCommands');
+  const sessionAchievements=document.getElementById('sessionAchievements');
+  const sessionClearance=document.getElementById('sessionClearance');
+  const sessionSummaryClose=document.getElementById('sessionSummaryClose');
+
+  let sessionSummaryShown=false;
+  const sessionStartProjects=new Set(JSON.parse(sessionStorage.getItem('sessionViewedProjects')||'[]'));
+
+  const previousOpenProjectForSession=openProjectModal;
+  openProjectModal=function(index){
+    sessionStartProjects.add(index);
+    sessionStorage.setItem('sessionViewedProjects',JSON.stringify([...sessionStartProjects]));
+    previousOpenProjectForSession(index);
+  };
+
+  function countUnlockedAchievements(){
+    return Object.keys(localStorage).filter(key=>key.startsWith('achievement:')).length;
+  }
+
+  function updateSessionSummary(){
+    sessionProjects.textContent=String(sessionStartProjects.size);
+    sessionCommands.textContent=String(Number(localStorage.getItem('commandCount')||0));
+    sessionAchievements.textContent=String(countUnlockedAchievements());
+    sessionClearance.textContent=`${clearanceScore}%`;
+  }
+
+  function showSessionSummary(){
+    if(sessionSummaryShown)return;
+    sessionSummaryShown=true;
+    updateSessionSummary();
+    sessionSummary.classList.add('active');
+  }
+
+  sessionSummaryClose?.addEventListener('click',()=>sessionSummary.classList.remove('active'));
+
+  window.addEventListener('beforeunload',updateSessionSummary);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='hidden')updateSessionSummary();
+  });
+
+  window.addEventListener('scroll',()=>{
+    const nearBottom=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-160;
+    if(nearBottom)showSessionSummary();
+  },{passive:true});
+
   // Matrix background
+
 
 
 
