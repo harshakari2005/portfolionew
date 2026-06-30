@@ -1130,6 +1130,118 @@
     }
 
 
+
+    /* Animated project preview images */
+    .project-visual{
+      position:relative;
+      height:190px;
+      margin:-4px -4px 18px;
+      overflow:hidden;
+      border:1px solid rgba(53,255,162,.2);
+      background:
+        radial-gradient(circle at 50% 50%,rgba(53,255,162,.09),transparent 58%),
+        linear-gradient(145deg,#06151a,#02080c);
+      isolation:isolate;
+    }
+    .project-visual::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(rgba(53,255,162,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(53,255,162,.035) 1px,transparent 1px);
+      background-size:24px 24px;
+      animation:gridShift 7s linear infinite;
+    }
+    .project-visual::after{
+      content:'';
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      top:-6px;
+      z-index:4;
+      background:linear-gradient(90deg,transparent,var(--green),transparent);
+      box-shadow:0 0 16px var(--green);
+      animation:visualScan 3.1s linear infinite;
+      opacity:.72;
+    }
+    @keyframes gridShift{
+      to{background-position:24px 24px}
+    }
+    @keyframes visualScan{
+      0%{transform:translateY(0)}
+      100%{transform:translateY(205px)}
+    }
+    .project-visual svg{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      width:100%;
+      height:100%;
+      display:block;
+    }
+    .project-visual .pulse{
+      transform-origin:center;
+      animation:visualPulse 1.8s ease-in-out infinite;
+    }
+    .project-visual .packet{
+      animation:packetTravel 2.4s linear infinite;
+    }
+    .project-visual .packet.delay-1{animation-delay:-.8s}
+    .project-visual .packet.delay-2{animation-delay:-1.6s}
+    .project-visual .rotate{
+      transform-origin:center;
+      animation:visualRotate 8s linear infinite;
+    }
+    .project-visual .float{
+      animation:visualFloat 2.8s ease-in-out infinite;
+    }
+    .project-visual .blink{
+      animation:visualBlink 1.2s steps(2,end) infinite;
+    }
+    @keyframes visualPulse{
+      0%,100%{opacity:.45;transform:scale(.92)}
+      50%{opacity:1;transform:scale(1.08)}
+    }
+    @keyframes packetTravel{
+      0%{transform:translateX(-28px);opacity:0}
+      15%{opacity:1}
+      85%{opacity:1}
+      100%{transform:translateX(310px);opacity:0}
+    }
+    @keyframes visualRotate{
+      to{transform:rotate(360deg)}
+    }
+    @keyframes visualFloat{
+      0%,100%{transform:translateY(-4px)}
+      50%{transform:translateY(7px)}
+    }
+    @keyframes visualBlink{
+      0%,45%{opacity:.25}
+      50%,100%{opacity:1}
+    }
+    .project-visual-label{
+      position:absolute;
+      left:12px;
+      bottom:10px;
+      z-index:5;
+      padding:6px 8px;
+      border:1px solid rgba(53,255,162,.25);
+      background:rgba(2,9,12,.82);
+      color:var(--green2);
+      font:9px var(--mono);
+      letter-spacing:.08em;
+    }
+    .project-card-copy{
+      position:relative;
+      z-index:3;
+    }
+    @media(max-width:620px){
+      .project-visual{height:165px}
+    }
+
     /* Portfolio search */
     .portfolio-search{
       position:fixed;
@@ -1547,16 +1659,105 @@
     return strings.reduce((out, str, i) => out + str + (values[i] ?? ''), '');
   }
 
+  function projectVisual(index) {
+    const visuals = [
+      `
+        <div class="project-visual">
+          <svg viewBox="0 0 360 190" aria-hidden="true">
+            <defs>
+              <linearGradient id="motagLine" x1="0" x2="1">
+                <stop offset="0" stop-color="#35ffa2" stop-opacity=".15"/>
+                <stop offset=".5" stop-color="#35ffa2"/>
+                <stop offset="1" stop-color="#45d7ff" stop-opacity=".2"/>
+              </linearGradient>
+            </defs>
+            <circle cx="180" cy="92" r="58" fill="none" stroke="#35ffa2" stroke-opacity=".2"/>
+            <circle class="rotate" cx="180" cy="92" r="42" fill="none" stroke="#45d7ff" stroke-width="2" stroke-dasharray="10 8"/>
+            <rect x="147" y="70" width="66" height="44" rx="6" fill="#07171b" stroke="#35ffa2"/>
+            <path d="M180 76 l22 9 v18 c0 15-12 24-22 29-10-5-22-14-22-29V85z" fill="none" stroke="#35ffa2" stroke-width="2"/>
+            <path d="M30 92 H145 M215 92 H330" stroke="url(#motagLine)" stroke-width="2"/>
+            <circle class="packet" cx="30" cy="92" r="5" fill="#45d7ff"/>
+            <circle class="packet delay-1" cx="30" cy="92" r="4" fill="#35ffa2"/>
+            <circle class="packet delay-2" cx="30" cy="92" r="3" fill="#ffbd4a"/>
+          </svg>
+          <span class="project-visual-label">LIVE TRAFFIC DEFENSE</span>
+        </div>`,
+      `
+        <div class="project-visual">
+          <svg viewBox="0 0 360 190" aria-hidden="true">
+            <rect x="54" y="34" width="252" height="122" rx="10" fill="#061318" stroke="#35ffa2" stroke-opacity=".55"/>
+            <rect x="72" y="54" width="216" height="22" rx="4" fill="#0b2026"/>
+            <circle cx="86" cy="65" r="4" fill="#ff6474"/>
+            <circle cx="100" cy="65" r="4" fill="#ffbd4a"/>
+            <circle cx="114" cy="65" r="4" fill="#35ffa2"/>
+            <path d="M86 102 H212" stroke="#45d7ff" stroke-width="4" stroke-linecap="round"/>
+            <path d="M86 120 H175" stroke="#35ffa2" stroke-width="4" stroke-linecap="round"/>
+            <path d="M250 91 l24 10-24 10z" fill="#ff6474" class="blink"/>
+            <circle class="pulse" cx="250" cy="101" r="25" fill="none" stroke="#ff6474" stroke-width="2"/>
+            <path d="M239 101 h22 M250 90 v22" stroke="#ff6474" stroke-width="2"/>
+          </svg>
+          <span class="project-visual-label">PHISHING CLASSIFIER</span>
+        </div>`,
+      `
+        <div class="project-visual">
+          <svg viewBox="0 0 360 190" aria-hidden="true">
+            <rect x="74" y="42" width="212" height="104" rx="8" fill="#061318" stroke="#45d7ff" stroke-opacity=".6"/>
+            <g class="float">
+              <rect x="104" y="68" width="66" height="48" rx="5" fill="#0a2027" stroke="#35ffa2"/>
+              <rect x="190" y="68" width="66" height="48" rx="5" fill="#0a2027" stroke="#45d7ff"/>
+              <path d="M170 92 H190" stroke="#ffbd4a" stroke-width="2" stroke-dasharray="4 4"/>
+            </g>
+            <path d="M100 132 H260" stroke="#35ffa2" stroke-opacity=".45"/>
+            <path class="pulse" d="M120 132 l12-18 13 12 17-28 16 34 18-20 15 20 16-10 14 10" fill="none" stroke="#35ffa2" stroke-width="2"/>
+          </svg>
+          <span class="project-visual-label">MEMORY ARTIFACT ANALYSIS</span>
+        </div>`,
+      `
+        <div class="project-visual">
+          <svg viewBox="0 0 360 190" aria-hidden="true">
+            <circle cx="180" cy="95" r="60" fill="none" stroke="#35ffa2" stroke-opacity=".18"/>
+            <circle class="rotate" cx="180" cy="95" r="48" fill="none" stroke="#35ffa2" stroke-width="2" stroke-dasharray="5 10"/>
+            <path d="M180 95 L180 45" stroke="#45d7ff" stroke-width="3"/>
+            <circle cx="180" cy="95" r="8" fill="#45d7ff"/>
+            <circle cx="222" cy="67" r="6" fill="#ff6474" class="blink"/>
+            <circle cx="132" cy="112" r="5" fill="#ffbd4a" class="blink"/>
+            <circle cx="207" cy="132" r="4" fill="#35ffa2" class="pulse"/>
+          </svg>
+          <span class="project-visual-label">VULNERABILITY SCAN</span>
+        </div>`,
+      `
+        <div class="project-visual">
+          <svg viewBox="0 0 360 190" aria-hidden="true">
+            <rect x="64" y="124" width="232" height="18" rx="5" fill="#07171b" stroke="#35ffa2" stroke-opacity=".5"/>
+            <g class="float">
+              <rect x="112" y="62" width="52" height="62" rx="5" fill="#0a2027" stroke="#35ffa2"/>
+              <rect x="196" y="62" width="52" height="62" rx="5" fill="#0a2027" stroke="#45d7ff"/>
+              <path d="M138 50 v-18 M222 50 v-18" stroke="#ffbd4a" stroke-width="3"/>
+              <circle cx="138" cy="29" r="6" fill="#ffbd4a" class="pulse"/>
+              <circle cx="222" cy="29" r="6" fill="#45d7ff" class="pulse"/>
+            </g>
+            <path d="M164 92 H196" stroke="#35ffa2" stroke-width="2" stroke-dasharray="5 5"/>
+          </svg>
+          <span class="project-visual-label">SMART WASTE SEGREGATION</span>
+        </div>`
+    ];
+
+    return visuals[index] || visuals[0];
+  }
+
   function projectCards() {
-    return DATA.projects.map(project => html`
-      <article class="card">
-        <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
-        <h4>${project.title}</h4>
-        <p>${project.description}</p>
-        <div class="project-actions">
-          <button class="project-details-btn" data-project-index="${DATA.projects.indexOf(project)}">VIEW CASE STUDY</button>
-          ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener">GITHUB</a>` : ''}
-          ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener">LIVE DEMO</a>` : ''}
+    return DATA.projects.map((project, index) => html`
+      <article class="card project-card">
+        ${projectVisual(index)}
+        <div class="project-card-copy">
+          <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+          <h4>${project.title}</h4>
+          <p>${project.description}</p>
+          <div class="project-actions">
+            <button class="project-details-btn" data-project-index="${index}">VIEW CASE STUDY</button>
+            ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener">GITHUB</a>` : ''}
+            ${project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener">LIVE DEMO</a>` : ''}
+          </div>
         </div>
       </article>
     `).join('');
@@ -1946,6 +2147,7 @@
       .join('');
 
     projectModalBody.innerHTML = `
+      ${projectVisual(index)}
       <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
       <h4>${project.title}</h4>
       <div class="modal-grid">
@@ -3735,31 +3937,41 @@
     requestAnimationFrame(() => element.classList.add('is-visible'));
   });
 
-  // Highlight the active navigation tab while scrolling.
+  // Highlight exactly one navigation tab based on the section nearest the viewport focus line.
   const navButtons = [...document.querySelectorAll('.nav [data-target]')];
   const navSections = navButtons
     .map(button => document.getElementById(button.dataset.target))
     .filter(Boolean);
 
-  const navObserver = new IntersectionObserver(entries => {
-    const visibleEntry = entries
-      .filter(entry => entry.isIntersecting)
-      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+  function updateActiveNavigation() {
+    if (!navSections.length) return;
 
-    if (!visibleEntry) return;
+    const focusLine = window.scrollY + Math.min(window.innerHeight * 0.34, 260);
+    let activeSection = navSections[0];
+
+    navSections.forEach(section => {
+      if (section.offsetTop <= focusLine) activeSection = section;
+    });
+
+    const nearPageBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 80;
+
+    if (nearPageBottom) {
+      activeSection = navSections[navSections.length - 1];
+    }
 
     navButtons.forEach(button => {
       button.classList.toggle(
         'active',
-        button.dataset.target === visibleEntry.target.id
+        button.dataset.target === activeSection.id
       );
     });
-  }, {
-    threshold:[0.25,0.5,0.75],
-    rootMargin:'-20% 0px -55% 0px'
-  });
+  }
 
-  navSections.forEach(section => navObserver.observe(section));
+  window.addEventListener('scroll', updateActiveNavigation, { passive:true });
+  window.addEventListener('resize', updateActiveNavigation);
+  requestAnimationFrame(updateActiveNavigation);
 
 
 
