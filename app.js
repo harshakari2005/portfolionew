@@ -12,7 +12,7 @@
       location: 'Gangaram, Hyderabad, Telangana, India',
       email: 'hvckari@gmail.com',
       phone: '+91 8019252777',
-      linkedin: 'https://www.linkedin.com/in/harsha-vardhan-146181217/',
+      linkedin: 'https://www.linkedin.com/in/kari-harshavardhan-chowdary-146181217/',
       status: 'Working at SSEV SOFTSOLS as Cyber Security Analyst'
     },
     about: [
@@ -1369,7 +1369,7 @@
           <div class="contact">
             <a href="mailto:${DATA.profile.email}"><small>EMAIL</small><strong>${DATA.profile.email}</strong></a>
             <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}"><small>PHONE</small><strong>${DATA.profile.phone}</strong></a>
-            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>harsha-vardhan-146181217</strong></a>
+            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>kari-harshavardhan-chowdary-146181217</strong></a>
             <div><small>LOCATION</small><strong>${DATA.profile.location}</strong></div>
           </div>
         </section>
