@@ -12,7 +12,7 @@
       location: 'Gangaram, Hyderabad, Telangana, India',
       email: 'hvckari@gmail.com',
       phone: '+91 8019252777',
-      linkedin: 'https://www.linkedin.com/in/kari-harshavardhan-chowdary-146181217/',
+      linkedin: 'https://www.linkedin.com/in/harsha-vardhan-146181217/',
       status: 'Working at SSEV SOFTSOLS as Cyber Security Analyst'
     },
     about: [
@@ -909,6 +909,191 @@
       .attack-row{grid-template-columns:1fr}
     }
 
+
+    .ai-launcher{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:10800;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      border:1px solid rgba(53,255,162,.5);
+      background:rgba(3,14,18,.96);
+      color:var(--green);
+      padding:12px 15px;
+      font:700 11px var(--mono);
+      cursor:pointer;
+      box-shadow:0 0 28px rgba(53,255,162,.14);
+      transition:.22s ease;
+    }
+    .ai-launcher:hover{
+      transform:translateY(-3px);
+      box-shadow:0 0 36px rgba(53,255,162,.26);
+    }
+    .ai-launcher .ai-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 12px var(--green);
+      animation:pulse 1.35s infinite;
+    }
+    .ai-panel{
+      position:fixed;
+      right:18px;
+      bottom:76px;
+      z-index:10850;
+      width:min(430px,calc(100% - 28px));
+      height:min(650px,calc(100vh - 100px));
+      display:none;
+      grid-template-rows:auto 1fr auto auto;
+      border:1px solid rgba(53,255,162,.48);
+      background:rgba(3,10,14,.98);
+      box-shadow:0 0 60px rgba(53,255,162,.16);
+      overflow:hidden;
+    }
+    .ai-panel.active{display:grid}
+    .ai-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      min-height:50px;
+      padding:0 14px;
+      border-bottom:1px solid var(--line);
+      font:700 11px var(--mono);
+      color:var(--green);
+    }
+    .ai-head-actions{display:flex;gap:7px}
+    .ai-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:6px 8px;
+      font:700 9px var(--mono);
+      cursor:pointer;
+    }
+    .ai-messages{
+      overflow:auto;
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      scrollbar-color:var(--green) #071016;
+    }
+    .ai-message{
+      max-width:90%;
+      padding:11px 12px;
+      border:1px solid var(--line);
+      font:12px/1.65 var(--mono);
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .ai-message.user{
+      align-self:flex-end;
+      background:rgba(69,215,255,.08);
+      border-color:rgba(69,215,255,.28);
+      color:#d9f7ff;
+    }
+    .ai-message.assistant{
+      align-self:flex-start;
+      background:rgba(53,255,162,.045);
+      color:#c8f6da;
+    }
+    .ai-message.system{
+      align-self:center;
+      max-width:100%;
+      border-style:dashed;
+      color:var(--muted);
+      background:transparent;
+      font-size:10px;
+    }
+    .ai-typing{
+      display:inline-flex;
+      gap:5px;
+      align-items:center;
+    }
+    .ai-typing i{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:var(--green);
+      animation:aiTyping 1s infinite;
+    }
+    .ai-typing i:nth-child(2){animation-delay:.16s}
+    .ai-typing i:nth-child(3){animation-delay:.32s}
+    @keyframes aiTyping{
+      0%,60%,100%{transform:translateY(0);opacity:.35}
+      30%{transform:translateY(-4px);opacity:1}
+    }
+    .ai-suggestions{
+      display:flex;
+      gap:7px;
+      overflow-x:auto;
+      padding:9px 12px;
+      border-top:1px solid rgba(53,255,162,.12);
+    }
+    .ai-suggestions button{
+      flex:0 0 auto;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.035);
+      color:var(--green2);
+      padding:7px 9px;
+      font:9px var(--mono);
+      cursor:pointer;
+    }
+    .ai-form{
+      display:flex;
+      gap:8px;
+      padding:11px;
+      border-top:1px solid var(--line);
+    }
+    .ai-form textarea{
+      flex:1;
+      min-height:42px;
+      max-height:110px;
+      resize:none;
+      border:1px solid var(--line);
+      background:#061015;
+      color:var(--text);
+      outline:none;
+      padding:10px;
+      font:12px/1.45 var(--mono);
+    }
+    .ai-form button{
+      align-self:stretch;
+      border:1px solid var(--line);
+      background:var(--green);
+      color:#021009;
+      padding:0 14px;
+      font:700 10px var(--mono);
+      cursor:pointer;
+    }
+    .ai-form button:disabled{opacity:.45;cursor:not-allowed}
+    .ai-disclaimer{
+      padding:7px 12px 10px;
+      color:#668174;
+      font:9px/1.4 var(--mono);
+    }
+    @media(max-width:760px){
+      .ai-launcher{
+        right:12px;
+        bottom:12px;
+      }
+      .ai-panel{
+        inset:0;
+        width:100%;
+        height:100%;
+        max-height:none;
+        border:0;
+      }
+      .ai-head{min-height:58px}
+      .ai-form textarea{
+        font-size:16px;
+      }
+    }
+
     .achievement-toast{
       position:fixed;
       right:18px;
@@ -1163,6 +1348,35 @@
       </div>
 
       <div class="recruiter-banner">RECRUITER MODE ACTIVE — EXPERIENCE, SKILLS, PROJECTS, PATENTS, PUBLICATIONS AND CONTACT PRIORITIZED</div>
+      <button class="ai-launcher" id="aiLauncher" aria-label="Open AI portfolio assistant">
+        <span class="ai-dot"></span>
+        <span>&gt;_ ASK HARSHAVARDHAN AI</span>
+      </button>
+
+      <section class="ai-panel" id="aiPanel" aria-hidden="true">
+        <div class="ai-head">
+          <span>HARSHAVARDHAN AI // ONLINE</span>
+          <div class="ai-head-actions">
+            <button id="aiClear">CLEAR</button>
+            <button id="aiClose">CLOSE</button>
+          </div>
+        </div>
+        <div class="ai-messages" id="aiMessages"></div>
+        <div>
+          <div class="ai-suggestions" id="aiSuggestions">
+            <button data-ai-question="What are Harshavardhan's strongest cybersecurity skills?">TOP SKILLS</button>
+            <button data-ai-question="Explain the MOTAG project in simple terms.">EXPLAIN MOTAG</button>
+            <button data-ai-question="Why should a recruiter consider Harshavardhan?">WHY HIRE HIM?</button>
+            <button data-ai-question="Summarize his patents and publications.">RESEARCH</button>
+          </div>
+          <form class="ai-form" id="aiForm">
+            <textarea id="aiInput" rows="1" maxlength="1200" placeholder="Ask about projects, skills, patents, experience..."></textarea>
+            <button id="aiSend" type="submit">SEND</button>
+          </form>
+          <div class="ai-disclaimer">AI answers are restricted to the portfolio data. Verify important details using the resume and project sections.</div>
+        </div>
+      </section>
+
       <div class="achievement-toast" id="achievementToast"></div>
       <div class="clearance-widget" id="clearanceWidget">
         <strong>VISITOR SECURITY CLEARANCE</strong>
@@ -1376,7 +1590,7 @@
           <div class="contact">
             <a href="mailto:${DATA.profile.email}"><small>EMAIL</small><strong>${DATA.profile.email}</strong></a>
             <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}"><small>PHONE</small><strong>${DATA.profile.phone}</strong></a>
-            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>kari-harshavardhan-chowdary-146181217</strong></a>
+            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener"><small>LINKEDIN</small><strong>harsha-vardhan-146181217</strong></a>
             <div><small>LOCATION</small><strong>${DATA.profile.location}</strong></div>
           </div>
         </section>
@@ -3193,7 +3407,212 @@
 
   navSections.forEach(section => navObserver.observe(section));
 
+
+  // AI portfolio assistant
+  const aiLauncher = document.getElementById('aiLauncher');
+  const aiPanel = document.getElementById('aiPanel');
+  const aiClose = document.getElementById('aiClose');
+  const aiClear = document.getElementById('aiClear');
+  const aiMessages = document.getElementById('aiMessages');
+  const aiForm = document.getElementById('aiForm');
+  const aiInput = document.getElementById('aiInput');
+  const aiSend = document.getElementById('aiSend');
+  const aiSuggestions = document.getElementById('aiSuggestions');
+
+  let aiConversation = JSON.parse(sessionStorage.getItem('portfolioAiConversation') || '[]');
+  let aiBusy = false;
+
+  function renderAiConversation() {
+    aiMessages.innerHTML = '';
+
+    if (!aiConversation.length) {
+      addAiMessage(
+        'assistant',
+        "Hello. I am Harshavardhan's portfolio assistant. Ask me about his projects, skills, publications, patents, current role or contact details."
+      );
+      return;
+    }
+
+    aiConversation.forEach(item => addAiMessage(item.role, item.content, false));
+  }
+
+  function addAiMessage(role, content, save = true) {
+    const message = document.createElement('div');
+    message.className = `ai-message ${role}`;
+    message.textContent = content;
+    aiMessages.appendChild(message);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+
+    if (save && (role === 'user' || role === 'assistant')) {
+      aiConversation.push({ role, content });
+      aiConversation = aiConversation.slice(-12);
+      sessionStorage.setItem('portfolioAiConversation', JSON.stringify(aiConversation));
+    }
+
+    return message;
+  }
+
+  function showAiTyping() {
+    const message = document.createElement('div');
+    message.className = 'ai-message assistant';
+    message.id = 'aiTypingMessage';
+    message.innerHTML = '<span class="ai-typing"><i></i><i></i><i></i></span>';
+    aiMessages.appendChild(message);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+  }
+
+  function hideAiTyping() {
+    document.getElementById('aiTypingMessage')?.remove();
+  }
+
+  function openAiPanel() {
+    aiPanel.classList.add('active');
+    aiPanel.setAttribute('aria-hidden', 'false');
+    renderAiConversation();
+
+    const isPhone =
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    if (!isPhone) aiInput.focus();
+  }
+
+  function closeAiPanel() {
+    aiPanel.classList.remove('active');
+    aiPanel.setAttribute('aria-hidden', 'true');
+    aiInput.blur();
+  }
+
+  function executeLocalAiAction(question) {
+    const normalized = question.toLowerCase().trim();
+
+    if (/(open|show|view).*(resume|cv)/.test(normalized)) {
+      openResumeAndCount();
+      return 'Opening Harshavardhan’s resume in a new tab.';
+    }
+
+    if (/(go to|show|open).*(skills)/.test(normalized)) {
+      document.querySelector('.skills')?.scrollIntoView({ behavior:'smooth', block:'center' });
+      return 'Opening the skills section.';
+    }
+
+    if (/(go to|show|open).*(contact)/.test(normalized)) {
+      document.querySelector('.contact')?.scrollIntoView({ behavior:'smooth', block:'center' });
+      return 'Opening the contact section.';
+    }
+
+    if (/(recruiter mode|recruiter view)/.test(normalized)) {
+      toggleRecruiterMode(true);
+      return 'Recruiter mode is now enabled.';
+    }
+
+    if (/(open|show).*(motag)/.test(normalized)) {
+      openProjectModal(0);
+      return 'Opening the MOTAG project case study.';
+    }
+
+    if (/(open|show).*(phishing)/.test(normalized)) {
+      openProjectModal(1);
+      return 'Opening the phishing-detection project case study.';
+    }
+
+    if (/(start|play).*(firewall)/.test(normalized)) {
+      document.getElementById('terminal')?.scrollIntoView({ behavior:'smooth', block:'start' });
+      startFirewallGame();
+      return 'Starting Firewall Defense in the terminal.';
+    }
+
+    if (/(start|play).*(snake|snack)/.test(normalized)) {
+      document.getElementById('terminal')?.scrollIntoView({ behavior:'smooth', block:'start' });
+      startSnakeGame();
+      return 'Starting Terminal Snake.';
+    }
+
+    return null;
+  }
+
+  async function askPortfolioAi(question) {
+    if (aiBusy || !question.trim()) return;
+
+    const localAction = executeLocalAiAction(question);
+    addAiMessage('user', question);
+
+    if (localAction) {
+      addAiMessage('assistant', localAction);
+      return;
+    }
+
+    aiBusy = true;
+    aiSend.disabled = true;
+    showAiTyping();
+
+    try {
+      const response = await fetch('/.netlify/functions/portfolio-agent', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body:JSON.stringify({
+          message:question,
+          history:aiConversation.slice(-8)
+        })
+      });
+
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(payload.error || 'The AI service is temporarily unavailable.');
+      }
+
+      hideAiTyping();
+      addAiMessage('assistant', payload.answer || 'No answer was returned.');
+      addClearance(2);
+    } catch (error) {
+      hideAiTyping();
+      addAiMessage(
+        'system',
+        `${error.message} Check the Netlify function and OPENAI_API_KEY environment variable.`
+      );
+    } finally {
+      aiBusy = false;
+      aiSend.disabled = false;
+    }
+  }
+
+  aiLauncher.addEventListener('click', openAiPanel);
+  aiClose.addEventListener('click', closeAiPanel);
+
+  aiClear.addEventListener('click', () => {
+    aiConversation = [];
+    sessionStorage.removeItem('portfolioAiConversation');
+    renderAiConversation();
+  });
+
+  aiForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const question = aiInput.value.trim();
+    if (!question) return;
+    aiInput.value = '';
+    askPortfolioAi(question);
+  });
+
+  aiInput.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      aiForm.requestSubmit();
+    }
+  });
+
+  aiSuggestions.querySelectorAll('[data-ai-question]').forEach(button => {
+    button.addEventListener('click', () => askPortfolioAi(button.dataset.aiQuestion));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && aiPanel.classList.contains('active')) {
+      closeAiPanel();
+    }
+  });
+
   // Matrix background
+
 
 
   const canvas = document.getElementById('matrix');
