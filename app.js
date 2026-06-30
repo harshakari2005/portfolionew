@@ -982,6 +982,28 @@
     @media(max-width:900px){.live-counter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.live-counter-grid{grid-template-columns:1fr 1fr}.hero-network{opacity:.34}}
 
+
+    /* Final no-gap section flow */
+    #home.hero{
+      margin-bottom:0!important;
+      padding-bottom:12px!important;
+    }
+    #projects{
+      margin-top:0!important;
+      padding-top:18px!important;
+    }
+    #about{
+      padding-top:42px!important;
+      padding-bottom:42px!important;
+    }
+    #threat-dashboard{
+      margin-top:0!important;
+      padding-top:20px!important;
+    }
+    main > .section{
+      min-height:0!important;
+    }
+
     /* Compact section spacing fixes */
     #home.hero{
       min-height:auto;
@@ -1419,9 +1441,18 @@
           </div>
 </section>
 
+        <section class="section" id="projects">
+          <div class="heading">
+            <div><div class="label">02 // PROJECTS</div><h3>Selected cyber operations</h3></div>
+            <div class="mono">[ mission_data.loaded = true ]</div>
+          </div>
+          <div class="grid2">${projectCards()}</div>
+        </section>
+
+
         <section class="section" id="about">
           <div class="heading">
-            <div><div class="label">01 // ABOUT</div><h3>Profile and education</h3></div>
+            <div><div class="label">03 // ABOUT</div><h3>Profile and education</h3></div>
           </div>
           <div class="grid2">
             <div class="card">
@@ -1432,17 +1463,9 @@
           </div>
         </section>
 
-        <section class="section" id="projects">
-          <div class="heading">
-            <div><div class="label">SECTION 02 // PROJECTS</div><h3>Selected cyber operations</h3></div>
-            <div class="mono">[ mission_data.loaded = true ]</div>
-          </div>
-          <div class="grid2">${projectCards()}</div>
-        </section>
-
         <section class="section" id="credentials">
           <div class="heading">
-            <div><div class="label">03 // CREDENTIALS</div><h3>Research and professional record</h3></div>
+            <div><div class="label">04 // CREDENTIALS</div><h3>Research and professional record</h3></div>
           </div>
           <div class="grid2">
             <div>
@@ -1475,7 +1498,7 @@
 
         <section class="section" id="skills">
           <div class="heading">
-            <div><div class="label">04 // SKILLS</div><h3>Technical capabilities</h3></div>
+            <div><div class="label">05 // SKILLS</div><h3>Technical capabilities</h3></div>
           </div>
           <div class="skills">${skillTags()}</div><div class="skill-detail" id="skillDetail"></div>
         </section>
@@ -1483,7 +1506,7 @@
 
         <section class="section" id="threat-dashboard">
           <div class="heading">
-            <div><div class="label">05 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
+            <div><div class="label">06 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
             <div class="mono">[ demonstration_mode = true ]</div>
           </div>
           <div class="threat-grid">
@@ -1526,7 +1549,7 @@
 
         <section class="section" id="contact">
           <div class="heading">
-            <div><div class="label">07 // CONTACT</div><h3>Let’s build secure systems</h3></div>
+            <div><div class="label">08 // CONTACT</div><h3>Let’s build secure systems</h3></div>
           </div>
           <div class="contact">
             <a href="mailto:${DATA.profile.email}">
@@ -3462,6 +3485,21 @@
   if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Scanning visitor permissions...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
 
 
+
+
+  // Prevent animation placeholders from creating empty sections.
+  ['projects','about','threat-dashboard'].forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.style.opacity = '1';
+    section.style.visibility = 'visible';
+    section.querySelectorAll('.reveal-item').forEach(item => {
+      item.classList.add('is-visible');
+      item.style.opacity = '1';
+      item.style.visibility = 'visible';
+      item.style.filter = 'none';
+    });
+  });
 
   // Keep key sections immediately visible and compact.
   ['projects','skills','threat-dashboard'].forEach(sectionId => {
