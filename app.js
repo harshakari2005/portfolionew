@@ -1542,25 +1542,21 @@
     const panel = document.getElementById('snakeGamePanel');
     if (!panel) return;
 
-    // Keep the game at the bottom of the terminal without moving the whole page.
-    output.scrollTop = output.scrollHeight;
-
-    // On small screens, keep the terminal itself visible.
-    if (window.innerWidth <= 760) {
-      const terminalRect = document.getElementById('terminalBox').getBoundingClientRect();
-      const headerOffset = 72;
-
-      if (terminalRect.top < headerOffset || terminalRect.bottom > window.innerHeight) {
-        document.getElementById('terminalBox').scrollIntoView({
-          behavior:'smooth',
-          block:'start'
-        });
-      }
-    }
+    // Scroll only inside the terminal output.
+    // Never scroll or reposition the whole webpage.
+    output.scrollTop = Math.max(
+      0,
+      panel.offsetTop - Math.max(12, (output.clientHeight - panel.offsetHeight) / 2)
+    );
   }
 
   function renderSnakeGame() {
     if (!activeGame || activeGame.type !== 'snake') return;
+
+    // Preserve both terminal and page position while updating the score/board.
+    const savedTerminalScroll = output.scrollTop;
+    const savedPageX = window.scrollX;
+    const savedPageY = window.scrollY;
 
     let panel = document.getElementById('snakeGamePanel');
     if (!panel) {
@@ -1594,7 +1590,7 @@
           <span>SCORE: ${game.score}</span>
           <span>PACKETS CAUGHT: ${game.foodsCaught}</span>
           <span>HIGH SCORE: ${Number(localStorage.getItem('snakeHighScore') || 0)}</span>
-          <span>CONTROLS: ARROW KEYS / WASD</span>
+          <span>CONTROLS: ARROWS / WASD / SWIPE</span>
         </div>
         <div class="snake-controls">
           <button data-dir="up">↑</button>
@@ -1611,7 +1607,6 @@
         event.stopPropagation();
         setSnakeDirection(button.dataset.dir);
         input.blur();
-        keepSnakeGameVisible();
       };
 
       button.addEventListener('pointerdown', move);
@@ -1647,10 +1642,11 @@
       }
 
       event.preventDefault();
-      keepSnakeGameVisible();
     }, { passive:false });
 
-    keepSnakeGameVisible();
+    // Updating the score must not move the terminal or the webpage.
+    output.scrollTop = savedTerminalScroll;
+    window.scrollTo(savedPageX, savedPageY);
   }
 
   function setSnakeDirection(direction) {
@@ -1709,11 +1705,12 @@
     if (game.direction === 'left') head.x -= 1;
     if (game.direction === 'right') head.x += 1;
 
-    const hitWall =
-      head.x < 0 ||
-      head.x >= SNAKE_COLS ||
-      head.y < 0 ||
-      head.y >= SNAKE_ROWS;
+    // Wrap around the board edges.
+    // Leaving one side makes the snake enter from the opposite side.
+    if (head.x < 0) head.x = SNAKE_COLS - 1;
+    if (head.x >= SNAKE_COLS) head.x = 0;
+    if (head.y < 0) head.y = SNAKE_ROWS - 1;
+    if (head.y >= SNAKE_ROWS) head.y = 0;
 
     const willEat =
       game.food &&
@@ -1727,7 +1724,8 @@
       segment => segment.x === head.x && segment.y === head.y
     );
 
-    if (hitWall || hitSelf) {
+    // The snake dies only when its head touches its own body.
+    if (hitSelf) {
       endSnakeGame();
       return;
     }
@@ -1796,13 +1794,15 @@
 
     addBlock('terminal snake', [
       'Use Arrow Keys or W/A/S/D.',
-      'Eat the red packets. Avoid walls and your own trail.',
+      'Eat the red packets. Board edges wrap around; avoid touching your own body.',
       'Type quit game to stop.'
     ]);
 
     renderSnakeGame();
     input.blur();
-    keepSnakeGameVisible();
+
+    // Position the game inside the terminal once at startup.
+    requestAnimationFrame(() => keepSnakeGameVisible());
 
     // Slightly slower on phones for easier touch control.
     const snakeSpeed = window.innerWidth <= 760 ? 190 : 145;
@@ -1944,7 +1944,6 @@
       event.stopPropagation();
       setSnakeDirection(direction);
       input.blur();
-      keepSnakeGameVisible();
     }
   }, true);
 
