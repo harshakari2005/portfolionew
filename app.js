@@ -817,6 +817,14 @@
     .inputrow{display:flex;gap:10px;align-items:center;padding:0 18px;min-height:54px;border-top:1px solid var(--line);font:13px var(--mono)}
     .prompt{color:var(--green);white-space:nowrap}
     .inputrow input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);caret-color:var(--green)}
+    @media (max-width:760px) and (pointer:coarse){
+      .inputrow{
+        cursor:text;
+      }
+      .inputrow input{
+        touch-action:manipulation;
+      }
+    }
     .hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .hints button{border:1px solid var(--line);background:var(--panel);color:var(--green2);padding:8px 10px;font:10px var(--mono);cursor:pointer}
     .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -1932,7 +1940,15 @@
     }
 
     input.value = '';
-    input.focus();
+
+    const isPhone =
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    if (!isPhone) {
+      input.focus();
+    }
+
     output.scrollTop = output.scrollHeight;
   }
 
@@ -2109,14 +2125,28 @@
       event.preventDefault();
       event.stopPropagation();
       runCommand(button.dataset.command);
-      input.focus();
+
+      const isPhone =
+        window.matchMedia('(max-width:760px)').matches &&
+        window.matchMedia('(pointer:coarse)').matches;
+
+      if (!isPhone) {
+        input.focus();
+      }
     });
   });
 
   document.getElementById('clearBtn').addEventListener('click', event => {
     event.preventDefault();
     output.innerHTML = '';
-    input.focus();
+
+    const isPhone =
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    if (!isPhone) {
+      input.focus();
+    }
   });
 
   document.getElementById('stopCommandBtn').addEventListener('click', event => {
@@ -2169,7 +2199,31 @@
     document.getElementById('nav').classList.toggle('open');
   });
 
-  document.getElementById('terminalBox').addEventListener('click', () => input.focus());
+  const terminalBox = document.getElementById('terminalBox');
+
+  terminalBox.addEventListener('click', event => {
+    const isPhone =
+      window.matchMedia('(max-width:760px)').matches &&
+      window.matchMedia('(pointer:coarse)').matches;
+
+    // On phones, open the keyboard only when the user taps the actual input.
+    if (isPhone) {
+      if (event.target === input) {
+        input.focus();
+      }
+      return;
+    }
+
+    // On desktop/laptop, clicking an empty area of the terminal may focus input,
+    // but buttons, links, games and terminal output remain interactive.
+    const interactiveTarget = event.target.closest(
+      'button, a, input, .game-panel, .snake-board, .project-modal'
+    );
+
+    if (!interactiveTarget) {
+      input.focus();
+    }
+  });
 
   addLine('Cyber Portfolio OS v2.0 initialized.');
   addLine('All terminal commands are active.');
