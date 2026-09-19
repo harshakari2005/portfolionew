@@ -1437,6 +1437,78 @@
     @media(max-width:760px){.soc-kpis{grid-template-columns:1fr 1fr}.soc-main-grid .soc-grid{grid-template-columns:1fr}.soc-chart{height:145px;gap:4px}.soc-alert{grid-template-columns:8px minmax(0,1fr)}.soc-alert-status{grid-column:2}}
     @media(max-width:430px){.soc-kpis{grid-template-columns:1fr}.soc-panel-head{align-items:flex-start;flex-direction:column;gap:6px}}
 
+    /* ADVANCED SOC COMMAND CENTER */
+    .soc-command-center{border-color:rgba(53,255,162,.34)}
+    .soc-header-right{display:flex;align-items:center;gap:14px}
+    .soc-clock{color:var(--green2);font-size:10px}
+    .soc-live-strip{display:grid;grid-template-columns:repeat(4,1fr) minmax(150px,1.2fr);gap:1px;background:rgba(53,255,162,.14);border-bottom:1px solid rgba(53,255,162,.14)}
+    .soc-live-strip>div{padding:14px;background:rgba(2,10,14,.95)}
+    .soc-live-strip small{display:block;color:var(--muted);font:700 8px var(--mono);letter-spacing:.08em}
+    .soc-live-strip strong{display:block;color:var(--green);font:800 19px var(--mono);margin-top:7px}
+    .soc-live-strip span{display:block;color:#799187;font:9px/1.4 var(--mono);margin-top:5px}
+    .soc-live-meter{display:flex!important;flex-direction:column;justify-content:center}
+    .soc-live-meter>div{height:6px;background:rgba(53,255,162,.08);border:1px solid rgba(53,255,162,.15);overflow:hidden}
+    .soc-live-meter i{display:block;height:100%;width:98.7%;background:linear-gradient(90deg,var(--green),var(--cyan));box-shadow:0 0 10px rgba(53,255,162,.4);transition:width .5s}
+    .soc-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid rgba(53,255,162,.12);background:rgba(53,255,162,.018)}
+    .soc-filter-group{display:flex;gap:5px;flex-wrap:wrap}
+    .soc-filter,.soc-refresh{border:1px solid rgba(53,255,162,.18);background:rgba(53,255,162,.025);color:var(--muted);padding:7px 9px;font:700 8px var(--mono);cursor:pointer}
+    .soc-filter:hover,.soc-filter.active,.soc-refresh:hover{background:rgba(53,255,162,.1);border-color:rgba(53,255,162,.5);color:var(--green2)}
+    .soc-refresh{color:var(--green)}
+    .soc-chart-wrap{position:relative}
+    .soc-chart-tooltip{position:absolute;display:none;pointer-events:none;padding:7px 9px;border:1px solid var(--line);background:#041014;color:var(--green2);font:9px var(--mono);z-index:3}
+    .soc-module-click{cursor:pointer;transition:.18s ease}
+    .soc-module-click:hover{background:rgba(53,255,162,.065);box-shadow:inset 0 0 0 1px rgba(53,255,162,.25)}
+    .soc-analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(53,255,162,.14);margin-top:1px}
+    .soc-attack-types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+    .soc-attack-type{padding:12px;border:1px solid rgba(53,255,162,.12);background:rgba(53,255,162,.022);cursor:pointer;transition:.18s}
+    .soc-attack-type:hover{border-color:rgba(53,255,162,.5);transform:translateY(-2px)}
+    .soc-attack-type small{display:block;color:var(--muted);font:8px var(--mono)}
+    .soc-attack-type strong{display:block;color:var(--green);font:700 19px var(--mono);margin-top:6px}
+    .soc-attack-type span{display:block;color:#71877c;font:8px var(--mono);margin-top:4px}
+    .soc-lifecycle{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;padding:20px 12px 10px}
+    .soc-lifecycle span{padding:7px 8px;border:1px solid rgba(53,255,162,.13);color:#63796e;font:700 7px var(--mono)}
+    .soc-lifecycle span.done{color:var(--green2);border-color:rgba(53,255,162,.3)}
+    .soc-lifecycle span.active{color:#04100a;background:var(--green);border-color:var(--green);box-shadow:0 0 14px rgba(53,255,162,.18)}
+    .soc-lifecycle b{color:var(--cyan);font:12px var(--mono)}
+    .soc-investigation-note{padding:0 16px 15px;color:#81978c;font:9px/1.5 var(--mono)}
+    .soc-terminal{border-top:1px solid rgba(53,255,162,.14);background:#020907}
+    .soc-terminal-output{height:120px;overflow:auto;padding:13px 16px;color:#8fa99a;font:9px/1.65 var(--mono)}
+    .soc-terminal-output span{display:block}
+    .soc-terminal-output b{color:var(--green)}
+    .soc-terminal-form{display:flex;align-items:center;gap:9px;padding:11px 16px;border-top:1px solid rgba(53,255,162,.12);color:var(--green);font:10px var(--mono)}
+    .soc-terminal-form input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--green2);font:10px var(--mono)}
+    .soc-terminal-form input::placeholder{color:#456056}
+    .soc-alert{cursor:pointer;transition:.18s}
+    .soc-alert:hover{border-color:rgba(53,255,162,.45);background:rgba(53,255,162,.05)}
+    .soc-alert.selected{box-shadow:inset 2px 0 var(--cyan);border-color:rgba(69,215,255,.38)}
+    .soc-incident-drawer{position:fixed;right:18px;top:88px;z-index:11100;width:min(430px,calc(100% - 28px));max-height:calc(100vh - 110px);overflow:auto;display:none;border:1px solid rgba(53,255,162,.42);background:#041014;box-shadow:0 20px 70px rgba(0,0,0,.55),0 0 35px rgba(53,255,162,.08)}
+    .soc-incident-drawer.active{display:block;animation:socDrawerIn .2s ease}
+    @keyframes socDrawerIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+    .soc-drawer-head{display:flex;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line);color:var(--green);font:700 10px var(--mono)}
+    .soc-drawer-head button{border:1px solid var(--line);background:transparent;color:var(--green);padding:5px 8px;cursor:pointer}
+    .soc-drawer-body{padding:15px}
+    .soc-drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .soc-drawer-field{padding:10px;border:1px solid rgba(53,255,162,.12);background:rgba(53,255,162,.02)}
+    .soc-drawer-field small{display:block;color:var(--muted);font:8px var(--mono);margin-bottom:5px}
+    .soc-drawer-field strong{color:var(--green2);font:10px/1.4 var(--mono)}
+    .soc-drawer-body h5{margin:18px 0 8px;color:var(--cyan);font:700 9px var(--mono);letter-spacing:.08em}
+    .soc-drawer-body p{margin:0;color:#9bb0a5;font:10px/1.6 var(--sans)}
+    @media(max-width:900px){
+      .soc-live-strip{grid-template-columns:repeat(2,1fr)}
+      .soc-analytics-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:760px){
+      .soc-header-right{align-items:flex-end;flex-direction:column;gap:4px}
+      .soc-toolbar{align-items:flex-start;flex-direction:column}
+      .soc-attack-types{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:500px){
+      .soc-live-strip{grid-template-columns:1fr}
+      .soc-attack-types{grid-template-columns:1fr}
+      .soc-lifecycle{justify-content:flex-start}
+      .soc-drawer-grid{grid-template-columns:1fr}
+    }
+
     .cyber-timeline{position:relative;display:grid;gap:24px;margin-top:32px;padding-left:34px}
     .cyber-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--green),rgba(53,255,162,.08));transform:scaleY(0);transform-origin:top;transition:transform 1.2s ease;box-shadow:0 0 12px rgba(53,255,162,.25)}
     .cyber-timeline.timeline-visible::before{transform:scaleY(1)}
@@ -3866,36 +3938,47 @@
         <section class="section" id="threat-dashboard">
           <div class="heading">
             <div><div class="label">07 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
-            <div class="mono">[ monitoring = simulated ]</div>
+            <div class="mono">[ SOC = simulated // telemetry = synthetic ]</div>
           </div>
 
-          <div class="soc-console soc-dashboard-v2">
+          <div class="soc-console soc-dashboard-v2 soc-command-center">
             <div class="soc-header">
-              <div><span class="status-led"></span> SECURITY OPERATIONS CENTER <b class="soc-live-text">ONLINE</b></div>
-              <span class="soc-simulated">PORTFOLIO SIMULATION // NO LIVE TELEMETRY</span>
+              <div><span class="status-led"></span> SECURITY OPERATIONS CENTER <b class="soc-live-text" id="socLiveState">ONLINE</b></div>
+              <div class="soc-header-right">
+                <span class="soc-clock" id="socClock">--:--:--</span>
+                <span class="soc-simulated">PORTFOLIO SIMULATION // NO LIVE TELEMETRY</span>
+              </div>
             </div>
 
             <div class="soc-kpis" aria-label="Security operations metrics">
-              <article class="soc-kpi">
-                <small>CASE FILES</small>
-                <strong data-soc-value="projects">0</strong>
-                <span>indexed security projects</span>
-              </article>
-              <article class="soc-kpi">
-                <small>RESEARCH OUTPUT</small>
-                <strong data-soc-value="research">0</strong>
-                <span>publications + patents</span>
-              </article>
-              <article class="soc-kpi">
-                <small>SECURITY DOMAINS</small>
-                <strong data-soc-value="domains">4</strong>
-                <span>active capability areas</span>
-              </article>
-              <article class="soc-kpi">
-                <small>WORKSTREAMS</small>
-                <strong data-soc-value="workstreams">0</strong>
-                <span>SSEV security workstreams</span>
-              </article>
+              <article class="soc-kpi"><small>CASE FILES</small><strong data-soc-value="projects">0</strong><span>indexed security projects</span></article>
+              <article class="soc-kpi"><small>RESEARCH OUTPUT</small><strong data-soc-value="research">0</strong><span>publications + patents</span></article>
+              <article class="soc-kpi"><small>SECURITY DOMAINS</small><strong data-soc-value="domains">4</strong><span>active capability areas</span></article>
+              <article class="soc-kpi"><small>WORKSTREAMS</small><strong data-soc-value="workstreams">0</strong><span>SSEV security workstreams</span></article>
+            </div>
+
+            <div class="soc-live-strip">
+              <div><small>THREAT LEVEL</small><strong id="socThreatLevel">ELEVATED</strong><span id="socThreatReason">Synthetic activity is being correlated</span></div>
+              <div><small>EVENTS / MIN</small><strong id="socEventsRate">18</strong><span>simulated event stream</span></div>
+              <div><small>OPEN INCIDENTS</small><strong id="socOpenIncidents">3</strong><span>requires analyst review</span></div>
+              <div><small>DETECTION HEALTH</small><strong id="socDetectionHealth">98.7%</strong><span>control pipeline availability</span></div>
+              <div class="soc-live-meter"><div><i id="socHealthBar"></i></div><span id="socLastEvent">last event --:--:--</span></div>
+            </div>
+
+            <div class="soc-toolbar" role="toolbar" aria-label="SOC dashboard filters">
+              <div class="soc-filter-group">
+                <button class="soc-filter active" data-soc-range="1H">1H</button>
+                <button class="soc-filter" data-soc-range="6H">6H</button>
+                <button class="soc-filter" data-soc-range="24H">24H</button>
+                <button class="soc-filter" data-soc-range="7D">7D</button>
+              </div>
+              <div class="soc-filter-group">
+                <button class="soc-filter active" data-soc-severity="ALL">ALL</button>
+                <button class="soc-filter" data-soc-severity="CRITICAL">CRITICAL</button>
+                <button class="soc-filter" data-soc-severity="HIGH">HIGH</button>
+                <button class="soc-filter" data-soc-severity="MEDIUM">MEDIUM</button>
+              </div>
+              <button class="soc-refresh" id="socRefresh">↻ REFRESH TELEMETRY</button>
             </div>
 
             <div class="soc-main-grid">
@@ -3905,49 +3988,72 @@
                   <span class="panel-state"><i></i> ALL SYSTEMS READY</span>
                 </div>
                 <div class="soc-grid">
-                  <article class="soc-module"><small>NETWORK MONITOR</small><strong>ACTIVE</strong><span>Traffic visibility and packet analysis</span><i></i></article>
-                  <article class="soc-module"><small>THREAT DETECTION</small><strong>ACTIVE</strong><span>Anomaly and malicious-activity analysis</span><i></i></article>
-                  <article class="soc-module"><small>FORENSICS ENGINE</small><strong>READY</strong><span>Memory and event evidence workflows</span><i></i></article>
-                  <article class="soc-module"><small>AI SECURITY</small><strong>ACTIVE</strong><span>Phishing and agent-policy controls</span><i></i></article>
-                  <article class="soc-module"><small>EMBEDDED SECURITY</small><strong>ACTIVE</strong><span>Security-focused device protection</span><i></i></article>
-                  <article class="soc-module"><small>AUDIT TRAIL</small><strong>LOGGING</strong><span>Project and terminal interaction events</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="NETWORK MONITOR"><small>NETWORK MONITOR</small><strong>ACTIVE</strong><span>Traffic visibility and packet analysis</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="THREAT DETECTION"><small>THREAT DETECTION</small><strong>ACTIVE</strong><span>Anomaly and malicious-activity analysis</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="FORENSICS ENGINE"><small>FORENSICS ENGINE</small><strong>READY</strong><span>Memory and event evidence workflows</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="AI SECURITY"><small>AI SECURITY</small><strong>ACTIVE</strong><span>Phishing and agent-policy controls</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="EMBEDDED SECURITY"><small>EMBEDDED SECURITY</small><strong>ACTIVE</strong><span>Security-focused device protection</span><i></i></article>
+                  <article class="soc-module soc-module-click" data-soc-module="AUDIT TRAIL"><small>AUDIT TRAIL</small><strong>LOGGING</strong><span>Project and terminal interaction events</span><i></i></article>
                 </div>
               </div>
 
               <div class="soc-panel soc-panel-activity">
                 <div class="soc-panel-head">
                   <div><span class="panel-index">02</span> THREAT ACTIVITY</div>
-                  <span class="panel-state">24H WINDOW</span>
+                  <span class="panel-state" id="socRangeLabel">24H WINDOW</span>
                 </div>
-                <div class="soc-chart" id="socChart" aria-label="Simulated 24 hour threat activity chart"></div>
+                <div class="soc-chart-wrap">
+                  <div class="soc-chart" id="socChart" aria-label="Simulated threat activity chart"></div>
+                  <div class="soc-chart-tooltip" id="socChartTooltip"></div>
+                </div>
                 <div class="soc-chart-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+              </div>
+            </div>
+
+            <div class="soc-analytics-grid">
+              <div class="soc-panel">
+                <div class="soc-panel-head"><div><span class="panel-index">03</span> ATTACK SURFACE</div><span class="panel-state">EVENT CLASSIFICATION</span></div>
+                <div class="soc-attack-types" id="socAttackTypes"></div>
+              </div>
+              <div class="soc-panel">
+                <div class="soc-panel-head"><div><span class="panel-index">04</span> INCIDENT LIFECYCLE</div><span class="panel-state" id="socLifecycleState">INVESTIGATING</span></div>
+                <div class="soc-lifecycle">
+                  <span class="done">DETECTED</span><b>›</b><span class="done">TRIAGED</span><b>›</b><span class="active">INVESTIGATING</span><b>›</b><span>CONTAINED</span><b>›</b><span>RESOLVED</span>
+                </div>
+                <div class="soc-investigation-note" id="socInvestigationNote">Synthetic incident correlation is active.</div>
               </div>
             </div>
 
             <div class="soc-bottom-grid">
               <div class="soc-panel">
                 <div class="soc-panel-head">
-                  <div><span class="panel-index">03</span> ALERT QUEUE</div>
-                  <span class="panel-state alert-state"><i></i> MONITORED</span>
+                  <div><span class="panel-index">05</span> LIVE ALERT QUEUE</div>
+                  <span class="panel-state alert-state"><i></i> STREAMING</span>
                 </div>
                 <div class="soc-alerts" id="attackFeed" aria-live="polite"></div>
               </div>
 
               <div class="soc-panel soc-severity">
-                <div class="soc-panel-head">
-                  <div><span class="panel-index">04</span> SEVERITY DISTRIBUTION</div>
-                  <span class="panel-state">SIMULATED</span>
-                </div>
-                <div class="severity-row"><span>CRITICAL</span><div><i style="width:12%"></i></div><b>12%</b></div>
-                <div class="severity-row"><span>HIGH</span><div><i style="width:28%"></i></div><b>28%</b></div>
-                <div class="severity-row"><span>MEDIUM</span><div><i style="width:42%"></i></div><b>42%</b></div>
-                <div class="severity-row"><span>LOW</span><div><i style="width:18%"></i></div><b>18%</b></div>
+                <div class="soc-panel-head"><div><span class="panel-index">06</span> SEVERITY DISTRIBUTION</div><span class="panel-state">SIMULATED</span></div>
+                <div class="severity-row"><span>CRITICAL</span><div><i id="severityCritical" style="width:12%"></i></div><b id="severityCriticalValue">12%</b></div>
+                <div class="severity-row"><span>HIGH</span><div><i id="severityHigh" style="width:28%"></i></div><b id="severityHighValue">28%</b></div>
+                <div class="severity-row"><span>MEDIUM</span><div><i id="severityMedium" style="width:42%"></i></div><b id="severityMediumValue">42%</b></div>
+                <div class="severity-row"><span>LOW</span><div><i id="severityLow" style="width:18%"></i></div><b id="severityLowValue">18%</b></div>
               </div>
             </div>
 
             <div class="soc-feed" id="socFeed"></div>
+
+            <div class="soc-terminal">
+              <div class="soc-panel-head"><div><span class="panel-index">07</span> SOC ANALYST CONSOLE</div><span class="panel-state">INTERACTIVE</span></div>
+              <div class="soc-terminal-output" id="socTerminalOutput" aria-live="polite"><span>&gt; SOC console initialized. Type <b>help</b>.</span></div>
+              <form class="soc-terminal-form" id="socTerminalForm">
+                <span>soc@portfolio:~$</span><input id="socTerminalInput" autocomplete="off" spellcheck="false" placeholder="status / alerts / incidents / systems / help">
+              </form>
+            </div>
           </div>
-          <div class="simulated-label">Dashboard metrics, alerts, charts and status indicators are portfolio demonstrations. They are not connected to a production SIEM or live network.</div>
+
+          <div class="simulated-label">SIMULATED SOC ENVIRONMENT — All metrics, incidents, alerts, charts and telemetry are synthetic browser-side demonstrations. No production SIEM, endpoint, network or live threat feed is connected.</div>
         </section>
 
         <section class="section" id="terminal">
@@ -6323,6 +6429,9 @@
     if (event.key === 'Escape' && projectModal.classList.contains('active')) {
       closeProjectModal();
     }
+    if (event.key === 'Escape') {
+      document.getElementById('socIncidentDrawer')?.classList.remove('active');
+    }
   });
 
   // Automatic start is triggered after the boot loader finishes.
@@ -6336,8 +6445,7 @@
   };
 
 
-  // Security Operations Dashboard — browser-only portfolio telemetry.
-  // All values are derived from DATA or explicitly marked as simulated.
+  // Advanced Security Operations Dashboard — synthetic, browser-only portfolio telemetry.
   const dashboard = document.getElementById('threat-dashboard');
   const socCounters = {
     projects: DATA.projects.length,
@@ -6346,89 +6454,219 @@
     workstreams: Array.isArray(DATA.experience[0]?.projectWork) ? DATA.experience[0].projectWork.length : 0
   };
 
-  function animateSocValue(element, target) {
-    const duration = 900;
-    const start = performance.now();
-    function step(now) {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      element.textContent = Math.round(target * eased).toLocaleString();
-      if (progress < 1) requestAnimationFrame(step);
+  const socIncidentCatalog = [
+    {source:'UNKNOWN NODE',type:'DDoS / traffic anomaly',status:'BLOCKED',severity:'critical',technique:'Network anomaly detection',tactic:'Impact',action:'Source blocked and traffic pattern isolated.',detail:'Synthetic traffic spike correlated across the network-monitoring layer.'},
+    {source:'EXTERNAL HOST',type:'Port-scan activity',status:'DETECTED',severity:'high',technique:'Network service discovery',tactic:'Discovery',action:'Host flagged for analyst review.',detail:'Sequential connection attempts were observed against multiple simulated services.'},
+    {source:'SUSPICIOUS URL',type:'Phishing classification',status:'QUARANTINED',severity:'high',technique:'Malicious URL analysis',tactic:'Initial Access',action:'URL isolated from the simulated workflow.',detail:'Synthetic URL features crossed the phishing-classification threshold.'},
+    {source:'BOTNET RELAY',type:'Credential-spray pattern',status:'BLOCKED',severity:'critical',technique:'Credential access anomaly',tactic:'Credential Access',action:'Authentication source blocked.',detail:'Repeated authentication failures were correlated into one synthetic incident.'},
+    {source:'MEMORY ARTIFACT',type:'Suspicious process indicator',status:'REVIEWED',severity:'medium',technique:'Process artifact analysis',tactic:'Discovery',action:'Evidence queued for forensic review.',detail:'A synthetic memory artifact was linked to an investigation workflow.'},
+    {source:'WORKSTATION',type:'Unusual DNS request',status:'MONITORED',severity:'medium',technique:'DNS anomaly',tactic:'Command and Control',action:'Request retained for correlation.',detail:'The event remains below the simulated containment threshold.'},
+    {source:'AGENT TOOL CALL',type:'Out-of-scope file access',status:'BLOCKED',severity:'high',technique:'Policy enforcement',tactic:'Execution',action:'Firewall policy denied the request.',detail:'The Trajectory Firewall rejected an action outside the authorized project scope.'}
+  ];
+
+  let socAttackIndex=0;
+  let socRange='24H';
+  let socSeverity='ALL';
+  let socEventTimer=null;
+
+  function animateSocValue(element,target){
+    const duration=850,start=performance.now();
+    function step(now){
+      const progress=Math.min(1,(now-start)/duration);
+      const eased=1-Math.pow(1-progress,3);
+      element.textContent=Math.round(target*eased).toLocaleString();
+      if(progress<1)requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
-  function initializeSocDashboard() {
-    document.querySelectorAll('[data-soc-value]').forEach(element => {
-      const key = element.dataset.socValue;
-      animateSocValue(element, Number(socCounters[key] || 0));
-    });
-
-    const chart = document.getElementById('socChart');
-    if (chart && !chart.children.length) {
-      const activity = [22,31,27,18,34,42,38,51,46,62,54,48,70,58,64,76,68,82,59,72,63,48,39,30];
-      activity.forEach((value,index) => {
-        const bar=document.createElement('span');
-        bar.className='soc-chart-bar';
-        bar.style.setProperty('--bar-height', `${value}%`);
-        bar.style.animationDelay=`${index*24}ms`;
-        bar.title=`${String(index).padStart(2,'0')}:00 — simulated activity ${value}%`;
-        chart.appendChild(bar);
-      });
-    }
+  function socNow(){
+    return new Date().toLocaleTimeString([], {hour12:false});
   }
 
-  const attackFeed = document.getElementById('attackFeed');
-  const simulatedAttacks = [
-    ['Unknown Node','Network anomaly / DDoS pattern','BLOCKED','critical'],
-    ['External Host','Port-scan activity','DETECTED','high'],
-    ['Suspicious URL','Phishing classification','QUARANTINED','high'],
-    ['Botnet Relay','Credential-spray pattern','BLOCKED','critical'],
-    ['Memory Artifact','Suspicious process indicator','REVIEWED','medium']
-  ];
-  let attackIndex=0;
+  function filteredSocIncidents(){
+    return socSeverity==='ALL' ? socIncidentCatalog : socIncidentCatalog.filter(item=>item.severity.toUpperCase()===socSeverity.toLowerCase());
+  }
 
-  function renderAttackFeed() {
-    if (!attackFeed) return;
-    const [source,type,status,severity] = simulatedAttacks[attackIndex % simulatedAttacks.length];
+  function renderSocAttackTypes(){
+    const host=document.getElementById('socAttackTypes');
+    if(!host)return;
+    const types=[
+      ['DDoS / ANOMALY',28,'Impact'],
+      ['BRUTE FORCE',19,'Credential Access'],
+      ['PORT SCANNING',16,'Discovery'],
+      ['PHISHING',14,'Initial Access'],
+      ['MEMORY ARTIFACTS',11,'Forensics'],
+      ['POLICY VIOLATIONS',12,'Execution']
+    ];
+    host.innerHTML=types.map(([name,value,tactic])=>`<div class="soc-attack-type" tabindex="0" data-soc-attack="${name}"><small>${name}</small><strong>${value}</strong><span>${tactic} // SYNTHETIC EVENTS</span></div>`).join('');
+    host.querySelectorAll('[data-soc-attack]').forEach(card=>{
+      card.addEventListener('click',()=>showSocDrawer({source:'ATTACK SURFACE',type:card.dataset.socAttack,status:'CLASSIFIED',severity:'medium',technique:'Portfolio analytics',tactic:'Security Operations',action:'Category selected for investigation.',detail:'This attack category is represented using synthetic portfolio telemetry.'}));
+      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ') {e.preventDefault();card.click();}});
+    });
+  }
+
+  function renderSocChart(){
+    const chart=document.getElementById('socChart');
+    const label=document.getElementById('socRangeLabel');
+    if(!chart)return;
+    chart.innerHTML='';
+    const lengths={ '1H':12, '6H':18, '24H':24, '7D':28 };
+    const length=lengths[socRange]||24;
+    const seed=[22,31,27,18,34,42,38,51,46,62,54,48,70,58,64,76,68,82,59,72,63,48,39,30,44,57,65,52];
+    for(let i=0;i<length;i++){
+      const value=Math.max(14,Math.min(94,seed[(i+socAttackIndex)%seed.length]+((socAttackIndex*7+i*3)%13)-6));
+      const bar=document.createElement('span');
+      bar.className='soc-chart-bar';
+      bar.style.setProperty('--bar-height',`${value}%`);
+      bar.style.animationDelay=`${i*18}ms`;
+      bar.title=`${socRange} // interval ${i+1} // activity ${value}%`;
+      bar.addEventListener('pointerenter',e=>{
+        const tip=document.getElementById('socChartTooltip');
+        if(!tip)return;
+        tip.textContent=`${socRange} / ${String(i+1).padStart(2,'0')} — ${value}% activity`;
+        tip.style.display='block';
+        const rect=chart.parentElement.getBoundingClientRect();
+        const x=e.clientX-rect.left;
+        tip.style.left=`${Math.max(4,Math.min(rect.width-145,x))}px`;
+        tip.style.top='8px';
+      });
+      bar.addEventListener('pointerleave',()=>{const tip=document.getElementById('socChartTooltip');if(tip)tip.style.display='none';});
+      chart.appendChild(bar);
+    }
+    if(label)label.textContent=`${socRange} WINDOW`;
+  }
+
+  function renderAttackFeed(){
+    const feed=document.getElementById('attackFeed');
+    if(!feed)return;
+    const visible=filteredSocIncidents();
+    if(!visible.length){feed.innerHTML='<div class="soc-alert"><span></span><div class="soc-alert-main"><b>NO MATCHING EVENTS</b><span>Change the severity filter.</span></div></div>';return;}
+    const item=visible[socAttackIndex%visible.length];
     const row=document.createElement('div');
     row.className='soc-alert';
-    row.innerHTML=`<i class="soc-alert-dot ${severity}"></i><div class="soc-alert-main"><b>${source}</b><span>${type}</span></div><span class="soc-alert-status">${status}</span>`;
-    attackFeed.prepend(row);
-    while (attackFeed.children.length>5) attackFeed.lastElementChild.remove();
-    attackIndex++;
+    row.dataset.socIncident=String(socAttackIndex%visible.length);
+    row.innerHTML=`<i class="soc-alert-dot ${item.severity}"></i><div class="soc-alert-main"><b>${item.source}</b><span>${item.type}</span></div><span class="soc-alert-status">${item.status}</span>`;
+    row.addEventListener('click',()=>showSocDrawer(item,row));
+    feed.prepend(row);
+    while(feed.children.length>6)feed.lastElementChild.remove();
+    socAttackIndex++;
+    const last=document.getElementById('socLastEvent');
+    if(last)last.textContent=`last event ${socNow()}`;
+    const rate=document.getElementById('socEventsRate');
+    if(rate)rate.textContent=String(14+((socAttackIndex*7)%13));
   }
 
-  renderAttackFeed();
-  setInterval(renderAttackFeed,2600);
-
-  const socFeed = document.getElementById('socFeed');
-  if (socFeed) {
-    [
-      'CASE DATABASE :: 6 PROJECT CASE FILES INDEXED',
-      'AI SECURITY :: POLICY CONTROLS READY',
-      'FORENSICS :: EVENT CORRELATION ENGINE READY',
-      'NETWORK DEFENSE :: TRAFFIC MONITORING READY',
-      'EMBEDDED SECURITY :: DEVICE PROTECTION WORKSTREAM READY'
-    ].forEach((event,index)=>{
-      const row=document.createElement('div');
-      row.innerHTML=`<b>[${String(index+1).padStart(2,'0')}]</b><span>${event}</span>`;
-      socFeed.appendChild(row);
-    });
+  function showSocDrawer(item,row){
+    document.querySelectorAll('.soc-alert.selected').forEach(el=>el.classList.remove('selected'));
+    if(row)row.classList.add('selected');
+    let drawer=document.getElementById('socIncidentDrawer');
+    if(!drawer){
+      drawer=document.createElement('aside');
+      drawer.className='soc-incident-drawer';
+      drawer.id='socIncidentDrawer';
+      drawer.setAttribute('aria-label','SOC incident investigation');
+      drawer.innerHTML='<div class="soc-drawer-head"><span>INCIDENT INVESTIGATION</span><button id="socDrawerClose">CLOSE</button></div><div class="soc-drawer-body" id="socDrawerBody"></div>';
+      document.body.appendChild(drawer);
+      drawer.querySelector('#socDrawerClose').addEventListener('click',()=>drawer.classList.remove('active'));
+    }
+    const body=drawer.querySelector('#socDrawerBody');
+    body.innerHTML=`
+      <div class="soc-drawer-grid">
+        <div class="soc-drawer-field"><small>SOURCE</small><strong>${item.source}</strong></div>
+        <div class="soc-drawer-field"><small>SEVERITY</small><strong>${item.severity.toUpperCase()}</strong></div>
+        <div class="soc-drawer-field"><small>STATUS</small><strong>${item.status}</strong></div>
+        <div class="soc-drawer-field"><small>TACTIC</small><strong>${item.tactic}</strong></div>
+      </div>
+      <h5>DETECTION</h5><p>${item.technique}</p>
+      <h5>ANALYST ACTION</h5><p>${item.action}</p>
+      <h5>EVENT CONTEXT</h5><p>${item.detail}</p>
+      <h5>LIFECYCLE</h5><p>DETECTED → TRIAGED → INVESTIGATING → CONTAINED → RESOLVED</p>
+    `;
+    drawer.classList.add('active');
   }
 
-  if (dashboard) {
-    const dashboardObserver = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        initializeSocDashboard();
-        dashboardObserver.disconnect();
-      }
-    }, { threshold: 0.2 });
+  function initializeSocDashboard(){
+    document.querySelectorAll('[data-soc-value]').forEach(el=>animateSocValue(el,Number(socCounters[el.dataset.socValue]||0)));
+    renderSocChart();
+    renderSocAttackTypes();
+    const feed=document.getElementById('attackFeed');
+    if(feed&&!feed.children.length){for(let i=0;i<5;i++)renderAttackFeed();}
+    const socFeed=document.getElementById('socFeed');
+    if(socFeed&&!socFeed.children.length){
+      [
+        'CASE DATABASE :: 6 PROJECT CASE FILES INDEXED',
+        'AI SECURITY :: POLICY CONTROLS READY',
+        'FORENSICS :: EVENT CORRELATION ENGINE READY',
+        'NETWORK DEFENSE :: TRAFFIC MONITORING READY',
+        'EMBEDDED SECURITY :: DEVICE PROTECTION WORKSTREAM READY'
+      ].forEach((event,index)=>{const row=document.createElement('div');row.innerHTML=`<b>[${String(index+1).padStart(2,'0')}]</b><span>${event}</span>`;socFeed.appendChild(row);});
+    }
+    const clock=document.getElementById('socClock');
+    if(clock)clock.textContent=socNow();
+    if(socEventTimer)clearInterval(socEventTimer);
+    socEventTimer=setInterval(()=>{
+      if(document.hidden)return;
+      renderAttackFeed();
+      const health=document.getElementById('socDetectionHealth');
+      const bar=document.getElementById('socHealthBar');
+      const value=(98.2+Math.random()*1.6).toFixed(1);
+      if(health)health.textContent=`${value}%`;
+      if(bar)bar.style.width=`${value}%`;
+      if(clock)clock.textContent=socNow();
+    },3200);
+  }
+
+  document.querySelectorAll('[data-soc-range]').forEach(button=>button.addEventListener('click',()=>{
+    document.querySelectorAll('[data-soc-range]').forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');socRange=button.dataset.socRange;renderSocChart();
+  }));
+  document.querySelectorAll('[data-soc-severity]').forEach(button=>button.addEventListener('click',()=>{
+    document.querySelectorAll('[data-soc-severity]').forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');socSeverity=button.dataset.socSeverity;renderAttackFeed();
+  }));
+  document.getElementById('socRefresh')?.addEventListener('click',()=>{
+    socAttackIndex++;
+    renderSocChart();renderAttackFeed();
+    const state=document.getElementById('socLiveState');
+    if(state){state.textContent='SYNCING';setTimeout(()=>state.textContent='ONLINE',550);}
+  });
+
+  document.querySelectorAll('.soc-module-click').forEach(module=>{
+    module.addEventListener('click',()=>showSocDrawer({source:module.dataset.socModule,type:'Security control module',status:'OPERATIONAL',severity:'medium',technique:'Control pipeline monitoring',tactic:'Defense',action:'Module status inspected.',detail:module.querySelector('span')?.textContent||'Synthetic module telemetry.'}));
+  });
+
+  const socTerminalForm=document.getElementById('socTerminalForm');
+  const socTerminalInput=document.getElementById('socTerminalInput');
+  const socTerminalOutput=document.getElementById('socTerminalOutput');
+  function socTerminalWrite(text){
+    if(!socTerminalOutput)return;
+    const line=document.createElement('span');line.innerHTML=`&gt; ${text}`;socTerminalOutput.appendChild(line);socTerminalOutput.scrollTop=socTerminalOutput.scrollHeight;
+  }
+  socTerminalForm?.addEventListener('submit',e=>{
+    e.preventDefault();
+    const command=socTerminalInput.value.trim().toLowerCase();
+    socTerminalInput.value='';
+    if(!command)return;
+    socTerminalWrite(`soc@portfolio:~$ ${command}`);
+    const responses={
+      help:'commands: status | alerts | incidents | systems | threats | clear',
+      status:'SOC ONLINE // 6 controls operational // detection health nominal',
+      alerts:`${filteredSocIncidents().length} synthetic alert classes available`,
+      incidents:'INC-001 DDoS anomaly // INC-002 credential spray // INC-003 phishing classification',
+      systems:'NETWORK MONITOR | THREAT DETECTION | FORENSICS | AI SECURITY | EMBEDDED | AUDIT',
+      threats:'DDoS | brute force | port scanning | phishing | memory artifacts | policy violations'
+    };
+    if(command==='clear'){socTerminalOutput.innerHTML='';return;}
+    socTerminalWrite(responses[command]||'unknown command — type help');
+  });
+
+  if(dashboard){
+    const dashboardObserver=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){initializeSocDashboard();dashboardObserver.disconnect();}
+    },{threshold:.15});
     dashboardObserver.observe(dashboard);
-  } else {
-    initializeSocDashboard();
-  }
-
+  }else initializeSocDashboard();
 
   // Scroll reveal animations for sections, cards, tabs and interactive blocks.
   const revealSelectors = [
