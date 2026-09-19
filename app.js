@@ -236,8 +236,36 @@
     }
     a{color:inherit;text-decoration:none}
     button,input{font:inherit}
-    #matrix{position:fixed;inset:0;z-index:-3;width:100%;height:100%;opacity:.2}
-    .scanlines{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.06;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(255,255,255,.12) 4px)}
+    .cyber-workstation-bg{
+      --bg-shift:0px;
+      position:fixed;inset:-1.5%;z-index:-2;pointer-events:none;overflow:hidden;
+      background-image:
+        linear-gradient(90deg,rgba(3,7,10,.985) 0%,rgba(3,7,10,.94) 22%,rgba(3,7,10,.60) 48%,rgba(3,7,10,.28) 74%,rgba(3,7,10,.20) 100%),
+        url("assets/cyber-workstation-bg.jpg");
+      background-size:cover,cover;
+      background-position:center,center;
+      background-repeat:no-repeat;
+      filter:saturate(.84) contrast(1.05) brightness(.90);
+      transform:translate3d(0,var(--bg-shift),0) scale(1.015);
+      transition:transform .18s ease-out;
+      will-change:transform;
+    }
+    .cyber-workstation-bg::before{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 76% 48%,rgba(53,255,162,.12),transparent 27%),
+        radial-gradient(circle at 62% 55%,rgba(69,215,255,.055),transparent 34%),
+        linear-gradient(180deg,rgba(2,7,10,.20),rgba(2,7,10,.50));
+    }
+    .cyber-workstation-bg::after{
+      content:'';position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,rgba(1,5,8,.28),transparent 38%,rgba(1,5,8,.10) 76%,rgba(1,5,8,.28)),
+        linear-gradient(0deg,rgba(1,5,8,.66),transparent 28%,rgba(1,5,8,.18) 100%);
+      pointer-events:none;
+    }
+    #matrix{position:fixed;inset:0;z-index:-1;width:100%;height:100%;opacity:.035}
+    .scanlines{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.035;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(255,255,255,.12) 4px)}
     .topbar{
       position:fixed;inset:0 0 auto 0;z-index:30;height:70px;
       display:flex;align-items:center;gap:28px;padding:0 clamp(18px,4vw,64px);
@@ -352,6 +380,20 @@
     .skill-group-items{display:flex!important;flex-wrap:wrap;gap:8px}
     @media(max-width:760px){
       #skills>.skills{grid-template-columns:1fr}
+    }
+    @media(max-width:760px){
+      .cyber-workstation-bg{
+        background-position:center,64% center;
+        background-size:auto 100%,auto 100%;
+        opacity:.68;
+      }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .cyber-workstation-bg{
+        background-attachment:scroll;
+        transform:scale(1.01);
+        transition:none;
+      }
     }
     .skills span{
       --glow-strength:0;
@@ -3691,6 +3733,7 @@
         </div>
       </div>
 
+      <div class="cyber-workstation-bg" aria-hidden="true"></div>
       <canvas id="matrix"></canvas>
 
       <div class="scanlines"></div>
@@ -7662,6 +7705,28 @@
     });
   });
 
+
+  // Cyber workstation background: very subtle scroll parallax.
+  // It stays purely decorative and respects reduced-motion preferences.
+  (() => {
+    const bg = document.querySelector('.cyber-workstation-bg');
+    if (!bg || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+    const updateBackground = () => {
+      const shift = Math.min(18, Math.max(-4, window.scrollY * 0.018));
+      bg.style.setProperty('--bg-shift', `${shift}px`);
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateBackground);
+    }, {passive:true});
+
+    updateBackground();
+  })();
 
   // Final portfolio polish: navigation feedback, scroll progress, back-to-top,
   // reduced-motion support and a lightweight interaction layer.
