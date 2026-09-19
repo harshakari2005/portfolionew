@@ -158,9 +158,10 @@
         organization: 'SSEV SOFTSOLS',
         detail: 'Worked on securing embedded devices and websites.',
         projectWork: [
-          'SAVATAR — Secure Smart Vehicle Door Controller',
           'Trajectory Firewall — Autonomous AI Security Prototype',
-          'Cyber Reconstruction Engine'
+          'Cyber Reconstruction Engine',
+          'SAVATAR — Secure Smart Vehicle Door Controller',
+          'LFS OS — Linux From Scratch'
         ]
       },
       {
@@ -343,6 +344,15 @@
     .info-row strong{display:block;margin-bottom:8px}
     .info-row p{margin:0;color:#b6c9bd;line-height:1.6}
     .skills{display:flex;flex-wrap:wrap;gap:10px}
+    #skills>.skills{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .skill-group-items{display:flex!important;flex-wrap:wrap;gap:8px}
+    @media(max-width:760px){
+      #skills>.skills{grid-template-columns:1fr}
+    }
     .skills span{
       --glow-strength:0;
       --mx:50%;
@@ -448,6 +458,32 @@
       font:10px var(--mono);
     }
 
+    .project-objective,
+    .project-stack{
+      margin-top:15px;
+      padding:11px 12px;
+      border:1px solid rgba(53,255,162,.12);
+      background:rgba(53,255,162,.025);
+    }
+    .project-objective small,
+    .project-stack small{
+      display:block;
+      color:var(--cyan);
+      font:700 9px var(--mono);
+      letter-spacing:.08em;
+      margin-bottom:6px;
+    }
+    .project-objective p{
+      margin:0;
+      color:#a9beb2;
+      font-size:12px;
+      line-height:1.55;
+    }
+    .project-stack span{
+      color:var(--green2);
+      font:10px var(--mono);
+      line-height:1.5;
+    }
     .project-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
     .project-actions button,.project-actions a{
       border:1px solid var(--line);
@@ -495,6 +531,208 @@
       padding:7px 10px;
       cursor:pointer;
     }
+    .ssev-work-card{
+      position:relative;
+      cursor:pointer;
+      border-color:rgba(53,255,162,.42)!important;
+      box-shadow:inset 3px 0 0 var(--green),0 20px 50px rgba(0,0,0,.24);
+    }
+    .ssev-work-card:hover{
+      transform:translateY(-4px)!important;
+      border-color:rgba(53,255,162,.68)!important;
+      box-shadow:inset 3px 0 0 var(--green),0 24px 60px rgba(0,0,0,.34),0 0 28px rgba(53,255,162,.08);
+    }
+    .ssev-work-card:focus-visible{
+      outline:1px solid var(--green);
+      outline-offset:3px;
+    }
+    .ssev-work-cta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:18px;
+      padding:10px 12px;
+      border:1px solid rgba(53,255,162,.18);
+      background:rgba(53,255,162,.035);
+      color:var(--green2);
+      font:700 10px var(--mono);
+      letter-spacing:.08em;
+    }
+    .ssev-work-cta b{color:var(--green);font-size:15px}
+    .ssev-modal{
+      position:fixed;
+      inset:0;
+      z-index:11050;
+      display:none;
+      place-items:center;
+      padding:20px;
+      background:rgba(0,0,0,.9);
+      backdrop-filter:blur(10px);
+    }
+    .ssev-modal.active{display:grid}
+    .ssev-modal-panel{
+      width:min(1080px,100%);
+      max-height:90vh;
+      overflow:auto;
+      border:1px solid rgba(53,255,162,.45);
+      background:#061015;
+      box-shadow:0 0 70px rgba(53,255,162,.13);
+    }
+    .ssev-modal-head{
+      position:sticky;
+      top:0;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:15px 18px;
+      border-bottom:1px solid var(--line);
+      background:rgba(6,16,21,.96);
+      backdrop-filter:blur(12px);
+    }
+    .ssev-modal-head .kicker{color:var(--green);font:700 10px var(--mono);letter-spacing:.12em}
+    .ssev-modal-head .sub{display:block;color:var(--muted);font:9px var(--mono);margin-top:4px}
+    .ssev-modal-head button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green);
+      padding:7px 10px;
+      cursor:pointer;
+      font:700 10px var(--mono);
+    }
+    .ssev-modal-body{padding:22px}
+    .ssev-hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.45fr) minmax(240px,.55fr);
+      gap:18px;
+      margin-bottom:22px;
+    }
+    .ssev-hero-main,.ssev-fact{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+      padding:20px;
+    }
+    .ssev-hero-main h4{
+      margin:0 0 10px;
+      font-size:clamp(28px,4vw,48px);
+      letter-spacing:-.04em;
+    }
+    .ssev-hero-main p{margin:0;color:#b9ccc0;line-height:1.7}
+    .ssev-facts{display:grid;gap:10px}
+    .ssev-fact small{display:block;color:var(--cyan);font:700 9px var(--mono);margin-bottom:6px}
+    .ssev-fact strong{color:var(--green2);font:700 13px/1.4 var(--mono)}
+    .ssev-section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin:22px 0 12px;
+      color:var(--green2);
+      font:700 10px var(--mono);
+      letter-spacing:.1em;
+    }
+    .ssev-section-title span{color:var(--muted);font-weight:400;letter-spacing:0}
+    .ssev-work-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .ssev-work-item{
+      border:1px solid rgba(53,255,162,.16);
+      background:rgba(53,255,162,.022);
+      padding:16px;
+    }
+    .ssev-work-item small{display:block;color:var(--cyan);font:700 8px var(--mono);margin-bottom:7px;letter-spacing:.08em}
+    .ssev-work-item strong{display:block;color:var(--text);font-size:16px;margin-bottom:7px}
+    .ssev-work-item p{margin:0;color:#9fb5a8;font:11px/1.6 var(--sans)}
+    .ssev-work-item .tags{margin-top:10px}
+    .ssev-work-item{
+      cursor:pointer;
+      transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+    }
+    .ssev-work-item:hover,
+    .ssev-work-item:focus-visible{
+      transform:translateY(-4px);
+      border-color:rgba(53,255,162,.55);
+      box-shadow:0 18px 38px rgba(0,0,0,.24),0 0 22px rgba(53,255,162,.07);
+      outline:none;
+    }
+    .ssev-work-item .detail-cta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:13px;
+      padding-top:10px;
+      border-top:1px dashed rgba(53,255,162,.14);
+      color:var(--green);
+      font:700 9px var(--mono);
+      letter-spacing:.08em;
+    }
+    .ssev-detail-view{animation:ssevDetailIn .2s ease}
+    @keyframes ssevDetailIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .ssev-detail-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
+    }
+    .ssev-back-btn{
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.04);
+      color:var(--green2);
+      padding:9px 12px;
+      font:700 10px var(--mono);
+      cursor:pointer;
+    }
+    .ssev-back-btn:hover{background:var(--green);color:#021009}
+    .ssev-detail-kicker{color:var(--cyan);font:700 9px var(--mono);letter-spacing:.1em}
+    .ssev-detail-title{margin:7px 0 8px;font-size:clamp(26px,4vw,44px);letter-spacing:-.04em}
+    .ssev-detail-summary{margin:0;color:#b9ccc0;line-height:1.7;max-width:850px}
+    .ssev-detail-tags{margin:14px 0 20px}
+    .ssev-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .ssev-detail-block{padding:16px;border:1px solid rgba(53,255,162,.16);background:rgba(53,255,162,.022)}
+    .ssev-detail-block small{display:block;color:var(--cyan);font:700 9px var(--mono);letter-spacing:.08em;margin-bottom:8px}
+    .ssev-detail-block p{margin:0;color:#b4c8bc;font:12px/1.7 var(--sans)}
+    .ssev-detail-architecture{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+    .ssev-detail-node{padding:12px;border:1px solid rgba(53,255,162,.18);background:rgba(4,12,16,.72);color:var(--green2);font:10px/1.4 var(--mono);text-align:center}
+    .ssev-detail-node span{display:block;color:var(--cyan);font-size:8px;margin-bottom:7px}
+    @media(max-width:760px){
+      .ssev-detail-grid{grid-template-columns:1fr}
+      .ssev-detail-architecture{grid-template-columns:1fr 1fr}
+      .ssev-detail-top{align-items:flex-start;flex-direction:column-reverse}
+    }
+    .ssev-task-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .ssev-task{
+      padding:13px;
+      border:1px solid rgba(53,255,162,.14);
+      background:rgba(4,12,16,.7);
+      color:#a9beb2;
+      font:10px/1.55 var(--mono);
+    }
+    .ssev-task::before{content:'// ';color:var(--green)}
+    .ssev-note{
+      margin-top:16px;
+      padding:12px 14px;
+      border-left:2px solid var(--cyan);
+      background:rgba(69,215,255,.025);
+      color:#8fa79a;
+      font:10px/1.6 var(--mono);
+    }
+    @media(max-width:760px){
+      .ssev-modal{padding:10px}
+      .ssev-modal-body{padding:14px}
+      .ssev-hero{grid-template-columns:1fr}
+      .ssev-work-grid{grid-template-columns:1fr}
+      .ssev-task-grid{grid-template-columns:1fr}
+    }
+
     .project-modal-body{padding:22px}
     .project-modal-body h4{font-size:clamp(24px,4vw,40px);margin:0 0 20px}
     .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -891,6 +1129,125 @@
       display:none;
     }
     .skill-detail.active{display:block}
+
+    .skill-group-card{
+      border:1px solid rgba(53,255,162,.16);
+      background:rgba(53,255,162,.018);
+      padding:16px;
+    }
+    .skill-group-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+      color:var(--green2);
+      font:700 10px var(--mono);
+      letter-spacing:.08em;
+    }
+    .skill-group-head b{color:var(--muted);font-size:9px}
+    .skill-group-items{margin:0}
+    .skill-group-items span{cursor:pointer}
+    .case-study-kicker{
+      color:var(--green);
+      font:700 10px var(--mono);
+      letter-spacing:.12em;
+      margin-bottom:12px;
+    }
+    .case-study-top{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(180px,.34fr);
+      gap:18px;
+      align-items:start;
+      margin:18px 0 24px;
+    }
+    .case-study-top h4{margin:14px 0 8px}
+    .case-study-summary{margin:0;color:#b9ccc0;line-height:1.7}
+    .case-study-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .case-study-stats>div{
+      padding:13px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.025);
+    }
+    .case-study-stats small{display:block;color:var(--cyan);font:700 8px var(--mono);margin-bottom:7px}
+    .case-study-stats strong{display:block;color:var(--green);font:700 25px var(--mono)}
+    .case-study-stats span{display:block;color:var(--muted);font:9px var(--mono);margin-top:3px}
+    .case-study-section-label{
+      margin:24px 0 11px;
+      color:var(--green2);
+      font:700 10px var(--mono);
+      letter-spacing:.1em;
+    }
+    .case-flow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+    }
+    .case-flow-node{
+      position:relative;
+      min-height:92px;
+      padding:13px;
+      border:1px solid rgba(53,255,162,.2);
+      background:linear-gradient(145deg,rgba(10,29,34,.8),rgba(4,12,16,.7));
+    }
+    .case-flow-node span{
+      display:block;
+      color:var(--cyan);
+      font:700 9px var(--mono);
+      margin-bottom:12px;
+    }
+    .case-flow-node strong{
+      display:block;
+      color:var(--green2);
+      font:700 11px/1.45 var(--mono);
+    }
+    .case-flow-legacy{display:none}
+    @media(max-width:760px){
+      .case-study-top{grid-template-columns:1fr}
+      .case-flow{grid-template-columns:1fr 1fr}
+    }
+
+    .recruiter-actions .btn{min-height:40px}
+    .recruiter-profile-card{position:relative;overflow:hidden}
+    .recruiter-profile-card::after{
+      content:'RECRUITER READY';
+      position:absolute;
+      top:14px;
+      right:16px;
+      color:rgba(53,255,162,.55);
+      font:700 8px var(--mono);
+      letter-spacing:.12em;
+      pointer-events:none;
+    }
+
+    .back-to-top{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:80;
+      width:42px;height:42px;
+      border:1px solid var(--line);
+      background:rgba(3,12,15,.88);
+      color:var(--green);
+      font:700 14px var(--mono);
+      cursor:pointer;
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(10px);
+      transition:.2s ease;
+      backdrop-filter:blur(10px);
+    }
+    .back-to-top.active{opacity:1;visibility:visible;transform:none}
+    .scroll-progress{
+      position:fixed;
+      top:70px;left:0;
+      height:2px;width:0;
+      z-index:31;
+      background:var(--green);
+      box-shadow:0 0 10px var(--green);
+      pointer-events:none;
+    }
+
     .recruiter-mode .hints,
     .recruiter-mode .clearance-widget{display:none!important}
     .recruiter-banner{
@@ -962,116 +1319,41 @@
     }
     .magnetic{will-change:transform;transition:transform .18s ease,box-shadow .25s ease}
 
-
-
-    /* CAREER JOURNEY */
-    .career-journey-section{padding-top:48px}
-    .journey-intro{
-      display:flex;justify-content:space-between;align-items:center;gap:18px;
-      padding:16px 18px;margin-bottom:24px;border:1px solid rgba(53,255,162,.18);
-      background:rgba(53,255,162,.025);
+    .experience-stack{
+      display:grid;
+      gap:14px;
+      margin-top:8px;
+      min-height:0;
     }
-    .journey-intro p{margin:6px 0 0;color:var(--muted);font:11px/1.65 var(--mono);max-width:720px}
-    .journey-status{white-space:nowrap;color:var(--green2);font:9px var(--mono)}
-    .journey-status span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);margin-right:6px}
-    .career-journey-section .cyber-timeline{margin-top:0}
-    .career-journey-section .timeline-item{
-      padding:18px 20px 18px 46px;
-      border:1px solid rgba(53,255,162,.13);
-      background:linear-gradient(145deg,rgba(8,24,28,.62),rgba(4,12,16,.48));
-      min-height:92px;
+    .experience-stack .experience-row:first-child{
+      border-color:rgba(53,255,162,.42)!important;
+      box-shadow:inset 3px 0 0 var(--green),0 20px 50px rgba(0,0,0,.24);
     }
-    .career-journey-section .timeline-item::before{left:5px;top:27px;width:12px;height:12px}
-    .timeline-index{
-      position:absolute;left:-4px;top:-8px;padding:4px 7px;border:1px solid var(--line);
-      background:#041015;color:var(--cyan);font:700 8px var(--mono);z-index:2;
+    .experience-stack .experience-row{
+      padding:22px 24px;
+      min-height:0;
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+      filter:none!important;
     }
-    .career-journey-section .timeline-title{font-size:16px}
-    .career-journey-section .timeline-copy{font-size:11px}
-
-    /* SECURITY CAPABILITY MATRIX */
-    .capability-console{
-      display:grid;grid-template-columns:minmax(250px,.62fr) minmax(0,1.38fr);
-      gap:1px;background:rgba(53,255,162,.13);border:1px solid rgba(53,255,162,.24);
-      overflow:hidden;
+    #experience{
+      padding-top:46px!important;
+      padding-bottom:46px!important;
     }
-    .capability-sidebar,.capability-output{background:rgba(3,11,15,.94);padding:20px}
-    .capability-sidebar{min-width:0}
-    .capability-tab{
-      width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;
-      margin-top:8px;padding:13px;border:1px solid rgba(53,255,162,.13);
-      background:rgba(53,255,162,.02);color:var(--green2);cursor:pointer;text-align:left;
-      font:700 10px var(--mono);transition:.2s ease;
+    #experience .cyber-timeline{
+      margin-top:28px;
     }
-    .capability-tab span{min-width:0}
-    .capability-tab b{color:var(--muted);margin-right:7px}
-    .capability-tab i{color:var(--muted);font-style:normal;font-size:7px}
-    .capability-tab:hover,.capability-tab.active{
-      border-color:rgba(53,255,162,.48);background:rgba(53,255,162,.075);
-      box-shadow:inset 3px 0 0 var(--green);color:var(--green);
+    /* Experience cards must not remain invisible while still taking layout space. */
+    #experience .heading,
+    #experience .experience-stack,
+    #experience .experience-stack .experience-row{
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+      filter:none!important;
+      clip-path:none!important;
     }
-    .capability-tab.active i{color:var(--green);text-shadow:0 0 10px var(--green)}
-    .capability-note{margin-top:18px;padding-top:15px;border-top:1px dashed rgba(53,255,162,.15);color:var(--muted);font:9px/1.6 var(--mono)}
-    .capability-output{min-height:330px}
-    .capability-output-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
-    .capability-output h4{margin:0;color:var(--green2);font-size:clamp(22px,3vw,32px)}
-    .capability-code{color:var(--cyan);font:700 9px var(--mono);letter-spacing:.1em}
-    .capability-summary{margin:12px 0 18px;color:#b9ccc0;font:11px/1.7 var(--mono);max-width:760px}
-    .capability-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .capability-evidence{padding:13px;border:1px solid var(--line);background:rgba(53,255,162,.025)}
-    .capability-evidence small{display:block;color:var(--cyan);font:8px var(--mono);margin-bottom:8px}
-    .capability-evidence strong{display:block;color:var(--green2);font:700 11px/1.45 var(--mono)}
-    .capability-evidence p{margin:7px 0 0;color:var(--muted);font:9px/1.55 var(--mono)}
-    .capability-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-    .capability-tags span{padding:6px 8px;border:1px solid var(--line);color:var(--green2);font:9px var(--mono)}
-    .capability-case-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .capability-case-links button{
-      border:1px solid var(--line);background:rgba(53,255,162,.04);color:var(--green2);
-      padding:8px 10px;font:700 9px var(--mono);cursor:pointer
-    }
-    .capability-case-links button:hover{background:var(--green);color:#021009}
-
-    /* CASE FILE ENHANCEMENT */
-    .case-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 18px}
-    .case-meta>div{padding:11px;border:1px solid var(--line);background:rgba(53,255,162,.025)}
-    .case-meta small{display:block;color:var(--cyan);font:8px var(--mono);margin-bottom:5px}
-    .case-meta strong{display:block;color:var(--green2);font:700 10px/1.35 var(--mono)}
-
-    /* INVESTIGATION MODE */
-    .investigation-overlay{
-      position:fixed;inset:0;z-index:11200;display:none;place-items:center;padding:18px;
-      background:rgba(0,4,6,.94);backdrop-filter:blur(12px);font-family:var(--mono);
-    }
-    .investigation-overlay.active{display:grid}
-    .investigation-shell{width:min(980px,100%);max-height:90vh;overflow:auto;border:1px solid rgba(53,255,162,.42);background:#041015;box-shadow:0 0 70px rgba(53,255,162,.12)}
-    .investigation-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 18px;border-bottom:1px solid var(--line);color:var(--green);font-size:10px;font-weight:700}
-    .investigation-head button{border:1px solid var(--line);background:transparent;color:var(--green);padding:7px 10px;font:700 9px var(--mono);cursor:pointer}
-    .investigation-body{padding:20px}
-    .investigation-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:14px}
-    .investigation-evidence,.investigation-log{border:1px solid var(--line);background:rgba(53,255,162,.025);padding:15px}
-    .investigation-evidence h4,.investigation-log h4{margin:0 0 12px;color:var(--green2);font-size:12px}
-    .evidence-item{padding:10px 0;border-bottom:1px dashed rgba(53,255,162,.13);display:flex;justify-content:space-between;gap:10px;font-size:9px}
-    .evidence-item:last-child{border-bottom:0}
-    .evidence-item span{color:var(--muted)}.evidence-item b{color:var(--cyan)}
-    .investigation-log{min-height:300px}
-    .investigation-lines{height:245px;overflow:auto;font-size:9px;line-height:1.7;color:var(--muted)}
-    .investigation-line b{color:var(--green)}.investigation-line.alert{color:#ff9ba5}
-    .investigation-progress{height:8px;border:1px solid var(--line);background:#06100d;margin-top:14px;overflow:hidden}
-    .investigation-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#0b6d45,var(--green));transition:width .45s ease}
-    .investigation-footer{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:12px;color:var(--muted);font-size:9px}
-    .investigation-footer button{border:1px solid var(--line);background:var(--green);color:#021009;padding:9px 12px;font:700 9px var(--mono);cursor:pointer}
-
-    /* CREDENTIAL MATRIX */
-    .credential-matrix{margin-top:22px;border:1px solid var(--line);background:rgba(53,255,162,.018);padding:18px}
-    .credential-matrix-head{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:14px}
-    .credential-matrix-head h4{margin:0;font-size:18px}
-    .credential-matrix-head small{color:var(--muted);font:9px var(--mono)}
-    .credential-provider-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
-    .credential-provider{padding:14px 10px;border:1px solid var(--line);background:rgba(3,12,16,.65);text-align:center}
-    .credential-provider strong{display:block;color:var(--green);font:800 20px var(--mono)}
-    .credential-provider span{display:block;color:var(--green2);font:700 9px var(--mono);margin-top:6px}
-    .credential-provider small{display:block;color:var(--muted);font:8px var(--mono);margin-top:4px}
-
     /* MICRO-INTERACTION CURSOR */
     .cursor-scanner{position:fixed;left:0;top:0;width:24px;height:24px;border:1px solid var(--green);border-radius:50%;z-index:14000;pointer-events:none;opacity:0;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .16s,height .16s,opacity .2s}
     .cursor-scanner::before,.cursor-scanner::after{content:'';position:absolute;background:var(--green);box-shadow:0 0 8px var(--green)}
@@ -1080,39 +1362,11 @@
     body.cursor-hover .cursor-scanner{width:38px;height:38px;opacity:.9}
     @media(pointer:coarse){.cursor-scanner{display:none}}
 
-    @media(max-width:900px){
-      .command-main{grid-template-columns:1fr}
-      .credential-provider-grid{grid-template-columns:repeat(3,1fr)}
-      .investigation-grid{grid-template-columns:1fr}
-      .capability-console{grid-template-columns:1fr}
-    }
-    @media(max-width:620px){
-      .command-metrics{grid-template-columns:1fr 1fr}
-      .case-meta{grid-template-columns:1fr}
-      .credential-provider-grid{grid-template-columns:1fr 1fr}
-      .security-map{min-height:260px}
-      .map-node{min-width:88px;font-size:8px}
-      .map-core{min-width:108px}
-      .investigation-body{padding:14px}
-      .journey-intro{align-items:flex-start;flex-direction:column}
-      .journey-status{white-space:normal}
-      .career-journey-section .timeline-item{padding-left:38px}
-      .capability-sidebar,.capability-output{padding:15px}
-      .capability-grid{grid-template-columns:1fr}
-    }
-
-    .profile-details-grid{align-items:start}
-    .profile-details-grid>.card{min-height:100%}
-    .profile-details-grid .info-row strong{line-height:1.5}
-    .profile-details-grid .skills{margin-top:4px}
-
-    .experience-stack{display:grid;gap:18px;margin-top:8px}
-    .experience-stack .experience-row{padding:26px}
     .credential-stack{display:grid;gap:22px}
     .credential-block{padding:22px;border:1px solid var(--line);background:rgba(53,255,162,.018)}
     .credential-block>.label{margin-bottom:14px}
     .credential-block .info-list{gap:12px}
-    #experience,#career-journey,#capabilities,#credentials,#profile-details,#terminal,#threat-dashboard,#trajectory,#reconstruction,#labs,#writeups,#contact{scroll-margin-top:88px}
+    #experience,#credentials,#terminal,#threat-dashboard{scroll-margin-top:88px}
     #terminal{position:relative;z-index:2;min-height:520px}
     #terminal .terminal{display:block!important;visibility:visible!important;opacity:1!important}
 
@@ -1143,6 +1397,45 @@
     @keyframes socPulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
     .soc-feed{display:grid;gap:7px;padding:14px 18px;background:rgba(53,255,162,.018);font:10px/1.5 var(--mono);color:var(--muted)}
     .soc-feed div{display:flex;gap:10px}.soc-feed b{color:var(--green)}
+    /* SECURITY OPERATIONS DASHBOARD v2 */
+    .soc-dashboard-v2{border-color:rgba(53,255,162,.28)}
+    .soc-live-text{margin-left:7px;color:var(--green2);font-size:9px;letter-spacing:.12em}
+    .soc-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(53,255,162,.14);border-bottom:1px solid rgba(53,255,162,.14)}
+    .soc-kpi{padding:20px;background:rgba(3,11,15,.92);min-width:0}
+    .soc-kpi small{display:block;color:var(--muted);font:700 9px var(--mono);letter-spacing:.1em}
+    .soc-kpi strong{display:block;margin-top:9px;color:var(--green);font:800 clamp(28px,3vw,42px) var(--mono);line-height:1}
+    .soc-kpi span{display:block;margin-top:8px;color:#8fa79a;font:10px/1.45 var(--mono)}
+    .soc-main-grid,.soc-bottom-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:1px;background:rgba(53,255,162,.14)}
+    .soc-bottom-grid{grid-template-columns:1.35fr .65fr;margin-top:1px}
+    .soc-panel{background:rgba(3,11,15,.94);min-width:0}
+    .soc-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(53,255,162,.12);font:700 9px var(--mono);letter-spacing:.08em;color:var(--green2)}
+    .panel-index{color:var(--cyan);margin-right:7px}
+    .panel-state{color:var(--muted);font-weight:400;font-size:8px}
+    .panel-state i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-right:5px}
+    .alert-state{color:var(--green2)}
+    .soc-main-grid .soc-grid{grid-template-columns:repeat(2,1fr);background:rgba(53,255,162,.10)}
+    .soc-main-grid .soc-module{min-height:126px;padding:16px}
+    .soc-chart{height:178px;display:flex;align-items:flex-end;gap:7px;padding:22px 18px 8px;background:linear-gradient(to top,rgba(53,255,162,.035),transparent)}
+    .soc-chart-bar{flex:1;min-width:3px;height:var(--bar-height);background:linear-gradient(to top,var(--green),var(--cyan));box-shadow:0 0 10px rgba(53,255,162,.16);opacity:.78;transform-origin:bottom;animation:socBarIn .55s ease both}
+    .soc-chart-bar:hover{opacity:1;filter:brightness(1.25)}
+    @keyframes socBarIn{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    .soc-chart-axis{display:flex;justify-content:space-between;padding:0 18px 12px;color:#63796e;font:8px var(--mono)}
+    .soc-alerts{display:grid;gap:6px;padding:10px 12px}
+    .soc-alert{display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;border:1px solid rgba(53,255,162,.10);background:rgba(53,255,162,.025);font:9px var(--mono)}
+    .soc-alert-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+    .soc-alert-dot.high{background:#ffbd4a;box-shadow:0 0 8px rgba(255,189,74,.55)}
+    .soc-alert-dot.critical{background:var(--red);box-shadow:0 0 8px rgba(255,100,116,.55)}
+    .soc-alert-main{min-width:0}.soc-alert-main b{display:block;color:#c9ddd2;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .soc-alert-main span{display:block;color:#687f74;margin-top:3px}
+    .soc-alert-status{color:var(--green);font-weight:700}
+    .severity-row{display:grid;grid-template-columns:68px 1fr 34px;align-items:center;gap:9px;padding:10px 16px;color:#82998e;font:8px var(--mono)}
+    .severity-row div{height:5px;background:rgba(53,255,162,.08);overflow:hidden}
+    .severity-row div i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan))}
+    .severity-row b{color:var(--green2);text-align:right;font-weight:700}
+    .soc-dashboard-v2 .soc-feed{border-top:1px solid rgba(53,255,162,.12)}
+    @media(max-width:900px){.soc-kpis{grid-template-columns:repeat(2,1fr)}.soc-main-grid,.soc-bottom-grid{grid-template-columns:1fr}}
+    @media(max-width:760px){.soc-kpis{grid-template-columns:1fr 1fr}.soc-main-grid .soc-grid{grid-template-columns:1fr}.soc-chart{height:145px;gap:4px}.soc-alert{grid-template-columns:8px minmax(0,1fr)}.soc-alert-status{grid-column:2}}
+    @media(max-width:430px){.soc-kpis{grid-template-columns:1fr}.soc-panel-head{align-items:flex-start;flex-direction:column;gap:6px}}
 
     .cyber-timeline{position:relative;display:grid;gap:24px;margin-top:32px;padding-left:34px}
     .cyber-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--green),rgba(53,255,162,.08));transform:scaleY(0);transform-origin:top;transition:transform 1.2s ease;box-shadow:0 0 12px rgba(53,255,162,.25)}
@@ -1186,125 +1479,6 @@
     @media(max-width:430px){.recruiter-facts{grid-template-columns:1fr}}
 
 
-    /* Education timeline — compact, continuous layout */
-    .profile-education{
-      margin-top:22px!important;
-      padding-top:18px!important;
-    }
-    .profile-education .dossier-kicker{margin-bottom:8px!important}
-    .profile-education .education-track{
-      margin-top:12px!important;
-      padding-top:8px!important;
-      gap:12px!important;
-      min-height:0!important;
-      align-items:stretch!important;
-    }
-    .profile-education .education-node{
-      min-height:0!important;
-      height:auto!important;
-      padding:32px 18px 18px!important;
-    }
-    .profile-education .education-node::before{
-      top:10px!important;
-    }
-    .profile-education .education-node::after{
-      top:15px!important;
-      height:17px!important;
-    }
-    .profile-education .education-node h4{
-      margin:7px 0 7px!important;
-    }
-    .profile-education .education-node p{
-      margin:0 0 8px!important;
-    }
-    @media(max-width:900px){
-      .profile-education .education-track{
-        gap:10px!important;
-        padding-top:0!important;
-      }
-      .profile-education .education-node{
-        padding:28px 18px 16px!important;
-      }
-    }
-    @media(max-width:620px){
-      .profile-education{
-        margin-top:18px!important;
-        padding-top:16px!important;
-      }
-      .profile-education .education-track{gap:10px!important}
-      .profile-education .education-node{padding:28px 16px 16px!important}
-    }
-
-
-
-
-    /* Dynamic-content visibility + compact vertical rhythm */
-    #about,#profile-details,#skills,#labs,#writeups,#contact,#trajectory,#reconstruction,#terminal,#experience,#career-journey,#capabilities{
-      min-height:0!important;
-    }
-    #about .security-profile-grid,
-    #about .profile-metrics,
-    #about .profile-education,
-    #profile-details .profile-details-grid,
-    #skills .skill-project-map,
-    #labs .lab-grid,
-    #writeups .writeup-grid,
-    #contact .contact{
-      opacity:1!important;
-      visibility:visible!important;
-    }
-    #about .reveal-item,
-    #experience .reveal-item,
-    #profile-details .reveal-item,
-    #skills .reveal-item,
-    #labs .reveal-item,
-    #writeups .reveal-item,
-    #contact .reveal-item{
-      opacity:1!important;
-      visibility:visible!important;
-      transform:none!important;
-      filter:none!important;
-      clip-path:none!important;
-    }
-    #about,#experience,#career-journey,#capabilities,#profile-details,#skills,#labs,#writeups,#contact{scroll-margin-top:88px}
-    @media(max-width:760px){
-      #about,#experience,#career-journey,#capabilities,#profile-details,#skills,#labs,#writeups,#contact{padding-top:42px;padding-bottom:42px}
-    }
-
-    /* Education → Experience final visibility fix: do not reserve blank space for hidden reveal elements. */
-    #experience > .heading,
-    #experience .experience-row,
-    #career-journey .cyber-timeline,
-    #career-journey .timeline-item{
-      opacity:1!important;
-      visibility:visible!important;
-      transform:none!important;
-      filter:none!important;
-      clip-path:none!important;
-    }
-    #experience{
-      margin-top:0!important;
-    }
-
-    /* Education → Experience gap fix */
-    #about{
-      padding-bottom:18px!important;
-    }
-    #experience{
-      padding-top:18px!important;
-      padding-bottom:34px!important;
-    }
-    #experience .heading{
-      margin-bottom:18px!important;
-    }
-    #experience .experience-stack{
-      margin-top:0!important;
-      gap:12px!important;
-    }
-    #career-journey .cyber-timeline{
-      margin-top:0!important;
-      gap:16px!important;
-    }
 
     /* Final no-gap section flow */
     #home.hero{
@@ -2386,13 +2560,6 @@
     }
 
     .terminal{border:1px solid rgba(53,255,162,.48);background:rgba(2,8,10,.96);box-shadow:0 0 45px rgba(53,255,162,.08)}
-    .terminal-health{display:inline-flex;align-items:center;gap:6px;color:var(--green2);font:8px var(--mono);margin-right:8px}
-    .terminal-health i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);animation:socPulse 1.5s infinite}
-    .terminal-health-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(53,255,162,.10);border-bottom:1px solid var(--line)}
-    .terminal-health-strip span{padding:8px 10px;background:rgba(3,11,15,.92);font:8px var(--mono);color:var(--muted)}
-    .terminal-health-strip b{color:var(--cyan);margin-right:5px}
-    .terminal-health-strip em{font-style:normal;color:var(--green2);float:right}
-    @media(max-width:760px){.terminal-health{display:none}.terminal-health-strip{grid-template-columns:1fr 1fr}.terminal-health-strip em{float:none;display:block;margin-top:3px}}
     .termbar{height:45px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);font:11px var(--mono);color:var(--muted)}
     .termbar-actions{display:flex;align-items:center;gap:8px}
     .termbar button{border:0;background:transparent;color:var(--green);font:10px var(--mono);cursor:pointer}
@@ -2509,7 +2676,7 @@
     .section + .section{border-top:1px solid rgba(53,255,162,.055)}
     .heading{margin-bottom:28px!important}
     .section .grid2{margin-top:0}
-    #career-journey .cyber-timeline{margin-top:0}
+    #credentials .cyber-timeline{margin-top:38px}
     #contact{padding-bottom:58px}
 
     .contact{
@@ -2542,6 +2709,225 @@
       font-size:14px;
       line-height:1.45;
       overflow-wrap:anywhere;
+    }
+
+    /* CONTACT COMMAND CENTER */
+    #contact{
+      position:relative;
+      padding-top:64px!important;
+      padding-bottom:76px!important;
+    }
+    .contact-command{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,1.35fr);
+      gap:18px;
+      align-items:stretch;
+    }
+    .contact-console,
+    .contact-channel{
+      border:1px solid rgba(53,255,162,.22);
+      background:linear-gradient(145deg,rgba(8,24,28,.82),rgba(3,11,15,.7));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 20px 55px rgba(0,0,0,.22);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+    .contact-console{
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:310px;
+      position:relative;
+      overflow:hidden;
+    }
+    .contact-console::after{
+      content:'';
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-90px;
+      bottom:-120px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(53,255,162,.16),transparent 68%);
+      pointer-events:none;
+    }
+    .contact-console-kicker{
+      color:var(--green);
+      font:700 10px var(--mono);
+      letter-spacing:.12em;
+      margin-bottom:13px;
+    }
+    .contact-console h4{
+      margin:0;
+      max-width:620px;
+      font-size:clamp(28px,3.5vw,48px);
+      line-height:1.02;
+      letter-spacing:-.035em;
+    }
+    .contact-console p{
+      max-width:610px;
+      margin:15px 0 0;
+      color:#abc0b4;
+      line-height:1.7;
+      font-size:14px;
+    }
+    .contact-console-status{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:22px;
+    }
+    .contact-console-status span{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid var(--line);
+      padding:7px 9px;
+      color:var(--green2);
+      font:700 9px var(--mono);
+      letter-spacing:.06em;
+      background:rgba(53,255,162,.025);
+    }
+    .contact-console-status i{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 10px var(--green);
+    }
+    .contact-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:24px;
+      position:relative;
+      z-index:1;
+    }
+    .contact-actions a,
+    .contact-actions button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      min-height:40px;
+      padding:10px 13px;
+      border:1px solid var(--line);
+      background:rgba(53,255,162,.04);
+      color:var(--green2);
+      font:700 10px var(--mono);
+      cursor:pointer;
+      text-decoration:none;
+    }
+    .contact-actions .primary{
+      background:var(--green);
+      color:#021009;
+      box-shadow:0 0 24px rgba(53,255,162,.12);
+    }
+    .contact-actions a:hover,
+    .contact-actions button:hover{
+      border-color:var(--green);
+      background:rgba(53,255,162,.1);
+      color:var(--green2);
+    }
+    .contact-actions .primary:hover{
+      background:var(--green2);
+      color:#021009;
+    }
+    .contact-channel-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1px;
+      background:rgba(53,255,162,.12);
+    }
+    .contact-channel{
+      min-height:154px;
+      padding:21px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+    }
+    .contact-channel:hover{
+      transform:translateY(-4px);
+      border-color:rgba(53,255,162,.46);
+      box-shadow:0 18px 42px rgba(0,0,0,.28),0 0 25px rgba(53,255,162,.07);
+    }
+    .contact-channel small{
+      color:var(--green);
+      font:700 9px var(--mono);
+      letter-spacing:.12em;
+    }
+    .contact-channel .channel-icon{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      color:var(--green);
+      font:700 13px var(--mono);
+      background:rgba(53,255,162,.035);
+      margin:10px 0;
+    }
+    .contact-channel strong{
+      font:700 12px/1.45 var(--mono);
+      color:#d7efe1;
+    }
+    .contact-channel .channel-meta{
+      margin-top:6px;
+      color:var(--muted);
+      font:9px/1.45 var(--mono);
+    }
+    .copy-contact{
+      margin-top:11px;
+      align-self:flex-start;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--green2);
+      padding:6px 8px;
+      font:700 8px var(--mono);
+      cursor:pointer;
+    }
+    .copy-contact:hover{
+      background:var(--green);
+      color:#021009;
+    }
+    .contact-availability{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      margin-top:14px;
+      padding:14px 16px;
+      border:1px solid rgba(53,255,162,.18);
+      background:rgba(53,255,162,.025);
+      color:var(--muted);
+      font:9px/1.5 var(--mono);
+    }
+    .contact-availability strong{color:var(--green2);font-size:10px}
+    .contact-availability .availability-dot{
+      display:inline-block;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 11px var(--green);
+      margin-right:7px;
+    }
+    .contact-copy-status{
+      color:var(--green);
+      min-height:14px;
+      font:9px var(--mono);
+    }
+    @media(max-width:900px){
+      .contact-command{grid-template-columns:1fr}
+      .contact-console{min-height:0}
+    }
+    @media(max-width:620px){
+      #contact{padding-top:48px!important;padding-bottom:58px!important}
+      .contact-console{padding:22px}
+      .contact-channel-grid{grid-template-columns:1fr}
+      .contact-channel{min-height:138px}
+      .contact-availability{align-items:flex-start;flex-direction:column;gap:8px}
     }
     footer{width:min(1180px,calc(100% - 36px));margin:auto;padding:26px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;color:var(--muted);font:10px var(--mono)}
     @media(max-width:980px){
@@ -2714,6 +3100,25 @@
       .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .security-profile-grid{grid-template-columns:1fr}
     }
+    @media(max-width:1100px){
+      .nav{display:none}
+      .menu{display:block}
+      .nav.open{
+        position:absolute;
+        display:grid;
+        top:64px;
+        left:12px;
+        right:12px;
+        gap:0;
+        padding:8px;
+        background:rgba(4,9,13,.97);
+        border:1px solid var(--line);
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
+        max-height:calc(100vh - 82px);
+        overflow:auto;
+      }
+      .nav.open button{text-align:left;padding:12px;border-bottom:1px solid rgba(53,255,162,.08)}
+    }
     @media(max-width:900px){
       .topbar{height:64px}.nav{display:none}.menu{display:block}
       .nav.open{position:absolute;display:grid;top:64px;left:12px;right:12px;gap:0;padding:8px;background:rgba(4,9,13,.97);border:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,.35)}
@@ -2793,7 +3198,6 @@
       .project-card-copy p{min-height:0}
       .project-visual{height:175px}
     }
-
 
   `;
 
@@ -3019,7 +3423,7 @@
         <article class="card project-card project-case-file" data-project-index="${index}" data-categories="${categories.join('|')}">
           <div class="project-file-head">
             <span>CASE-${projectCardNumber(index)}</span>
-            <span class="project-state live"><i></i> CASE FILE</span>
+            <span class="project-state live"><i></i> DOCUMENTED</span>
           </div>
           ${projectVisual(index)}
           <div class="project-card-copy">
@@ -3027,6 +3431,14 @@
             <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
             <h4>${project.title}</h4>
             <p>${project.description}</p>
+            <div class="project-objective">
+              <small>PRIMARY OBJECTIVE</small>
+              <p>${project.objective}</p>
+            </div>
+            <div class="project-stack">
+              <small>TECH STACK / FOCUS</small>
+              <span>${project.tags.join(' · ')}</span>
+            </div>
             <div class="project-architecture-mini">
               ${(project.architecture || []).slice(0,4).map((step,i)=>html`<span>${step}</span>${i < Math.min((project.architecture||[]).length,4)-1 ? '<b>→</b>' : ''}`).join('')}
             </div>
@@ -3073,7 +3485,8 @@
 
   function experienceRows() {
     return DATA.experience.map(item => html`
-      <div class="info-row experience-row">
+      <div class="info-row experience-row ${item.organization === 'SSEV SOFTSOLS' ? 'ssev-work-card' : ''}"
+           ${item.organization === 'SSEV SOFTSOLS' ? 'data-ssev-work="true" role="button" tabindex="0"' : ''}>
         <small>${item.organization}</small>
         <strong>${item.title}</strong>
         <p>${item.detail}</p>
@@ -3083,14 +3496,28 @@
             ${item.projectWork.map(project => html`<span class="experience-project">${project}</span>`).join('')}
           </div>
         ` : ''}
+        ${item.organization === 'SSEV SOFTSOLS' ? html`
+          <div class="ssev-work-cta">
+            <span>OPEN SSEV WORKSPACE</span>
+            <b>→</b>
+          </div>
+        ` : ''}
       </div>
     `).join('');
   }
 
   function skillTags() {
-    return Object.entries(DATA.skills)
-      .flatMap(([group, items]) => items.map(item => `<span title="${group}">${item}</span>`))
-      .join('');
+    return Object.entries(DATA.skills).map(([group, items]) => `
+      <div class="skill-group-card">
+        <div class="skill-group-head">
+          <span>${group.toUpperCase()}</span>
+          <b>${items.length} SKILLS</b>
+        </div>
+        <div class="skills skill-group-items">
+          ${items.map(item => `<span title="${group}" data-skill="${item}">${item}</span>`).join('')}
+        </div>
+      </div>
+    `).join('');
   }
 
   function appTemplate() {
@@ -3167,46 +3594,28 @@
         <div class="window-body" id="utilityBody"></div>
       </div>
 
-
-      <div class="investigation-overlay" id="investigationOverlay" aria-hidden="true">
-        <div class="investigation-shell">
-          <div class="investigation-head">
-            <span>INCIDENT RESPONSE // INVESTIGATION MODE // BROWSER SIMULATION</span>
-            <button id="investigationClose">CLOSE [ESC]</button>
-          </div>
-          <div class="investigation-body">
-            <div class="investigation-grid">
-              <div class="investigation-evidence">
-                <h4>EVIDENCE BOARD</h4>
-                <div class="evidence-item"><span>AUTH LOG</span><b>LOGIN_FAILURE</b></div>
-                <div class="evidence-item"><span>PROCESS</span><b>invoice.pdf.exe</b></div>
-                <div class="evidence-item"><span>EVENT SOURCE</span><b>WINDOWS SECURITY</b></div>
-                <div class="evidence-item"><span>NETWORK IOC</span><b>185.42.19.77:4444</b></div>
-                <div class="evidence-item"><span>CASE</span><b>CASE-2026-001</b></div>
-              </div>
-              <div class="investigation-log">
-                <h4>RECONSTRUCTION STREAM</h4>
-                <div class="investigation-lines" id="investigationLines"></div>
-                <div class="investigation-progress"><span id="investigationProgress"></span></div>
-                <div class="investigation-footer">
-                  <span id="investigationStatus">READY // ANALYSIS NOT STARTED</span>
-                  <button id="investigationRun">START ANALYSIS</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="cursor-scanner" id="cursorScanner" aria-hidden="true"></div>
 
       <div class="project-modal" id="projectModal" aria-hidden="true">
         <div class="project-modal-panel">
           <div class="project-modal-head">
-            <span>PROJECT CASE FILE // <b id="projectModalCaseId">CASE</b></span>
+            <span>PROJECT CASE STUDY</span>
             <button id="projectModalClose">CLOSE [ESC]</button>
           </div>
           <div class="project-modal-body" id="projectModalBody"></div>
+        </div>
+      </div>
+
+      <div class="ssev-modal" id="ssevModal" aria-hidden="true">
+        <div class="ssev-modal-panel">
+          <div class="ssev-modal-head">
+            <div>
+              <div class="kicker">SSEV SOFTSOLS // WORKSPACE</div>
+              <span class="sub">CYBER SECURITY ANALYST • PROJECTS • ENGINEERING • SECURITY LABS</span>
+            </div>
+            <button id="ssevModalClose">CLOSE [ESC]</button>
+          </div>
+          <div class="ssev-modal-body" id="ssevModalBody"></div>
         </div>
       </div>
 
@@ -3248,7 +3657,7 @@
 
       <header class="topbar">
         <button class="brand nav-target" data-target="home"><b>&gt;_</b> HARSHAVARDHAN</button>
-        <button class="menu" id="menuBtn">☰</button>
+        <button class="menu" id="menuBtn" aria-label="Open portfolio navigation" aria-expanded="false" aria-controls="nav">☰</button>
         <div class="mode-switch" id="modeSwitch">
           <button id="cyberModeButton" class="active">CYBER MODE</button>
           <button id="professionalModeButton">PROFESSIONAL MODE</button>
@@ -3258,10 +3667,9 @@
           <button data-target="projects">PROJECTS</button>
           <button data-target="about">ABOUT</button>
           <button data-target="experience">EXPERIENCE</button>
-          <button data-target="career-journey">JOURNEY</button>
-          <button data-target="capabilities">CAPABILITIES</button>
           <button data-target="credentials">CREDENTIALS</button>
           <button data-target="terminal">TERMINAL</button>
+          <button data-target="threat-dashboard">SOC</button>
           <button data-target="labs">LABS</button>
           <button data-target="writeups">WRITE-UPS</button>
           <button data-target="contact">CONTACT</button>
@@ -3327,7 +3735,9 @@
               <p class="recruiter-summary">Security-focused analyst and builder working across network defense, digital forensics, AI security and embedded security.</p>
               <div class="recruiter-specializations">${['NETWORK DEFENSE','DIGITAL FORENSICS','AI SECURITY','EMBEDDED SECURITY'].map(item=>`<span>${item}</span>`).join('')}</div>
               <div class="recruiter-actions">
-                <button class="btn primary" data-target="contact">CONTACT</button>
+                <button class="btn primary" data-target="projects">VIEW PROJECTS</button>
+                <button class="btn" data-target="experience">VIEW EXPERIENCE</button>
+                <button class="btn" data-target="contact">CONTACT</button>
                 <button class="btn" id="recruiterResumeBtn">VIEW RESUME</button>
                 <a class="btn" href="${DATA.profile.linkedin}" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
               </div>
@@ -3343,7 +3753,7 @@
 
         <section class="section projects-section" id="projects">
           <div class="heading">
-            <div><div class="label">03 // PROJECTS</div><h3>Selected cyber operations</h3></div>
+            <div><div class="label">02 // PROJECTS</div><h3>Cyber Operations</h3></div>
             <div class="mono">[ mission_data.loaded = true ]</div>
           </div>
           <div class="project-console">
@@ -3364,7 +3774,7 @@
 
         <section class="section security-profile-section" id="about">
           <div class="heading">
-            <div><div class="label">04 // SECURITY PROFILE</div><h3>Analyst dossier</h3></div>
+            <div><div class="label">03 // SECURITY PROFILE</div><h3>Analyst dossier</h3></div>
             <div class="mono">[ profile.access = verified ]</div>
           </div>
 
@@ -3414,61 +3824,21 @@
 
         <section class="section" id="experience">
           <div class="heading">
-            <div><div class="label">05 // EXPERIENCE</div><h3>Professional experience</h3></div>
+            <div><div class="label">04 // EXPERIENCE</div><h3>Professional experience</h3></div>
             <div class="mono">[ work_history = verified ]</div>
           </div>
           <div class="experience-stack">${experienceRows()}</div>
-        </section>
-
-        <section class="section career-journey-section" id="career-journey">
-          <div class="heading">
-            <div><div class="label">06 // CAREER JOURNEY</div><h3>Career and security journey</h3></div>
-            <div class="mono">[ learning // research // growth ]</div>
-          </div>
-          <div class="journey-intro">
-            <div>
-              <div class="dossier-kicker">FROM FOUNDATION TO INDUSTRY</div>
-              <p>This timeline separates academic development, research milestones and industry progression from formal employment history.</p>
-            </div>
-            <div class="journey-status"><span></span> PROGRESSION TRACKED // 2023–2026</div>
-          </div>
           <div class="cyber-timeline" id="cyberTimeline">
-            <article class="timeline-item"><div class="timeline-index">01</div><div class="timeline-year">2023</div><div class="timeline-title">Cybersecurity Foundation</div><div class="timeline-copy">Built practical experience in ethical hacking, network analysis, web security and defensive tools.</div></article>
-            <article class="timeline-item"><div class="timeline-index">02</div><div class="timeline-year">2024</div><div class="timeline-title">Research and Project Development</div><div class="timeline-copy">Worked on phishing detection, memory forensics, vulnerability scanning and cybersecurity research.</div></article>
-            <article class="timeline-item"><div class="timeline-index">03</div><div class="timeline-year">2025</div><div class="timeline-title">Publications and Patent Work</div><div class="timeline-copy">Advanced work in DDoS mitigation, moving target defense, ChaCha20 and AI-assisted threat detection.</div></article>
-            <article class="timeline-item"><div class="timeline-index">04</div><div class="timeline-year">2026</div><div class="timeline-title">Graduation and Industry Role</div><div class="timeline-copy">Completing B.Tech CSE Cyber Security while working as a Cyber Security Analyst at SSEV SOFTSOLS.</div></article>
-          </div>
-        </section>
-
-        <section class="section capability-section" id="capabilities">
-          <div class="heading">
-            <div><div class="label">07 // SECURITY CAPABILITIES</div><h3>Security capability matrix</h3></div>
-            <div class="mono">[ domain → evidence → case files ]</div>
-          </div>
-          <div class="capability-console">
-            <div class="capability-sidebar">
-              <div class="dossier-kicker">SELECT A DOMAIN</div>
-              <button class="capability-tab active" data-capability="network">
-                <span><b>01</b> NETWORK DEFENSE</span><i>●</i>
-              </button>
-              <button class="capability-tab" data-capability="ai">
-                <span><b>02</b> AI SECURITY</span><i>●</i>
-              </button>
-              <button class="capability-tab" data-capability="forensics">
-                <span><b>03</b> DIGITAL FORENSICS</span><i>●</i>
-              </button>
-              <button class="capability-tab" data-capability="embedded">
-                <span><b>04</b> EMBEDDED SECURITY</span><i>●</i>
-              </button>
-              <div class="capability-note">Interactive portfolio map. Selecting a domain reveals the related practical work and evidence trail.</div>
-            </div>
-            <div class="capability-output" id="capabilityOutput"></div>
+            <article class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-title">Cybersecurity Foundation</div><div class="timeline-copy">Built practical experience in ethical hacking, network analysis, web security and defensive tools.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-title">Research and Project Development</div><div class="timeline-copy">Worked on phishing detection, memory forensics, vulnerability scanning and cybersecurity research.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-title">Publications and Patent Work</div><div class="timeline-copy">Advanced work in DDoS mitigation, moving target defense, ChaCha20 and AI-assisted threat detection.</div></article>
+            <article class="timeline-item"><div class="timeline-year">2026</div><div class="timeline-title">Graduation and Industry Role</div><div class="timeline-copy">Completing B.Tech CSE Cyber Security while working as a Cyber Security Analyst at SSEV SOFTSOLS.</div></article>
           </div>
         </section>
 
         <section class="section" id="credentials">
           <div class="heading">
-            <div><div class="label">08 // CREDENTIALS</div><h3>Research and credentials</h3></div>
+            <div><div class="label">05 // CREDENTIALS</div><h3>Research and credentials</h3></div>
             <div class="mono">[ publications // patents // certifications ]</div>
           </div>
           <div class="credential-stack">
@@ -3476,54 +3846,11 @@
             <div class="credential-block"><div class="label">PATENTS</div><div class="info-list">${patentRows()}</div></div>
             <div class="credential-block"><div class="label">CERTIFICATIONS</div><div class="info-list">${DATA.certifications.map((item,i)=>`<div class="info-row"><small>CERT-${String(i+1).padStart(2,'0')}</small><strong>${item}</strong></div>`).join('')}</div></div>
           </div>
-          <div class="credential-matrix">
-            <div class="credential-matrix-head">
-              <div><div class="dossier-kicker">CREDENTIAL MATRIX</div><h4>Certification ecosystem</h4></div>
-              <small>${DATA.certifications.length} CREDENTIAL RECORDS</small>
-            </div>
-            <div class="credential-provider-grid">
-              ${[
-                ['GOOGLE','Professional Cyber Security Course'],
-                ['MICROSOFT','Industrial Training'],
-                ['EC-COUNCIL','Cloud Computing / CEH'],
-                ['CISCO','Introduction to Cybersecurity'],
-                ['TATA','Cyber Suraksha']
-              ].map(([provider,detail])=>{
-                const count=DATA.certifications.filter(c=>c.toUpperCase().includes(provider)).length;
-                return `<div class="credential-provider"><strong>${count}</strong><span>${provider}</span><small>${detail}</small></div>`;
-              }).join('')}
-            </div>
-          </div>
-        </section>
-
-        <section class="section profile-details-section" id="profile-details">
-          <div class="heading">
-            <div><div class="label">09 // PERSONAL PROFILE</div><h3>Leadership and beyond</h3></div>
-            <div class="mono">[ leadership // strengths // hobbies ]</div>
-          </div>
-          <div class="grid2 profile-details-grid">
-            <div class="card">
-              <div class="dossier-kicker">LEADERSHIP</div>
-              <div class="info-list">
-                ${DATA.leadership.map((item,i)=>`<div class="info-row"><small>LEAD-${String(i+1).padStart(2,'0')}</small><strong>${item}</strong></div>`).join('')}
-              </div>
-            </div>
-            <div class="card">
-              <div class="dossier-kicker">STRENGTHS</div>
-              <div class="skills">
-                ${DATA.strengths.map(item=>`<span>${item}</span>`).join('')}
-              </div>
-              <div class="dossier-kicker" style="margin-top:28px">HOBBIES</div>
-              <div class="info-list">
-                ${DATA.hobbies.map((item,i)=>`<div class="info-row"><small>HOBBY-${String(i+1).padStart(2,'0')}</small><strong>${item}</strong></div>`).join('')}
-              </div>
-            </div>
-          </div>
         </section>
 
         <section class="section" id="skills">
           <div class="heading">
-            <div><div class="label">10 // SKILLS</div><h3>Technical capabilities</h3></div>
+            <div><div class="label">06 // SKILLS</div><h3>Technical capabilities</h3></div>
           </div>
           <div class="skills">${skillTags()}</div><div class="skill-detail" id="skillDetail"></div>
           <div class="skill-project-map" id="skillProjectMap">
@@ -3538,27 +3865,94 @@
 
         <section class="section" id="threat-dashboard">
           <div class="heading">
-            <div><div class="label">11 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
+            <div><div class="label">07 // THREAT INTELLIGENCE</div><h3>Security operations dashboard</h3></div>
             <div class="mono">[ monitoring = simulated ]</div>
           </div>
-          <div class="soc-console">
-            <div class="soc-header"><div><span class="status-led"></span> SECURITY CONTROL PLANE</div><span class="soc-simulated">BROWSER-ONLY STATUS DISPLAY</span></div>
-            <div class="soc-grid">
-              <article class="soc-module"><small>NETWORK MONITOR</small><strong>ACTIVE</strong><span>Traffic visibility and packet analysis</span><i></i></article>
-              <article class="soc-module"><small>THREAT DETECTION</small><strong>ACTIVE</strong><span>Anomaly and malicious-activity analysis</span><i></i></article>
-              <article class="soc-module"><small>FORENSICS ENGINE</small><strong>READY</strong><span>Memory and event evidence workflows</span><i></i></article>
-              <article class="soc-module"><small>AI SECURITY</small><strong>ACTIVE</strong><span>Phishing and agent-policy controls</span><i></i></article>
-              <article class="soc-module"><small>EMBEDDED SECURITY</small><strong>ACTIVE</strong><span>Security-focused device protection</span><i></i></article>
-              <article class="soc-module"><small>AUDIT TRAIL</small><strong>LOGGING</strong><span>Project and terminal interaction events</span><i></i></article>
+
+          <div class="soc-console soc-dashboard-v2">
+            <div class="soc-header">
+              <div><span class="status-led"></span> SECURITY OPERATIONS CENTER <b class="soc-live-text">ONLINE</b></div>
+              <span class="soc-simulated">PORTFOLIO SIMULATION // NO LIVE TELEMETRY</span>
             </div>
+
+            <div class="soc-kpis" aria-label="Security operations metrics">
+              <article class="soc-kpi">
+                <small>CASE FILES</small>
+                <strong data-soc-value="projects">0</strong>
+                <span>indexed security projects</span>
+              </article>
+              <article class="soc-kpi">
+                <small>RESEARCH OUTPUT</small>
+                <strong data-soc-value="research">0</strong>
+                <span>publications + patents</span>
+              </article>
+              <article class="soc-kpi">
+                <small>SECURITY DOMAINS</small>
+                <strong data-soc-value="domains">4</strong>
+                <span>active capability areas</span>
+              </article>
+              <article class="soc-kpi">
+                <small>WORKSTREAMS</small>
+                <strong data-soc-value="workstreams">0</strong>
+                <span>SSEV security workstreams</span>
+              </article>
+            </div>
+
+            <div class="soc-main-grid">
+              <div class="soc-panel soc-panel-pipeline">
+                <div class="soc-panel-head">
+                  <div><span class="panel-index">01</span> SECURITY CONTROL PIPELINE</div>
+                  <span class="panel-state"><i></i> ALL SYSTEMS READY</span>
+                </div>
+                <div class="soc-grid">
+                  <article class="soc-module"><small>NETWORK MONITOR</small><strong>ACTIVE</strong><span>Traffic visibility and packet analysis</span><i></i></article>
+                  <article class="soc-module"><small>THREAT DETECTION</small><strong>ACTIVE</strong><span>Anomaly and malicious-activity analysis</span><i></i></article>
+                  <article class="soc-module"><small>FORENSICS ENGINE</small><strong>READY</strong><span>Memory and event evidence workflows</span><i></i></article>
+                  <article class="soc-module"><small>AI SECURITY</small><strong>ACTIVE</strong><span>Phishing and agent-policy controls</span><i></i></article>
+                  <article class="soc-module"><small>EMBEDDED SECURITY</small><strong>ACTIVE</strong><span>Security-focused device protection</span><i></i></article>
+                  <article class="soc-module"><small>AUDIT TRAIL</small><strong>LOGGING</strong><span>Project and terminal interaction events</span><i></i></article>
+                </div>
+              </div>
+
+              <div class="soc-panel soc-panel-activity">
+                <div class="soc-panel-head">
+                  <div><span class="panel-index">02</span> THREAT ACTIVITY</div>
+                  <span class="panel-state">24H WINDOW</span>
+                </div>
+                <div class="soc-chart" id="socChart" aria-label="Simulated 24 hour threat activity chart"></div>
+                <div class="soc-chart-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+              </div>
+            </div>
+
+            <div class="soc-bottom-grid">
+              <div class="soc-panel">
+                <div class="soc-panel-head">
+                  <div><span class="panel-index">03</span> ALERT QUEUE</div>
+                  <span class="panel-state alert-state"><i></i> MONITORED</span>
+                </div>
+                <div class="soc-alerts" id="attackFeed" aria-live="polite"></div>
+              </div>
+
+              <div class="soc-panel soc-severity">
+                <div class="soc-panel-head">
+                  <div><span class="panel-index">04</span> SEVERITY DISTRIBUTION</div>
+                  <span class="panel-state">SIMULATED</span>
+                </div>
+                <div class="severity-row"><span>CRITICAL</span><div><i style="width:12%"></i></div><b>12%</b></div>
+                <div class="severity-row"><span>HIGH</span><div><i style="width:28%"></i></div><b>28%</b></div>
+                <div class="severity-row"><span>MEDIUM</span><div><i style="width:42%"></i></div><b>42%</b></div>
+                <div class="severity-row"><span>LOW</span><div><i style="width:18%"></i></div><b>18%</b></div>
+              </div>
+            </div>
+
             <div class="soc-feed" id="socFeed"></div>
           </div>
-          <div class="simulated-label">All dashboard values and status indicators are portfolio demonstrations, not live production telemetry.</div>
+          <div class="simulated-label">Dashboard metrics, alerts, charts and status indicators are portfolio demonstrations. They are not connected to a production SIEM or live network.</div>
         </section>
 
         <section class="section" id="terminal">
           <div class="heading">
-            <div><div class="label">12 // INTERACTIVE TERMINAL</div><h3>Query the complete profile</h3></div>
+            <div><div class="label">08 // INTERACTIVE TERMINAL</div><h3>Query the complete profile</h3></div>
             <div class="mono">Type help to begin</div>
           </div>
 
@@ -3566,16 +3960,9 @@
             <div class="termbar">
               <span>harsha@cyber-portfolio: ~</span>
               <div class="termbar-actions">
-                <span class="terminal-health"><i></i> SHELL ONLINE</span>
                 <button class="stop-command" id="stopCommandBtn">STOP</button>
                 <button id="clearBtn">CLEAR</button>
               </div>
-            </div>
-            <div class="terminal-health-strip" aria-label="Terminal health status">
-              <span><b>01</b> SHELL <em>READY</em></span>
-              <span><b>02</b> FILESYSTEM <em>MOUNTED</em></span>
-              <span><b>03</b> COMMAND ENGINE <em>READY</em></span>
-              <span><b>04</b> EXTERNAL ACCESS <em>NONE</em></span>
             </div>
             <div class="output" id="output"></div>
             <div class="terminal-startup" id="terminalStartup" aria-live="polite"></div>
@@ -3595,7 +3982,7 @@
             <div class="command-group">
               <h4>PROFILE</h4>
               <div class="command-buttons">
-                ${['help','whoami','whoami --visitor','profile','scan portfolio','matrix','investigate','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','resume','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+                ${['help','whoami','whoami --visitor','profile','about','education','skills','projects','publications','patents','experience','certificates','leadership','strengths','hobbies','contact','resume','all'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
               </div>
               <small>View portfolio information, resume, contact details and complete profile data.</small>
             </div>
@@ -3603,7 +3990,7 @@
             <div class="command-group">
               <h4>FILESYSTEM</h4>
               <div class="command-buttons">
-                ${['pwd','ls','tree','cd projects','cd certificates','cd evidence','cd ..','cat profile.txt','cat security-map.txt','cat skills.txt','cat contact.txt','cat publications.txt','cat patents.txt','cat experience.txt','cat projects/motag.txt','cat projects/phishing.txt','cat projects/forensics.txt','cat projects/trajectory-firewall.txt','cat projects/cyber-reconstruction.txt','cat projects/waste-iot.txt','cat certificates/certificates.txt'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+                ${['pwd','ls','tree','cd projects','cd certificates','cd evidence','cd ..','cat profile.txt','cat skills.txt','cat contact.txt','cat publications.txt','cat patents.txt','cat experience.txt','cat projects/motag.txt','cat projects/phishing.txt','cat projects/forensics.txt','cat projects/trajectory-firewall.txt','cat projects/cyber-reconstruction.txt','cat projects/waste-iot.txt','cat certificates/certificates.txt'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
               </div>
               <small>Explore the portfolio using the simulated Linux-style filesystem.</small>
             </div>
@@ -3627,7 +4014,7 @@
             <div class="command-group">
               <h4>GAMES & PROGRESS</h4>
               <div class="command-buttons">
-                ${['play firewall','play snake','highscore','achievements','history','date','search','scan portfolio','matrix','investigate'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
+                ${['play firewall','play snake','highscore','achievements','history','date','search'].map(cmd => `<button data-command="${cmd}">${cmd}</button>`).join('')}
               </div>
               <small>Play terminal games, view scores, achievements and command history.</small>
             </div>
@@ -3653,7 +4040,7 @@
         
         <section class="section project-intelligence-section" id="trajectory">
           <div class="heading">
-            <div><div class="label">13 // AI SECURITY CONTROL</div><h3>Trajectory Firewall</h3></div>
+            <div><div class="label">08 // AI SECURITY CONTROL</div><h3>Trajectory Firewall</h3></div>
             <div class="mono">[ autonomous_agent = constrained ]</div>
           </div>
           <div class="intel-panel">
@@ -3678,7 +4065,7 @@
 
         <section class="section reconstruction-section" id="reconstruction">
           <div class="heading">
-            <div><div class="label">14 // DIGITAL FORENSICS</div><h3>Cyber Reconstruction</h3></div>
+            <div><div class="label">10 // DIGITAL FORENSICS</div><h3>Cyber Reconstruction</h3></div>
             <div class="mono">[ incident_timeline = reconstructed ]</div>
           </div>
           <div class="reconstruction-panel reconstruction-timeline-panel">
@@ -3701,7 +4088,7 @@
         <section class="section" id="labs">
           <div class="heading">
             <div>
-              <div class="label">15 // CYBERSECURITY LABS</div>
+              <div class="label">11 // CYBERSECURITY LABS</div>
               <h3>Practical security work</h3>
             </div>
           </div>
@@ -3711,7 +4098,7 @@
         <section class="section" id="writeups">
           <div class="heading">
             <div>
-              <div class="label">16 // SECURITY WRITE-UPS</div>
+              <div class="label">12 // SECURITY WRITE-UPS</div>
               <h3>Technical explanations and research notes</h3>
             </div>
           </div>
@@ -3730,25 +4117,84 @@
 
 <section class="section" id="contact">
           <div class="heading">
-            <div><div class="label">17 // CONTACT</div><h3>Let’s build secure systems</h3></div>
-          </div>
-          <div class="contact">
-            <a href="mailto:${DATA.profile.email}">
-              <small>EMAIL</small>
-              <strong>${DATA.profile.email}</strong>
-            </a>
-            <a href="tel:${DATA.profile.phone.replace(/\s/g,'')}">
-              <small>PHONE</small>
-              <strong>${DATA.profile.phone}</strong>
-            </a>
-            <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener noreferrer">
-              <small>LINKEDIN</small>
-              <strong>kari-harshavardhan-chowdary-146181217</strong>
-            </a>
             <div>
-              <small>LOCATION</small>
-              <strong>${DATA.profile.location}</strong>
+              <div class="label">13 // CONTACT</div>
+              <h3>Open a secure channel</h3>
             </div>
+            <div class="mono">[ communication = ready ]</div>
+          </div>
+
+          <div class="contact-command">
+            <div class="contact-console">
+              <div>
+                <div class="contact-console-kicker">CONTACT CONTROL // DIRECT ACCESS</div>
+                <h4>Let’s build secure systems.</h4>
+                <p>
+                  Have a security project, research collaboration, role or technical problem to discuss?
+                  Reach out directly and I’ll have the right channel ready.
+                </p>
+
+                <div class="contact-console-status">
+                  <span><i></i> OPEN TO SECURITY WORK</span>
+                  <span><i></i> HYDERABAD // INDIA</span>
+                  <span><i></i> CYBER SECURITY ANALYST</span>
+                </div>
+              </div>
+
+              <div class="contact-actions">
+                <a class="primary" href="mailto:${DATA.profile.email}?subject=Cybersecurity%20Opportunity%20-%20Portfolio">SEND EMAIL →</a>
+                <a href="${DATA.profile.linkedin}" target="_blank" rel="noopener noreferrer">OPEN LINKEDIN ↗</a>
+                <button type="button" id="copyEmailBtn" data-copy-value="${DATA.profile.email}">COPY EMAIL</button>
+              </div>
+              <div class="contact-copy-status" id="contactCopyStatus" aria-live="polite"></div>
+            </div>
+
+            <div class="contact-channel-grid">
+              <div class="contact-channel">
+                <div>
+                  <small>01 // EMAIL</small>
+                  <div class="channel-icon">@</div>
+                  <strong>${DATA.profile.email}</strong>
+                  <div class="channel-meta">Primary professional contact</div>
+                </div>
+                <button class="copy-contact" type="button" data-copy-value="${DATA.profile.email}">COPY ADDRESS</button>
+              </div>
+
+              <div class="contact-channel">
+                <div>
+                  <small>02 // PHONE</small>
+                  <div class="channel-icon">TEL</div>
+                  <strong>${DATA.profile.phone}</strong>
+                  <div class="channel-meta">Direct contact line</div>
+                </div>
+                <button class="copy-contact" type="button" data-copy-value="${DATA.profile.phone}">COPY NUMBER</button>
+              </div>
+
+              <div class="contact-channel">
+                <div>
+                  <small>03 // LINKEDIN</small>
+                  <div class="channel-icon">IN</div>
+                  <strong>harsha-vardhan-146181217</strong>
+                  <div class="channel-meta">Professional profile and updates</div>
+                </div>
+                <a class="copy-contact" href="${DATA.profile.linkedin}" target="_blank" rel="noopener noreferrer">OPEN PROFILE ↗</a>
+              </div>
+
+              <div class="contact-channel">
+                <div>
+                  <small>04 // LOCATION</small>
+                  <div class="channel-icon">LOC</div>
+                  <strong>${DATA.profile.location}</strong>
+                  <div class="channel-meta">Current professional base</div>
+                </div>
+                <button class="copy-contact" type="button" data-copy-value="${DATA.profile.location}">COPY LOCATION</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-availability">
+            <div><span class="availability-dot"></span><strong>CHANNEL STATUS: AVAILABLE</strong></div>
+            <div>BEST FOR: SECURITY ROLES // COLLABORATION // RESEARCH // PROJECT DISCUSSION</div>
           </div>
         </section>
       </main>
@@ -3790,6 +4236,300 @@
 
 
 
+  const ssevModal = document.getElementById('ssevModal');
+  const ssevModalBody = document.getElementById('ssevModalBody');
+  const ssevModalClose = document.getElementById('ssevModalClose');
+
+  const ssevWorkItems = [
+    {
+      type:'SECURITY ENGINEERING',
+      title:'Trajectory Firewall',
+      text:'Autonomous AI security prototype for controlling agent actions through authorized-tool policy, project-scope validation, allow/block decisions and security logging.',
+      tags:['AI SECURITY','POLICY ENFORCEMENT','AGENT SECURITY'],
+      details:{
+        summary:'A security-control layer for autonomous agents that evaluates requested actions before execution.',
+        objective:'Prevent an autonomous agent from performing unauthorized actions outside its approved project scope.',
+        contribution:'Defined the firewall decision flow, authorized-tool policy, project-scope enforcement and security event logging.',
+        architecture:['Agent Request','Policy Check','Scope Validation','Allow / Block Decision','Security Log'],
+        focus:'Agent authorization, least privilege, workspace isolation and auditable security decisions.',
+        outcome:'Demonstrated controlled agent execution where approved file operations are allowed and out-of-scope access is blocked.',
+        future:'Richer policy rules, role-based authorization, persistent audit trails and additional tool controls.'
+      }
+    },
+    {
+      type:'DIGITAL FORENSICS',
+      title:'Cyber Reconstruction Engine',
+      text:'Incident reconstruction workflow using Windows event evidence to correlate activity, failures and indicators into an ordered investigation timeline.',
+      tags:['WINDOWS EVENTS','TIMELINE CORRELATION','INCIDENT RESPONSE'],
+      details:{
+        summary:'A reconstruction workflow that turns fragmented security-event evidence into an ordered incident timeline.',
+        objective:'Connect security events, failures and indicators into an understandable investigation flow.',
+        contribution:'Worked with Windows event evidence and reconstruction logic to map security activity into ordered investigation stages.',
+        architecture:['Evidence Input','Event Parsing','Timeline Correlation','Incident Reconstruction','Investigation View'],
+        focus:'Digital forensics, event correlation, chronology and incident-response analysis.',
+        outcome:'Produced a structured reconstruction flow connecting incident stages such as initial access and login failures.',
+        future:'Automated correlation, IOC enrichment, graph-based relationships and broader event-source support.'
+      }
+    },
+    {
+      type:'OPERATING SYSTEM / SECURITY',
+      title:'LFS OS — Linux From Scratch',
+      text:'Built and configured a Linux From Scratch environment to work directly with the operating-system build process, packages, system configuration and low-level Linux security experimentation.',
+      tags:['LINUX FROM SCRATCH','OS SECURITY','SYSTEM BUILD'],
+      details:{
+        summary:'Hands-on Linux From Scratch work focused on understanding how a Linux system is assembled and configured from its core components.',
+        objective:'Build a working Linux environment from source while gaining direct understanding of system components, dependencies and configuration.',
+        contribution:'Worked through the LFS build process, package preparation, system configuration and low-level Linux experimentation.',
+        architecture:['Build Environment','Toolchain','Package Build','System Configuration','Bootable Linux System'],
+        focus:'Linux internals, package dependencies, system configuration and OS-level security experimentation.',
+        outcome:'Created and worked through a source-built Linux environment rather than relying only on a prebuilt distribution.',
+        future:'Continue hardening, service minimization, security auditing and deeper kernel/system-level experimentation.'
+      }
+    },
+    {
+      type:'AUTOMOTIVE SECURITY',
+      title:'SAVATAR — Secure Smart Vehicle Door Controller',
+      text:'Secure embedded/automotive door-lock and access-control workstream focused on protecting a smart vehicle door-control system.',
+      tags:['DOOR LOCK SECURITY','EMBEDDED SECURITY','AUTOMOTIVE','ACCESS CONTROL'],
+      details:{
+        summary:'A secure smart vehicle door-controller concept focused on protected access control and embedded-device security.',
+        objective:'Design a vehicle door-control system that treats authentication, communication and failure handling as security requirements.',
+        contribution:'Worked across the secure controller design, embedded-security considerations, control logic and failure scenarios.',
+        architecture:['Access Request','Authentication / Validation','Secure Controller','Lock Actuation','Failure-Safe State'],
+        focus:'Embedded security, access control, secure communication, automotive interfaces and fail-safe behavior.',
+        outcome:'Developed a structured security design for a smart vehicle door-control workflow.',
+        future:'Hardware-backed authentication, stronger key management, secure firmware update mechanisms and expanded vehicle-network integration.'
+      }
+    },
+    {
+      type:'AUTOMOTIVE ENGINEERING',
+      title:'Car Engine Design & Engineering',
+      text:'Worked on car-engine design and engineering concepts as part of automotive development and system-level vehicle work.',
+      tags:['AUTOMOTIVE','ENGINE DESIGN','ENGINEERING'],
+      details:{
+        summary:'Automotive engineering work centered on car-engine design concepts and system-level vehicle development.',
+        objective:'Explore engine design and engineering considerations as part of broader automotive system development.',
+        contribution:'Worked on engine-design concepts and engineering-oriented vehicle development tasks.',
+        architecture:['Engine Requirements','Mechanical / System Concepts','Component Relationships','System Integration','Engineering Review'],
+        focus:'Automotive engineering, system thinking and vehicle-level design.',
+        outcome:'Built practical exposure to how engine-level engineering fits into a larger automotive system.',
+        future:'Deeper simulation, ECU integration, telemetry and security-aware automotive system analysis.'
+      }
+    },
+    {
+      type:'AUTOMOTIVE HMI',
+      title:'Digital Instrument Cluster',
+      text:'Worked on digital cluster interfaces including speedometer/tachometer presentation, track and sports modes, and animated gauge experiences.',
+      tags:['HMI','HTML/CSS/JS','AUTOMOTIVE'],
+      details:{
+        summary:'Digital automotive HMI work focused on instrument-cluster presentation and interactive driving modes.',
+        objective:'Create a clear and responsive digital dashboard experience for vehicle information and driving modes.',
+        contribution:'Worked on speedometer/tachometer presentation, track and sports modes, animations and interface behavior.',
+        architecture:['Vehicle Data','Display Logic','Gauge Rendering','Driving Mode','HMI Output'],
+        focus:'Automotive HMI, real-time visual feedback, interface design and responsive interaction.',
+        outcome:'Developed an interactive digital-cluster experience with multiple presentation modes.',
+        future:'Connect to live CAN/ECU data, add diagnostics and integrate security-aware vehicle telemetry.'
+      }
+    },
+    {
+      type:'HMI / COMPUTER VISION',
+      title:'Gesture Control & HMI Experiments',
+      text:'Explored gesture-driven interaction and HMI concepts, including camera-based interaction and experimental interface systems.',
+      tags:['GESTURE CONTROL','HMI','COMPUTER VISION'],
+      details:{
+        summary:'Experimental HMI work exploring camera-based gesture input as an alternative interaction mechanism.',
+        objective:'Explore intuitive hands-free interaction between a user and an interface.',
+        contribution:'Worked with gesture-driven interaction concepts, camera-based input and experimental HMI behavior.',
+        architecture:['Camera Input','Gesture Detection','Action Mapping','Interface State','User Feedback'],
+        focus:'Computer vision, gesture interaction, HMI design and responsive feedback.',
+        outcome:'Demonstrated experimental gesture-driven interface concepts suitable for further HMI development.',
+        future:'Improve gesture robustness, reduce false detections and integrate with automotive HMI systems.'
+      }
+    },
+    {
+      type:'EMBEDDED SECURITY',
+      title:'Raspberry Pi / Jetson / ESP32 Security Work',
+      text:'Performed authorized security assessment and experimentation across embedded platforms, including device communication and security testing.',
+      tags:['RASPBERRY PI','JETSON','ESP32'],
+      details:{
+        summary:'Embedded-platform security work spanning device experimentation, communication and authorized security assessment.',
+        objective:'Understand security behavior across commonly used embedded-computing platforms.',
+        contribution:'Performed authorized security assessment and experimentation involving embedded devices and their communication paths.',
+        architecture:['Embedded Device','Interfaces / Sensors','Communication Layer','Security Testing','Findings'],
+        focus:'Embedded security, device communication, attack-surface review and security testing.',
+        outcome:'Built practical exposure to assessing embedded platforms rather than treating them as isolated hardware.',
+        future:'Hardware-rooted trust, firmware analysis, secure boot and deeper protocol-level testing.'
+      }
+    },
+    {
+      type:'VEHICLE NETWORKING',
+      title:'CAN / ECU & Connectivity Labs',
+      text:'Worked with CAN/ECU concepts and connected-device communication involving embedded systems, Android tablets and cellular connectivity experiments.',
+      tags:['CAN','ECU','4G/5G'],
+      details:{
+        summary:'Connected-vehicle experimentation covering CAN/ECU concepts and communication between embedded and external systems.',
+        objective:'Understand how vehicle electronics and connected devices exchange information across system boundaries.',
+        contribution:'Worked with CAN/ECU concepts and connected-device communication involving embedded systems, Android tablets and cellular connectivity experiments.',
+        architecture:['Vehicle / ECU','CAN Communication','Gateway / Device','Cellular Connectivity','External Interface'],
+        focus:'Vehicle networking, ECU communication, connectivity and connected-device security.',
+        outcome:'Built practical exposure to the communication paths that connect vehicle electronics with external systems.',
+        future:'CAN anomaly detection, secure gateways, message authentication and deeper automotive network analysis.'
+      }
+    }
+  ];
+
+  const ssevTaskItems = [
+    'Security architecture and policy enforcement',
+    'Authorized vulnerability assessment and security testing',
+    'Log collection, event monitoring and threat analysis',
+    'Network analysis with Wireshark and tcpdump',
+    'Firewall configuration and Linux security labs with UFW',
+    'Linux From Scratch system build, package configuration and OS-level security experimentation',
+    'Snort-based intrusion detection experimentation',
+    'Embedded-device security assessment',
+    'Automotive HMI and digital-cluster interface development',
+    'Car engine design and automotive engineering work',
+    'Gesture-control and camera/HMI experimentation',
+    'Security-focused data visualization and dashboard UI work',
+    'CAN/ECU and connected-vehicle security experimentation'
+  ];
+
+  function openSsevWorkspace(){
+    if(!ssevModal || !ssevModalBody) return;
+
+    const documented = DATA.experience.find(item => item.organization === 'SSEV SOFTSOLS');
+
+    ssevModalBody.innerHTML = `
+      <div class="ssev-hero">
+        <div class="ssev-hero-main">
+          <div class="label">WORKSTREAM ARCHIVE</div>
+          <h4>SSEV SOFTSOLS</h4>
+          <p>${documented?.detail || 'Cybersecurity, embedded systems and security engineering work.'}</p>
+        </div>
+        <div class="ssev-facts">
+          <div class="ssev-fact"><small>ROLE</small><strong>Cyber Security Analyst</strong></div>
+          <div class="ssev-fact"><small>FOCUS</small><strong>Security • AI • Embedded • Automotive • Visualization</strong></div>
+          <div class="ssev-fact"><small>PRIMARY WORK</small><strong>${documented?.projectWork?.length || 0} documented core workstreams</strong></div>
+        </div>
+      </div>
+
+      <div class="ssev-section-title">
+        <div>01 // PROJECTS & WORKSTREAMS</div>
+        <span>Selected SSEV work archive</span>
+      </div>
+      <div class="ssev-work-grid">
+        ${ssevWorkItems.map((item,index) => `
+          <article class="ssev-work-item" data-ssev-detail="${index}" role="button" tabindex="0">
+            <small>${item.type}</small>
+            <strong>${item.title}</strong>
+            <p>${item.text}</p>
+            <div class="tags">${item.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+            <div class="detail-cta"><span>OPEN WORKSTREAM DETAILS</span><b>→</b></div>
+          </article>
+        `).join('')}
+      </div>
+
+      <div class="ssev-section-title">
+        <div>02 // TASKS & RESPONSIBILITIES</div>
+        <span>Hands-on engineering areas</span>
+      </div>
+      <div class="ssev-task-grid">
+        ${ssevTaskItems.map(task => `<div class="ssev-task">${task}</div>`).join('')}
+      </div>
+
+      <div class="ssev-note">
+        This workspace consolidates the SSEV projects and work areas documented across the portfolio/work history. Individual project cards elsewhere in the portfolio contain deeper case-study details where available.
+      </div>
+    `;
+
+    ssevModal.classList.add('active');
+    ssevModal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  function openSsevWorkDetail(index){
+    const item = ssevWorkItems[index];
+    if(!item || !ssevModalBody) return;
+    const d = item.details || {};
+    const architecture = (d.architecture || []).map((step,i) => `
+      <div class="ssev-detail-node"><span>0${i+1}</span>${step}</div>
+    `).join('');
+
+    ssevModalBody.innerHTML = `
+      <div class="ssev-detail-view">
+        <div class="ssev-detail-top">
+          <div>
+            <div class="ssev-detail-kicker">${item.type} // SSEV WORKSTREAM</div>
+            <h4 class="ssev-detail-title">${item.title}</h4>
+            <p class="ssev-detail-summary">${d.summary || item.text}</p>
+          </div>
+          <button class="ssev-back-btn" id="ssevDetailBack">← BACK TO WORKSPACE</button>
+        </div>
+
+        <div class="tags ssev-detail-tags">
+          ${item.tags.map(tag => `<span>${tag}</span>`).join('')}
+        </div>
+
+        <div class="ssev-section-title"><div>01 // WORKSTREAM DETAILS</div><span>Engineering summary</span></div>
+        <div class="ssev-detail-grid">
+          <div class="ssev-detail-block"><small>OBJECTIVE</small><p>${d.objective || 'Documented workstream objective.'}</p></div>
+          <div class="ssev-detail-block"><small>MY CONTRIBUTION</small><p>${d.contribution || 'Hands-on engineering contribution documented in the workstream.'}</p></div>
+          <div class="ssev-detail-block"><small>SECURITY / ENGINEERING FOCUS</small><p>${d.focus || 'Security and engineering focus documented for this workstream.'}</p></div>
+          <div class="ssev-detail-block"><small>OUTCOME</small><p>${d.outcome || 'Documented workstream outcome.'}</p></div>
+        </div>
+
+        <div class="ssev-section-title"><div>02 // SYSTEM FLOW</div><span>Conceptual architecture</span></div>
+        <div class="ssev-detail-architecture">${architecture}</div>
+
+        <div class="ssev-section-title"><div>03 // NEXT DEVELOPMENT</div><span>Future direction</span></div>
+        <div class="ssev-detail-block"><p>${d.future || 'Further development can extend the documented workstream.'}</p></div>
+      </div>
+    `;
+
+    ssevModalBody.querySelector('#ssevDetailBack')?.addEventListener('click', openSsevWorkspace);
+  }
+
+  function closeSsevWorkspace(){
+    ssevModal?.classList.remove('active');
+    ssevModal?.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-ssev-work="true"]').forEach(card=>{
+    card.addEventListener('click',openSsevWorkspace);
+    card.addEventListener('keydown',event=>{
+      if(event.key==='Enter' || event.key===' '){
+        event.preventDefault();
+        openSsevWorkspace();
+      }
+    });
+  });
+
+  ssevModalBody?.addEventListener('click',event=>{
+    const card = event.target.closest('[data-ssev-detail]');
+    if(card){
+      openSsevWorkDetail(Number(card.dataset.ssevDetail));
+    }
+  });
+  ssevModalBody?.addEventListener('keydown',event=>{
+    const card = event.target.closest('[data-ssev-detail]');
+    if(card && (event.key==='Enter' || event.key===' ')){
+      event.preventDefault();
+      openSsevWorkDetail(Number(card.dataset.ssevDetail));
+    }
+  });
+
+  ssevModalClose?.addEventListener('click',closeSsevWorkspace);
+  ssevModal?.addEventListener('click',event=>{
+    if(event.target===ssevModal) closeSsevWorkspace();
+  });
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){
+      closeProjectModal();
+      closeSsevWorkspace();
+    }
+  });
   const projectModal = document.getElementById('projectModal');
   const projectModalBody = document.getElementById('projectModalBody');
   const projectModalClose = document.getElementById('projectModalClose');
@@ -3804,26 +4544,45 @@
       )
       .join('');
 
-    projectModalBody.innerHTML = `
-      ${projectVisual(index)}
-      <div class="case-meta">
-        <div><small>CASE ID</small><strong>CASE-${String(index + 1).padStart(3,'0')}</strong></div>
-        <div><small>STATUS</small><strong>DOCUMENTED / ANALYZABLE</strong></div>
-        <div><small>DOMAIN</small><strong>${projectCategory(project).join(' // ') || 'SECURITY RESEARCH'}</strong></div>
+    const architectureNodes = (project.architecture || []).map((step, stepIndex) => `
+      <div class="case-flow-node">
+        <span>${String(stepIndex + 1).padStart(2,'0')}</span>
+        <strong>${step}</strong>
       </div>
-      <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
-      <h4>${project.title}</h4>
+    `).join('');
+
+    projectModalBody.innerHTML = `
+      <div class="case-study-kicker">CASE FILE // ${String(index + 1).padStart(2,'0')} // ${projectCategory(project).join(' / ') || 'SECURITY PROJECT'}</div>
+      ${projectVisual(index)}
+      <div class="case-study-top">
+        <div>
+          <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+          <h4>${project.title}</h4>
+          <p class="case-study-summary">${project.description}</p>
+        </div>
+        <div class="case-study-stats">
+          <div><small>STACK / FOCUS</small><strong>${project.tags.length}</strong><span>core areas</span></div>
+          <div><small>ARCHITECTURE</small><strong>${(project.architecture || []).length}</strong><span>pipeline stages</span></div>
+        </div>
+      </div>
+
+      <div class="case-study-section-label">01 // BUILD BREAKDOWN</div>
       <div class="modal-grid">
         <div class="modal-block"><small>PROJECT OBJECTIVE</small><p>${project.objective || project.description}</p></div>
         <div class="modal-block"><small>MY CONTRIBUTION</small><p>${project.contribution || 'Project design and implementation.'}</p></div>
-        <div class="modal-block" style="grid-column:1/-1"><small>ARCHITECTURE</small><div class="architecture-flow">${architecture}</div></div>
+      </div>
+
+      <div class="case-study-section-label">02 // SYSTEM ARCHITECTURE</div>
+      <div class="case-flow">${architectureNodes}</div>
+      <div class="architecture-flow case-flow-legacy">${architecture}</div>
+
+      <div class="case-study-section-label">03 // OUTCOME & ENGINEERING NOTES</div>
+      <div class="modal-grid">
         <div class="modal-block"><small>RESULTS</small><p>${project.results || project.description}</p></div>
         <div class="modal-block"><small>CHALLENGES</small><p>${project.challenges || 'Technical research, implementation and validation.'}</p></div>
         <div class="modal-block" style="grid-column:1/-1"><small>FUTURE IMPROVEMENTS</small><p>${project.future || 'Continue improving scalability, automation and usability.'}</p></div>
       </div>
     `;
-    const caseIdEl = document.getElementById('projectModalCaseId');
-    if(caseIdEl) caseIdEl.textContent = `CASE-${String(index + 1).padStart(3,'0')}`;
 
     projectModal.classList.add('active');
     projectModal.setAttribute('aria-hidden', 'false');
@@ -3912,7 +4671,6 @@
     'TERMINAL SERPENT':'Score at least 8 in Snake.',
     'PROJECT EXPLORER':'Open three project case studies.',
     'INCIDENT INVESTIGATOR':'Complete the cyber investigation mission.',
-    'CASE ANALYST':'Complete the browser-only investigation mode.',
     'ROOT ACCESS':'Reach 100% visitor clearance.',
     'CTF SOLVER':'Complete the hidden portfolio challenge.'
   };
@@ -4031,9 +4789,6 @@
       '<span class="k">achievements</span>  open achievement panel',
       '<span class="k">recruiter</span>     enable recruiter mode',
       '<span class="k">profile</span>       show recruiter-ready profile',
-      '<span class="k">scan portfolio</span> run a browser-only integrity scan',
-      '<span class="k">matrix</span>         open security domain matrix',
-      '<span class="k">investigate</span>    open incident investigation mode',
       '<span class="k">theme</span>         change visual theme',
       '<span class="k">open [project]</span> open project case study',
       '<span class="k">project [name]</span> project details + case study',
@@ -4057,28 +4812,6 @@
     ]),
 
     about: () => addBlock('about', DATA.about),
-
-    'scan portfolio': () => addBlock('portfolio integrity scan', [
-      '<span class="k">[OK]</span> Identity record loaded',
-      `<span class="k">[OK]</span> ${DATA.projects.length} project case files indexed`,
-      `<span class="k">[OK]</span> ${DATA.certifications.length} certifications indexed`,
-      `<span class="k">[OK]</span> ${DATA.publications.length} publications indexed`,
-      `<span class="k">[OK]</span> ${DATA.patents.length} patent records indexed`,
-      '<span class="k">[OK]</span> Interactive security modules mounted',
-      '<span class="v">STATUS: PORTFOLIO INTEGRITY VERIFIED</span>'
-    ]),
-
-    matrix: () => {
-      showWindow('SECURITY MATRIX','<div class="credential-provider-grid" style="grid-template-columns:repeat(2,1fr)">'+[
-        ['NETWORK','MOTAG / TRAFFIC DEFENSE'],
-        ['AI','PHISHING / TRAJECTORY FIREWALL'],
-        ['FORENSICS','MEMORY / RECONSTRUCTION'],
-        ['EMBEDDED','SAVATAR / DEVICE SECURITY']
-      ].map(([a,b])=>`<div class="credential-provider"><strong>●</strong><span>${a}</span><small>${b}</small></div>`).join('')+'</div>');
-      return;
-    },
-
-    investigate: () => openInvestigationMode(),
 
     profile: () => addBlock('recruiter profile', [
       `<span class="k">role:</span> ${DATA.profile.role}`,
@@ -4161,13 +4894,6 @@
 
   const virtualFiles = {
     'about.txt': () => DATA.about,
-    'security-map.txt': () => [
-      'SECURITY CORE',
-      '├── NETWORK DEFENSE → MOTAG',
-      '├── AI SECURITY → PHISHING / TRAJECTORY FIREWALL',
-      '├── DIGITAL FORENSICS → MEMORY / CYBER RECONSTRUCTION',
-      '└── EMBEDDED SECURITY → SAVATAR'
-    ],
     'education.txt': () => DATA.education.flatMap(item => [
       `${item.period} — ${item.institution}`,
       `${item.detail} | ${item.score}`
@@ -4450,8 +5176,7 @@
           <button data-dir="right">→</button>
         </div>
       </div>
-  
-  `;
+    `;
 
     panel.querySelectorAll('[data-dir]').forEach(button => {
       const move = event => {
@@ -5102,10 +5827,6 @@
   }, { passive:false, capture:true });
 
   document.addEventListener('keydown', event => {
-    if(event.key==='Escape' && investigationOverlay?.classList.contains('active')){
-      closeInvestigationMode();
-      return;
-    }
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'c') {
       event.preventDefault();
       event.stopPropagation();
@@ -5258,7 +5979,16 @@
     addClearance(5);
     localStorage.setItem('resumeOpenCount', String(resumeOpenCount));
     resumeCountElement.textContent = String(resumeOpenCount);
-    window.open('assets/Harsha_Resume.pdf', '_blank', 'noopener');
+
+    const resumePath = 'assets/Harsha_Resume.pdf';
+    const resumeWindow = window.open(resumePath, '_blank', 'noopener');
+
+    if (!resumeWindow) {
+      addLine('Resume could not be opened. Please allow pop-ups for this portfolio.','error');
+      return;
+    }
+
+    addLine('Opening resume PDF...','success');
   }
 
   document.getElementById('resumeBtn').addEventListener('click', event => {
@@ -5271,81 +6001,8 @@
     breachTriggered = false;
     startBreachSimulation();
   });
-const investigationOverlay = document.getElementById('investigationOverlay');
-  const investigationLines = document.getElementById('investigationLines');
-  const investigationProgress = document.getElementById('investigationProgress');
-  const investigationStatus = document.getElementById('investigationStatus');
-  const investigationRun = document.getElementById('investigationRun');
-  const investigationClose = document.getElementById('investigationClose');
-  let investigationTimer = null;
 
-  function closeInvestigationMode(){
-    if(investigationTimer) clearTimeout(investigationTimer);
-    investigationTimer=null;
-    investigationOverlay?.classList.remove('active');
-    investigationOverlay?.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-
-  function openInvestigationMode(){
-    if(!investigationOverlay) return;
-    investigationLines.innerHTML='';
-    investigationProgress.style.width='0%';
-    investigationStatus.textContent='READY // ANALYSIS NOT STARTED';
-    investigationRun.disabled=false;
-    investigationRun.textContent='START ANALYSIS';
-    investigationOverlay.classList.add('active');
-    investigationOverlay.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-    addClearance(3);
-  }
-
-  function runInvestigation(){
-    if(!investigationLines) return;
-    if(investigationTimer) clearTimeout(investigationTimer);
-    investigationRun.disabled=true;
-    investigationRun.textContent='ANALYZING...';
-    investigationLines.innerHTML='';
-    const events=[
-      ['01','Loading Windows security evidence...','ok'],
-      ['02','Correlating authentication failures...','ok'],
-      ['03','Suspicious process: invoice.pdf.exe','alert'],
-      ['04','Network indicator: 185.42.19.77:4444','alert'],
-      ['05','Building chronological incident chain...','ok'],
-      ['06','Reconstruction complete // investigation view ready','ok']
-    ];
-    events.forEach((event,i)=>{
-      investigationTimer=setTimeout(()=>{
-        const line=document.createElement('div');
-        line.className=`investigation-line ${event[2]==='alert'?'alert':''}`;
-        line.innerHTML=`<b>[${event[0]}]</b> ${event[1]}`;
-        investigationLines.appendChild(line);
-        investigationLines.scrollTop=investigationLines.scrollHeight;
-        investigationProgress.style.width=`${Math.round(((i+1)/events.length)*100)}%`;
-        investigationStatus.textContent=i===events.length-1?'COMPLETE // CASE RECONSTRUCTED':`ANALYZING // ${Math.round(((i+1)/events.length)*100)}%`;
-        if(i===events.length-1){
-          investigationRun.disabled=false;
-          investigationRun.textContent='RUN AGAIN';
-          unlockAchievement('CASE ANALYST','Completed the browser-only investigation mode.');
-          addClearance(10);
-        }
-      },i*430);
-    });
-  }
-
-  investigationRun?.addEventListener('click',runInvestigation);
-  investigationClose?.addEventListener('click',closeInvestigationMode);
-  investigationOverlay?.addEventListener('click',event=>{
-    if(event.target===investigationOverlay) closeInvestigationMode();
-  });
-
-  document.querySelectorAll('[data-project-index]').forEach(node=>{
-    node.addEventListener('click',()=>{
-      const index=Number(node.dataset.projectIndex);
-      if(Number.isInteger(index)) openProjectModal(index);
-    });
-  });
-// Mouse-driven scanner cursor on desktop.
+  // Mouse-driven scanner cursor on desktop.
   const cursorScanner=document.getElementById('cursorScanner');
   if(cursorScanner && matchMedia('(pointer:fine)').matches){
     window.addEventListener('mousemove',event=>{
@@ -5366,11 +6023,23 @@ const investigationOverlay = document.getElementById('investigationOverlay');
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       document.getElementById('nav').classList.remove('open');
+      document.getElementById('menuBtn')?.setAttribute('aria-expanded','false');
     });
   });
 
-  document.getElementById('menuBtn').addEventListener('click', () => {
-    document.getElementById('nav').classList.toggle('open');
+  const menuButton = document.getElementById('menuBtn');
+  const navigation = document.getElementById('nav');
+
+  menuButton?.addEventListener('click', () => {
+    const isOpen = navigation?.classList.toggle('open') || false;
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && navigation?.classList.contains('open')) {
+      navigation.classList.remove('open');
+      menuButton?.setAttribute('aria-expanded', 'false');
+    }
   });
 
   const terminalBox = document.getElementById('terminalBox');
@@ -5399,8 +6068,8 @@ const investigationOverlay = document.getElementById('investigationOverlay');
     }
   });
 
-  addLine('Cyber Portfolio Terminal v3.0 initialized.');
-  addLine('Shell online. Portfolio filesystem mounted. Command engine ready.');
+  addLine('Cyber Portfolio OS v2.0 initialized.');
+  addLine('All terminal commands are active.');
   addLine('Type <span class="k">help</span> or click any command button below.');
 
   // Cursor-proximity glow for every skill button.
@@ -5667,66 +6336,97 @@ const investigationOverlay = document.getElementById('investigationOverlay');
   };
 
 
-  // Animate demonstration dashboard metrics when they become visible.
-  const metricElements = [...document.querySelectorAll('[data-counter]')];
-  let metricsAnimated = false;
+  // Security Operations Dashboard — browser-only portfolio telemetry.
+  // All values are derived from DATA or explicitly marked as simulated.
+  const dashboard = document.getElementById('threat-dashboard');
+  const socCounters = {
+    projects: DATA.projects.length,
+    research: DATA.publications.length + DATA.patents.length,
+    domains: 4,
+    workstreams: Array.isArray(DATA.experience[0]?.projectWork) ? DATA.experience[0].projectWork.length : 0
+  };
 
-  function animateMetrics() {
-    if (metricsAnimated) return;
-    metricsAnimated = true;
+  function animateSocValue(element, target) {
+    const duration = 900;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = Math.round(target * eased).toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
-    metricElements.forEach(element => {
-      const target = Number(element.dataset.counter || 0);
-      const suffix = element.dataset.suffix || '';
-      const duration = 1300;
-      const start = performance.now();
+  function initializeSocDashboard() {
+    document.querySelectorAll('[data-soc-value]').forEach(element => {
+      const key = element.dataset.socValue;
+      animateSocValue(element, Number(socCounters[key] || 0));
+    });
 
-      function step(now) {
-        const progress = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const value = Math.round(target * eased);
-        element.textContent = value.toLocaleString() + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
+    const chart = document.getElementById('socChart');
+    if (chart && !chart.children.length) {
+      const activity = [22,31,27,18,34,42,38,51,46,62,54,48,70,58,64,76,68,82,59,72,63,48,39,30];
+      activity.forEach((value,index) => {
+        const bar=document.createElement('span');
+        bar.className='soc-chart-bar';
+        bar.style.setProperty('--bar-height', `${value}%`);
+        bar.style.animationDelay=`${index*24}ms`;
+        bar.title=`${String(index).padStart(2,'0')}:00 — simulated activity ${value}%`;
+        chart.appendChild(bar);
+      });
+    }
+  }
 
-      requestAnimationFrame(step);
+  const attackFeed = document.getElementById('attackFeed');
+  const simulatedAttacks = [
+    ['Unknown Node','Network anomaly / DDoS pattern','BLOCKED','critical'],
+    ['External Host','Port-scan activity','DETECTED','high'],
+    ['Suspicious URL','Phishing classification','QUARANTINED','high'],
+    ['Botnet Relay','Credential-spray pattern','BLOCKED','critical'],
+    ['Memory Artifact','Suspicious process indicator','REVIEWED','medium']
+  ];
+  let attackIndex=0;
+
+  function renderAttackFeed() {
+    if (!attackFeed) return;
+    const [source,type,status,severity] = simulatedAttacks[attackIndex % simulatedAttacks.length];
+    const row=document.createElement('div');
+    row.className='soc-alert';
+    row.innerHTML=`<i class="soc-alert-dot ${severity}"></i><div class="soc-alert-main"><b>${source}</b><span>${type}</span></div><span class="soc-alert-status">${status}</span>`;
+    attackFeed.prepend(row);
+    while (attackFeed.children.length>5) attackFeed.lastElementChild.remove();
+    attackIndex++;
+  }
+
+  renderAttackFeed();
+  setInterval(renderAttackFeed,2600);
+
+  const socFeed = document.getElementById('socFeed');
+  if (socFeed) {
+    [
+      'CASE DATABASE :: 6 PROJECT CASE FILES INDEXED',
+      'AI SECURITY :: POLICY CONTROLS READY',
+      'FORENSICS :: EVENT CORRELATION ENGINE READY',
+      'NETWORK DEFENSE :: TRAFFIC MONITORING READY',
+      'EMBEDDED SECURITY :: DEVICE PROTECTION WORKSTREAM READY'
+    ].forEach((event,index)=>{
+      const row=document.createElement('div');
+      row.innerHTML=`<b>[${String(index+1).padStart(2,'0')}]</b><span>${event}</span>`;
+      socFeed.appendChild(row);
     });
   }
 
-  const dashboard = document.getElementById('threat-dashboard');
-  const dashboardObserver = new IntersectionObserver(entries => {
-    if (entries.some(entry => entry.isIntersecting)) {
-      animateMetrics();
-      dashboardObserver.disconnect();
-    }
-  }, { threshold: 0.25 });
-
-  dashboardObserver.observe(dashboard);
-
-
-  // Legacy attack-feed code is kept optional so a missing #attackFeed
-  // element can never stop the rest of the portfolio from rendering.
-  const attackFeed = document.getElementById('attackFeed');
-  if (attackFeed) {
-    const simulatedAttacks = [
-      ['Unknown Node','DDoS','BLOCKED'],
-      ['External Host','Port Scan','DETECTED'],
-      ['Suspicious URL','Phishing','QUARANTINED'],
-      ['Botnet Relay','Credential Spray','BLOCKED'],
-      ['Malware Sample','C2 Beacon','ISOLATED']
-    ];
-    let attackIndex=0;
-    function renderAttackFeed() {
-      const [source,type,status] = simulatedAttacks[attackIndex % simulatedAttacks.length];
-      const row=document.createElement('div');
-      row.className='attack-row';
-      row.innerHTML=`<b>${source}</b><span>${type}</span><em>${status}</em>`;
-      attackFeed.prepend(row);
-      while (attackFeed.children.length>5) attackFeed.lastChild.remove();
-      attackIndex++;
-    }
-    renderAttackFeed();
-    setInterval(renderAttackFeed,2200);
+  if (dashboard) {
+    const dashboardObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        initializeSocDashboard();
+        dashboardObserver.disconnect();
+      }
+    }, { threshold: 0.2 });
+    dashboardObserver.observe(dashboard);
+  } else {
+    initializeSocDashboard();
   }
 
 
@@ -5863,27 +6563,12 @@ const investigationOverlay = document.getElementById('investigationOverlay');
   const chars='01{}[]<>/\\\\$#@*&%ABCDEFabcdef';
   [document.querySelector('.terminal'),document.querySelector('#projects'),document.querySelector('#credentials'),document.querySelector('#threat-dashboard')].filter(Boolean).forEach(target=>{target.classList.add('code-rain-host');const layer=document.createElement('div');layer.className='code-rain-layer';const count=Math.max(8,Math.floor((target.clientWidth||600)/44));for(let i=0;i<count;i++){const col=document.createElement('span');col.className='code-rain-column';col.style.left=(i/count*100)+'%';col.style.animationDuration=(5+Math.random()*6)+'s';col.style.animationDelay=(-Math.random()*8)+'s';col.textContent=Array.from({length:28},()=>chars[Math.floor(Math.random()*chars.length)]).join('\n');layer.appendChild(col)}target.prepend(layer)});
 
-  // Simulated SOC feed — visual portfolio telemetry only.
-  const socFeed = document.getElementById('socFeed');
-  if (socFeed) {
-    [
-      'CASE DATABASE :: 6 PROJECT CASE FILES INDEXED',
-      'AI SECURITY :: POLICY CONTROLS READY',
-      'FORENSICS :: EVENT CORRELATION ENGINE READY',
-      'NETWORK DEFENSE :: TRAFFIC MONITORING READY',
-      'EMBEDDED SECURITY :: DEVICE PROTECTION WORKSTREAM READY'
-    ].forEach((event,index)=>{
-      const row=document.createElement('div');
-      row.innerHTML=`<b>[${String(index+1).padStart(2,'0')}]</b><span>${event}</span>`;
-      socFeed.appendChild(row);
-    });
-  }
   const recruiterResumeBtn=document.getElementById('recruiterResumeBtn');
   if(recruiterResumeBtn) recruiterResumeBtn.addEventListener('click',()=>openResumeAndCount());
 
   // Terminal startup
   const terminalElement=document.querySelector('.terminal'),terminalStartup=document.getElementById('terminalStartup');
-  if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Loading command engine...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
+  if(terminalElement&&terminalStartup){terminalElement.classList.add('terminal-locked');['Initializing secure shell...','Loading portfolio filesystem...','Mounting project directories...','Scanning visitor permissions...','Terminal ready.'].forEach((message,index)=>setTimeout(()=>{const line=document.createElement('div');line.className='startup-line';line.textContent='> '+message;terminalStartup.appendChild(line);if(index===4)setTimeout(()=>terminalElement.classList.remove('terminal-locked'),450)},index*430))}
 
 
 
@@ -5912,7 +6597,7 @@ const investigationOverlay = document.getElementById('investigationOverlay');
   }
 
   // Prevent animation placeholders from creating empty sections.
-  ['projects','about','experience','threat-dashboard'].forEach(sectionId => {
+  ['projects','about','threat-dashboard'].forEach(sectionId => {
     const section = document.getElementById(sectionId);
     if (!section) return;
     section.style.opacity = '1';
@@ -5934,6 +6619,27 @@ const investigationOverlay = document.getElementById('investigationOverlay');
       item.classList.add('is-visible');
     });
   });
+
+  // Experience visibility fix: .info-row elements are globally registered
+  // as reveal items, so force this section visible immediately to prevent
+  // invisible cards from reserving a large blank block before the timeline.
+  const experienceSection = document.getElementById('experience');
+  if (experienceSection) {
+    experienceSection.style.opacity = '1';
+    experienceSection.style.visibility = 'visible';
+    experienceSection.style.transform = 'none';
+    experienceSection.style.filter = 'none';
+    experienceSection.style.clipPath = 'none';
+
+    experienceSection.querySelectorAll('.heading, .experience-stack, .experience-stack .reveal-item').forEach(item => {
+      item.classList.add('is-visible');
+      item.style.opacity = '1';
+      item.style.visibility = 'visible';
+      item.style.transform = 'none';
+      item.style.filter = 'none';
+      item.style.clipPath = 'none';
+    });
+  }
 
   // Contact visibility fallback
   const contactSection = document.getElementById('contact');
@@ -5965,11 +6671,8 @@ const investigationOverlay = document.getElementById('investigationOverlay');
       description:`Cybersecurity skill listed under ${group}.`,
       target:()=>document.getElementById('skills')?.scrollIntoView({behavior:'smooth'})
     }))),
-    ...DATA.publications.map(item=>({type:'Publication',title:item.title,description:item.description,target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
-    ...DATA.patents.map(item=>({type:'Patent',title:item.title,description:`${item.number} — ${item.date}`,target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
-    ...DATA.experience.map(item=>({type:'Experience',title:item.title,description:`${item.organization} — ${item.detail}`,target:()=>document.getElementById('experience')?.scrollIntoView({behavior:'smooth'})})),
-    {type:'Section',title:'Career and Security Journey',description:'2023–2026 learning, research and industry progression.',target:()=>document.getElementById('career-journey')?.scrollIntoView({behavior:'smooth'})},
-    {type:'Section',title:'Security Capability Matrix',description:'Network defense, AI security, digital forensics and embedded security.',target:()=>document.getElementById('capabilities')?.scrollIntoView({behavior:'smooth'})},
+    ...DATA.publications.map(item=>({type:'Publication',title:item,description:'Research publication',target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
+    ...DATA.patents.map(item=>({type:'Patent',title:item,description:'Patent application',target:()=>document.getElementById('credentials')?.scrollIntoView({behavior:'smooth'})})),
     {type:'Contact',title:'Email',description:DATA.profile.email,target:()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})},
     {type:'Contact',title:'LinkedIn',description:DATA.profile.linkedin,target:()=>window.open(DATA.profile.linkedin,'_blank')}
   ];
@@ -6059,96 +6762,6 @@ const investigationOverlay = document.getElementById('investigationOverlay');
     });
   }
 
-  // Interactive security capability matrix
-  const capabilityData={
-    network:{
-      code:'CAP-01 // NETWORK DEFENSE',
-      title:'Network Defense',
-      summary:'Practical work centered on traffic visibility, anomaly detection, DDoS mitigation and defensive network analysis.',
-      evidence:[
-        ['PRIMARY CASE','MOTAG','DDoS detection, traffic monitoring, source blocking and dynamic proxy defense.'],
-        ['TOOLS','Wireshark / Nmap','Packet analysis, network reconnaissance and exposure assessment.'],
-        ['SECURITY METHODS','IDS/IPS + DDoS','Traffic filtering, anomaly analysis and resilient defense workflows.'],
-        ['RESEARCH SIGNAL','MTD + ChaCha20','Moving Target Defense and encrypted communication research.']
-      ],
-      tags:['MOTAG','Wireshark','Nmap','IDS/IPS','DDoS Mitigation','Packet Analysis'],
-      cases:[['MOTAG',0]]
-    },
-    ai:{
-      code:'CAP-02 // AI SECURITY',
-      title:'AI Security',
-      summary:'Security automation and machine-learning work spanning phishing classification and policy enforcement for autonomous agents.',
-      evidence:[
-        ['PRIMARY CASE','Phishing Detection','TF-IDF feature extraction, machine-learning classification and Flask-based delivery.'],
-        ['SECURITY CONTROL','Trajectory Firewall','Authorized-tool checks, project-scope validation and allow/block decisions.'],
-        ['MODEL WORKFLOW','Detect → Classify','Convert inputs into security signals and produce a controlled decision.'],
-        ['FUTURE DIRECTION','Explainability + Policy','Browser integration, reputation signals and richer authorization rules.']
-      ],
-      tags:['Python','Machine Learning','Flask','Agent Security','Policy Enforcement','Automation'],
-      cases:[['PHISHING',1],['TRAJECTORY FIREWALL',3]]
-    },
-    forensics:{
-      code:'CAP-03 // DIGITAL FORENSICS',
-      title:'Digital Forensics',
-      summary:'Evidence-driven investigation using volatile-memory artifacts and Windows security-event reconstruction.',
-      evidence:[
-        ['PRIMARY CASE','Memory Forensics','Process, network and suspicious-memory artifact analysis.'],
-        ['INCIDENT CASE','Cyber Reconstruction','Chronological correlation of Windows event evidence into an investigation flow.'],
-        ['EVIDENCE FLOW','Capture → Correlate','Extract artifacts, connect events and preserve an understandable timeline.'],
-        ['INVESTIGATION FOCUS','IOC + Timeline','Future-ready path toward automated IOC extraction and broader event correlation.']
-      ],
-      tags:['Memory Analysis','Windows Events','Incident Response','Artifact Extraction','Timeline Correlation'],
-      cases:[['MEMORY FORENSICS',2],['CYBER RECONSTRUCTION',4]]
-    },
-    embedded:{
-      code:'CAP-04 // EMBEDDED SECURITY',
-      title:'Embedded Security',
-      summary:'Security-oriented embedded-device work combining the SAVATAR controller project with sensor-based IoT experimentation.',
-      evidence:[
-        ['INDUSTRY WORK','SAVATAR','Secure Smart Vehicle Door Controller developed within the SSEV SOFTSOLS workstream.'],
-        ['PROJECT CASE','Waste Segregation','Arduino, IR, inductive and moisture sensors used for automated classification.'],
-        ['ENGINEERING SIGNAL','Controller + Sensors','Connect hardware inputs to control logic and defined system behavior.'],
-        ['SECURITY DIRECTION','Device Protection','Focus on secure embedded behavior, controlled access and resilient device workflows.']
-      ],
-      tags:['SAVATAR','Arduino','IoT','Sensors','Embedded Devices','Controller Security'],
-      cases:[['WASTE SEGREGATION',5]]
-    }
-  };
-
-  const capabilityOutput=document.getElementById('capabilityOutput');
-  const capabilityTabs=document.querySelectorAll('.capability-tab');
-  function renderCapability(key){
-    const data=capabilityData[key];
-    if(!capabilityOutput||!data)return;
-    capabilityOutput.innerHTML=`
-      <div class="capability-output-head">
-        <div>
-          <div class="capability-code">${data.code}</div>
-          <h4>${data.title}</h4>
-        </div>
-        <div class="mono">EVIDENCE // VERIFIED</div>
-      </div>
-      <p class="capability-summary">${data.summary}</p>
-      <div class="capability-grid">
-        ${data.evidence.map(item=>`<div class="capability-evidence"><small>${item[0]}</small><strong>${item[1]}</strong><p>${item[2]}</p></div>`).join('')}
-      </div>
-      <div class="capability-tags">${data.tags.map(tag=>`<span>${tag}</span>`).join('')}</div>
-      <div class="capability-case-links">
-        ${data.cases.map(([label,index])=>`<button type="button" data-capability-project="${index}">OPEN CASE // ${label}</button>`).join('')}
-      </div>`;
-    capabilityOutput.querySelectorAll('[data-capability-project]').forEach(button=>{
-      button.addEventListener('click',()=>openProjectModal(Number(button.dataset.capabilityProject)));
-    });
-  }
-  capabilityTabs.forEach(tab=>{
-    tab.addEventListener('click',()=>{
-      capabilityTabs.forEach(item=>item.classList.remove('active'));
-      tab.classList.add('active');
-      renderCapability(tab.dataset.capability);
-    });
-  });
-  if(capabilityTabs.length) renderCapability(capabilityTabs[0].dataset.capability);
-
   // Animated architecture diagrams in project case studies
   const projectArchitectures={
     0:[
@@ -6172,20 +6785,12 @@ const investigationOverlay = document.getElementById('investigationOverlay');
       ['Investigation Report','Summarizes evidence for forensic review.']
     ],
     3:[
-      ['Agent Request','Receives a requested autonomous action.'],
-      ['Tool Policy Check','Checks whether the requested tool is authorized.'],
-      ['Project Scope','Validates the requested resource against the approved workspace.'],
-      ['Allow / Block','Makes the enforcement decision.'],
-      ['Security Log','Records the decision for auditability.']
+      ['Target Input','Receives the host or application to test.'],
+      ['Scanner Engine','Runs automated checks against known weaknesses.'],
+      ['Finding Classification','Groups issues by type and severity.'],
+      ['Security Report','Generates recommended remediation actions.']
     ],
     4:[
-      ['Evidence Input','Collects Windows security-event evidence.'],
-      ['Event Parsing','Extracts relevant authentication and system activity.'],
-      ['Timeline Correlation','Connects related events in chronological order.'],
-      ['Incident Reconstruction','Builds an understandable investigation chain.'],
-      ['Investigation View','Presents the reconstructed incident flow.']
-    ],
-    5:[
       ['Sensor Input','Detects characteristics of incoming waste.'],
       ['Arduino Controller','Processes sensor readings and classification logic.'],
       ['Segregation Mechanism','Routes waste into the correct category.'],
@@ -6241,14 +6846,15 @@ const investigationOverlay = document.getElementById('investigationOverlay');
     },40);
   };
 
-
   // Project terminal commands
   const projectCommandHelp=[
     'project motag',
     'project phishing',
     'project forensics',
+    'project scanner',
     'project trajectory-firewall',
     'project cyber-reconstruction',
+    'project savatar',
     'project waste'
   ];
 
@@ -6759,7 +7365,13 @@ const investigationOverlay = document.getElementById('investigationOverlay');
     drops = Array(Math.ceil(innerWidth / fontSize)).fill(0).map(() => Math.random() * -80);
   }
 
+  let matrixFrame = 0;
   function draw() {
+    if(document.hidden){
+      matrixFrame = requestAnimationFrame(draw);
+      return;
+    }
+
     ctx.fillStyle = 'rgba(4,8,12,.09)';
     ctx.fillRect(0,0,innerWidth,innerHeight);
     ctx.font = fontSize + 'px monospace';
@@ -6771,10 +7383,113 @@ const investigationOverlay = document.getElementById('investigationOverlay');
       else drops[index] += .45;
     });
 
-    requestAnimationFrame(draw);
+    matrixFrame = requestAnimationFrame(draw);
   }
 
   resize();
+  cancelAnimationFrame(matrixFrame);
   draw();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, {passive:true});
+  // Contact command center: copy-to-clipboard actions with a visible status.
+  document.querySelectorAll('[data-copy-value]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const value = button.dataset.copyValue || '';
+      if (!value) return;
+
+      const status = document.getElementById('contactCopyStatus');
+      const original = button.textContent;
+
+      try {
+        await navigator.clipboard.writeText(value);
+        button.textContent = 'COPIED ✓';
+        if (status) status.textContent = `CHANNEL READY :: ${value}`;
+      } catch {
+        const helper = document.createElement('textarea');
+        helper.value = value;
+        helper.setAttribute('readonly','');
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+        button.textContent = 'COPIED ✓';
+        if (status) status.textContent = `CHANNEL READY :: ${value}`;
+      }
+
+      window.setTimeout(() => {
+        button.textContent = original;
+        if (status) status.textContent = '';
+      }, 1800);
+    });
+  });
+
+
+  // Final portfolio polish: navigation feedback, scroll progress, back-to-top,
+  // reduced-motion support and a lightweight interaction layer.
+  (() => {
+    const progress = document.createElement('div');
+    progress.className = 'scroll-progress';
+    progress.setAttribute('aria-hidden','true');
+    document.body.appendChild(progress);
+
+    const topButton = document.createElement('button');
+    topButton.className = 'back-to-top';
+    topButton.type = 'button';
+    topButton.setAttribute('aria-label','Back to top');
+    topButton.textContent = '↑';
+    document.body.appendChild(topButton);
+
+    const updateScrollUI = () => {
+      const doc = document.documentElement;
+      const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const ratio = Math.min(1, Math.max(0, window.scrollY / max));
+      progress.style.width = `${ratio * 100}%`;
+      topButton.classList.toggle('active', window.scrollY > 650);
+    };
+    window.addEventListener('scroll', updateScrollUI, {passive:true});
+    window.addEventListener('resize', updateScrollUI, {passive:true});
+    updateScrollUI();
+
+    topButton.addEventListener('click', () => {
+      window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+
+    // Keep navigation buttons working even when sections are rendered dynamically.
+    document.addEventListener('click', event => {
+      const button = event.target.closest('[data-target]');
+      if(!button) return;
+      const target = document.getElementById(button.dataset.target);
+      if(target){
+        event.preventDefault();
+        target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
+      }
+    });
+
+    // Project cards behave as accessible case-file surfaces.
+    const projectGridEl = document.getElementById('projectGrid');
+    projectGridEl?.addEventListener('click', event => {
+      const card = event.target.closest('.project-case-file');
+      if(!card || event.target.closest('button,a')) return;
+      openProjectModal(Number(card.dataset.projectIndex));
+    });
+
+    // Skills can be activated directly from the matrix.
+    document.querySelectorAll('[data-skill]').forEach(skill => {
+      skill.addEventListener('click', () => {
+        const detail = document.getElementById('skillDetail');
+        if(!detail) return;
+        const name = skill.dataset.skill;
+        const group = skill.title || 'Technical Skill';
+        detail.innerHTML = `<strong>${name}</strong><br><span>${group} capability selected. Use the skill map below to inspect related practical applications.</span>`;
+        detail.classList.add('active');
+      });
+    });
+
+    // Avoid running the custom cursor on touch devices.
+    if(window.matchMedia('(pointer:fine)').matches){
+      document.body.classList.add('cursor-enhanced-ready');
+    }
+  })();
+
 })();
